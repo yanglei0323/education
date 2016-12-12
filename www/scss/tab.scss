@@ -1,0 +1,34 @@
+.icon-micro-lesson {
+	background: url(../img/micro_lesson.png) no-repeat center;
+}
+
+.icon-micro-lesson-active {
+	background: url(../img/micro_lesson_active.png) no-repeat center;
+}
+
+.icon-subscribed {
+	background: url(../img/subscribed.png) no-repeat center;
+}
+.icon-subscribed-active {
+	background: url(../img/subscribed_active.png) no-repeat center;
+}
+
+.icon-offline-lesson {
+	background: url(../img/offline_lesson.png) no-repeat center;
+}
+
+.icon-offline-lesson-active {
+	background: url(../img/offline_lesson_active.png) no-repeat center;
+}
+
+.icon-me {
+	background: url(../img/me.png) no-repeat center;
+}
+
+.icon-me-active {
+	background: url(../img/me_active.png) no-repeat center;
+}
+
+ion-tabs.tabs-color-active-positive .tab-item.tab-item-active {
+	color: #f5a523 !important;
+}

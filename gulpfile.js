@@ -6,24 +6,37 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var notify = require('gulp-notify');
+var plumber = require('gulp-plumber');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  // sass: ['./scss/**/*.scss']
+  sass: ['./www/scss/**/*.scss']
 };
 
 gulp.task('default', ['sass']);
 
-gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
-    .pipe(sass())
-    .on('error', sass.logError)
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
+// gulp.task('sass', function(done) {
+//   gulp.src('./scss/ionic.app.scss')
+//     .pipe(sass())
+//     .on('error', sass.logError)
+//     .pipe(gulp.dest('./www/css/'))
+//     .pipe(minifyCss({
+//       keepSpecialComments: 0
+//     }))
+//     .pipe(rename({ extname: '.min.css' }))
+//     .pipe(gulp.dest('./www/css/'))
+//     .on('end', done);
+// });
+
+gulp.task('sass', function (done) {
+  gulp.src('./www/scss/**/*.scss')
+      .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
+      .pipe(sass())
+      .pipe(minifyCss())
+      .pipe(concat('ionic.app.css'))
+      .pipe(gulp.dest('./www/css/'))
+      .on('end', done);
 });
 
 gulp.task('watch', ['sass'], function() {
