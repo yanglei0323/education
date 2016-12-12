@@ -8,6 +8,7 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
+var px2rem = require('gulp-px2rem-plugin');
 
 var paths = {
   // sass: ['./scss/**/*.scss']
@@ -33,8 +34,9 @@ gulp.task('sass', function (done) {
   gulp.src('./www/scss/**/*.scss')
       .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
       .pipe(sass())
-      .pipe(minifyCss())
+      // .pipe(minifyCss())
       .pipe(concat('ionic.app.css'))
+      // .pipe(px2rem({'width_design': 750}))
       .pipe(gulp.dest('./www/css/'))
       .on('end', done);
 });
