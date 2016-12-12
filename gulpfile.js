@@ -9,40 +9,51 @@ var sh = require('shelljs');
 var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var px2rem = require('gulp-px2rem-plugin');
+var jshint = require('gulp-jshint');
 
 var paths = {
   // sass: ['./scss/**/*.scss']
-  sass: ['./www/scss/**/*.scss']
+  sass: ['./www/css/scss/**/*.scss'],
+  controllerJs: ['./www/js/controller/**/*.js'],
+  serviceJs: ['./www/js/service/**/*.js']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'buildController', 'buildService']);
 
-// gulp.task('sass', function(done) {
-//   gulp.src('./scss/ionic.app.scss')
-//     .pipe(sass())
-//     .on('error', sass.logError)
-//     .pipe(gulp.dest('./www/css/'))
-//     .pipe(minifyCss({
-//       keepSpecialComments: 0
-//     }))
-//     .pipe(rename({ extname: '.min.css' }))
-//     .pipe(gulp.dest('./www/css/'))
-//     .on('end', done);
-// });
-
+// 处理sass文件
 gulp.task('sass', function (done) {
-  gulp.src('./www/scss/**/*.scss')
+  gulp.src('./www/css/scss/ionic.app.scss')
       .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
       .pipe(sass())
       // .pipe(minifyCss())
-      .pipe(concat('ionic.app.css'))
-      // .pipe(px2rem({'width_design': 750}))
+      // .pipe(rename({ extname: '.min.css' }))
       .pipe(gulp.dest('./www/css/'))
       .on('end', done);
 });
 
-gulp.task('watch', ['sass'], function() {
+// 处理controller文件
+gulp.task('buildController', function () {
+  return gulp.src('./www/js/controller/**/*.js')
+      .pipe(jshint())
+      .pipe(plumber())
+      // .pipe(uglify())
+      .pipe(concat('controllers.js'))
+      .pipe(gulp.dest('./www/js'));
+});
+// 构建service文件
+gulp.task('buildService', function () {
+  return gulp.src('./www/js/service/**/*.js')
+      .pipe(jshint())
+      .pipe(plumber())
+      // .pipe(uglify())
+      .pipe(concat('services.js'))
+      .pipe(gulp.dest('./www/js'));
+});
+// 监听任务
+gulp.task('watch', ['sass', 'buildController', 'buildService'], function() {
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.controllerJs, ['buildController']);
+  gulp.watch(paths.serviceJs, ['buildService']);
 });
 
 gulp.task('install', ['git-check'], function() {
