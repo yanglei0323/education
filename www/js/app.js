@@ -34,9 +34,13 @@ var educationApp = angular.module('education', ['ionic'])
   $ionicConfigProvider.platform.android.tabs.position('bottom');
   $ionicConfigProvider.tabs.style('standard');
 
-  // 设置请求默认contentType
+  // 修改post请求默认配置
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  $httpProvider.defaults.transformRequest = [function (data) {
+      return angular.isObject(data) && String(data) !== '[object File]' ? $.param(data) : data;
+  }];
 
+  // 路由设置
   $stateProvider
   // setup an abstract state for the tabs directive
     .state('tab', {
@@ -97,21 +101,4 @@ var educationApp = angular.module('education', ['ionic'])
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/micro-lesson');
-
 });
-// .directive('hideTabs', function ($rootScope) {
-//     return {
-//         restrict: 'A',
-//         link: function (scope, element, attributes) {
-//             scope.$on('$ionicView.beforeEnter', function () {
-//                 scope.$watch(attributes.hideTabs, function (value) {
-//                     $rootScope.hideTabs = value;
-//                 });
-//             });
-
-//             scope.$on('$ionicView.beforeLeave', function () {
-//                 $rootScope.hideTabs = false;
-//             });
-//         }
-//     };
-// });

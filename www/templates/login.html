@@ -12,16 +12,16 @@
 	<div class="list clearfix">
 	    <label class="item item-input">
 	        <i class="icon ion-person placeholder-icon"></i>
-	        <input type="text" placeholder="请输入用户名">
+	        <input type="text" placeholder="请输入手机号" ng-model="user.telephone">
 	    </label>
 	    <label class="item item-input">
 	        <i class="icon ion-locked placeholder-icon"></i>
-	        <input type="text" placeholder="请输入验证码">
+	        <input type="text" placeholder="请输入验证码" ng-model="user.code">
 	    </label>
 	    <a class="padding pull-right" ng-click="getCode()">获取验证码</a>
 	</div>
 	<div class="padding">
-        <button class="button button-block button-positive">提交</button>
+        <button class="button button-block button-positive" ng-click="login()">提交</button>
     </div>
 </ion-content>
 </ion-view>
