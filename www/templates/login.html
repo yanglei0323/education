@@ -1,0 +1,27 @@
+<ion-view>
+<ion-header-bar class="bar-stable bar bar-header" align-title="center">
+	<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item">
+	    <i class="icon ion-ios-arrow-back"></i> 
+        <!-- <span class="back-text">
+            <span class="default-title">返回</span>
+        </span> -->
+    </button>
+    <div class="title title-center header-item">登录</div>
+</ion-header-bar>
+<ion-content>
+	<div class="list clearfix">
+	    <label class="item item-input">
+	        <i class="icon ion-person placeholder-icon"></i>
+	        <input type="text" placeholder="请输入用户名">
+	    </label>
+	    <label class="item item-input">
+	        <i class="icon ion-locked placeholder-icon"></i>
+	        <input type="text" placeholder="请输入验证码">
+	    </label>
+	    <a class="padding pull-right" ng-click="getCode()">获取验证码</a>
+	</div>
+	<div class="padding">
+        <button class="button button-block button-positive">提交</button>
+    </div>
+</ion-content>
+</ion-view>

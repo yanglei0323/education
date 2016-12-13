@@ -83,9 +83,35 @@ var educationApp = angular.module('education', ['ionic'])
         controller: 'meCtrl'
       }
     }
+  })
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html',
+    controller: 'registerCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/micro-lesson');
 
 });
+// .directive('hideTabs', function ($rootScope) {
+//     return {
+//         restrict: 'A',
+//         link: function (scope, element, attributes) {
+//             scope.$on('$ionicView.beforeEnter', function () {
+//                 scope.$watch(attributes.hideTabs, function (value) {
+//                     $rootScope.hideTabs = value;
+//                 });
+//             });
+
+//             scope.$on('$ionicView.beforeLeave', function () {
+//                 $rootScope.hideTabs = false;
+//             });
+//         }
+//     };
+// });
