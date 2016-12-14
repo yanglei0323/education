@@ -1,4 +1,10 @@
 {
   "name": "education",
-  "app_id": ""
+  "app_id": "",
+  "proxies": [
+  	{
+  		"path": "/user/",
+	  	"proxyUrl": "http://101.200.205.162:8889/user/"
+  	}
+  ]
 }
