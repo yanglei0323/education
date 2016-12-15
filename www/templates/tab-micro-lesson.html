@@ -1,5 +1,50 @@
+
 <ion-view view-title="悦美课">
   <ion-content>
-      
+  	<!-- 轮播图 -->
+  	<div class="home-banner">
+  		<ion-slide-box auto-play="true" slide-interval="3000" does-continue="true" delegate-handle="slideimgs"  
+                   class="slidebox" on-slide-changed="slideHasChanged($index)">  
+	      <ion-slide ng-repeat="banner in bannerList" >  
+	      	<div class="box banner"><img  ng-src="{{banner.imgurl}}" /></div>  
+	      </ion-slide>  
+	    </ion-slide-box>
+  	</div>
+  	<!-- 专栏订阅 -->
+  	<div class="y_home_title">专栏订阅</div>
+  	<div class="y_subscription">
+  		<ion-scroll direction="x">
+	  		<div ng-repeat="subdesigner in subDesignerList" class="subItem">
+	  			<img ng-src="{{subdesigner.imgurl}}" alt="">
+	  			<span class="y_densigner_name"><span ng-bind="subdesigner.name"></span>-<span ng-bind="subdesigner.job"></span></span>
+	  			<span class="y_densigner_price">￥<span ng-bind="subdesigner.price"></span>/年</span>
+			</div>  
+        </ion-scroll>
+  	</div>
+  	<!-- 专题 -->
+  	<div class="y_home_title special_title">专题</div>
+  	<div class="y_special">
+  		<div class="row">
+		  <div class="col col-50"><img ng-src="{{specialList[0].imgurl}}" alt=""><span ng-bind="specialList[0].name"></span></div>
+		  <div class="col col-50"><img ng-src="{{specialList[1].imgurl}}" alt=""><span ng-bind="specialList[1].name"></span></div>
+		</div>
+		<div class="row y_row_bottom">
+		  <div class="col col-50"><img ng-src="{{specialList[2].imgurl}}" alt=""><span ng-bind="specialList[2].name"></span></div>
+		  <div class="col col-50"><img ng-src="{{specialList[3].imgurl}}" alt=""><span ng-bind="specialList[3].name"></span></div>
+		</div>
+  	</div>
+	<!-- 热门推荐 -->
+	<div class="y_home_title special_title">热门推荐</div>
+	<div class="y_recommend">
+		<div class="item" ng-repeat="recomitem in recomList">
+			<img src="../images/recom_1.png" alt="">
+			<div class="recom_title flex align s_between">
+				<div class="left flex align"><span ng-bind="recomitem.video.teachername"></span>:<span ng-bind="recomitem.video.name"></span></div>
+				<div class="right flex align"><span ng-bind="recomitem.video.price"></span>元</div>
+			</div>
+			<span class="flex align watchnum"><span ng-bind="recomitem.video.timelongs"></span>-<span ng-bind="recomitem.video.watchnum"></span>人观看</span>
+		</div>
+	</div>
+	
   </ion-content>
 </ion-view>

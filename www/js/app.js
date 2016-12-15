@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+var picBasePath = 'http://101.200.180.188:8112';
 var educationApp = angular.module('education', ['ionic'])
 
 .run(function($ionicPlatform) {

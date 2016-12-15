@@ -43,3 +43,30 @@ ion-tabs.tabs-color-active-positive {
 		color: $orange !important;
 	}
 }
+
+
+.home-bar{
+	height:44px;
+	background:#fff !important;
+	font-size:14px;
+	color:#333;
+}
+.hometab .tabs{  
+    top:0;  
+    border:0;  
+    background:none; 
+    height:44px !important; 
+  
+} 
+.hometab .tabs .tab-item >span{ 
+    color:#333; 
+} 
+.hometab .tabs .tab-item-active { 
+    border-bottom:2px solid #f5a523; 
+}  
+.hometab .tabs .tab-item-active > span {  
+    color:#f5a523;   
+}  
+.hometab .has-tabs-top {  
+    top:44px;  
+}
