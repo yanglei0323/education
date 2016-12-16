@@ -1,0 +1,155 @@
+.y-simple-video{
+	background:#ececec;
+}
+.y-video{
+	width:100%;
+	height:200px;
+	margin:0 auto;
+	overflow:hidden;
+	position:relative;
+	video{
+		width:100%;
+		height:100%;
+	}
+
+	.y-back{
+		position:absolute;
+		left:15px;
+		top:10px;
+	}
+	.y-back img,.y-share img,.y-collection img{
+		width:22px;
+		height:22px;
+	}
+
+	.y-share{
+		position:absolute;
+		right:42px;
+		top:10px;
+	}
+
+	.y-collection{
+		position:absolute;
+		right:10px;
+		top:10px;
+	}
+}
+.y-switch{
+	width:100%;
+	height:44px;
+	font-size:14px;
+	background:#fff;
+	span{
+		line-height:44px;
+		padding-left:15px;
+		color:#333;
+	}
+}
+
+
+.y-subInfo{
+	width:100%;
+	height:132.5px;
+	position:relative;
+	font-size:12px;
+
+	.y-sub-title{
+		position:absolute;
+		top:15px;
+		left:15px;
+		color:#333;
+	}
+	.y-sub-number{
+		position:absolute;
+		top:15px;
+		right:15px;
+		color:#333;
+	}
+	.y-designer-info{
+		position:absolute;
+		top:41px;
+		left:0;
+		width:100%;
+		height:91.5px;
+		img{
+			width:50px;
+			height:50px;
+			border-radius:50%;
+			margin:0 auto;
+			display:block;
+		}
+		span{
+			width:100%;
+			line-height:17px;
+			text-align:center;
+			display:inline-block;
+		}
+
+		.y-job-type{
+			line-height:15px;
+			color:#666;
+		}
+	}
+}
+.y-describe{
+	width:365px;
+	height:100px;
+	margin:0 auto;
+	word-break:break-all;
+	display:-webkit-box;
+	-webkit-line-clamp:4;
+	-webkit-box-orient:vertical;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	border-radius:5px;
+	background:#fff;
+	color:#666;
+	font-size:12px;
+	text-indent:2em;
+	padding:7px 5px;
+}
+::-webkit-scrollbar{
+	display:none;
+}
+.y-notice{
+	padding-left:15px;
+	color:#333;
+	font-size:12px;
+	line-height:31px;
+}
+.y-notice-info{
+	text-indent:0em;
+}
+.y-pay-info{
+	width:100%;
+	height:54px;
+	background:#fff;
+	position:fixed;
+	left:0;
+	bottom:0;
+	.y-pay-btn{
+		width:120px;
+		height:44px;
+		background:#f5a523;
+		border-radius:5px;
+		color:#fff;
+		font-size:12px;
+		line-height:44px;
+		text-align:center;
+		margin:5px 20px 5px 0;
+		float:right;
+		border:1px solid #f5a523;
+	}
+	.y-pay-number{
+		width:225px;
+		color:#333;
+		font-size:12px;
+		line-height:54px;
+		text-align:center;
+		float:left;
+	}
+	.y-pay-price{
+		padding-left:25px;
+	}
+}
+

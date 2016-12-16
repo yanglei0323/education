@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var picBasePath = 'http://101.200.180.188:8112';
+var picBasePath = 'http://yuemeikeimg.oss-cn-beijing.aliyuncs.com';
 var educationApp = angular.module('education', ['ionic'])
 
 .run(function($ionicPlatform) {
@@ -98,6 +98,21 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/register',
     templateUrl: 'templates/register.html',
     controller: 'registerCtrl'
+  })
+  .state('area', {
+    url: '/area:topicid/:topicname',
+    templateUrl: 'templates/area.html',
+    controller: 'areaCtrl'
+  })
+  .state('boutiquedetail', {
+    url: '/boutiquedetail:videoid',
+    templateUrl: 'templates/boutique-details.html',
+    controller: 'boutiquedetailCtrl'
+  })
+  .state('publicdetail', {
+    url: '/publicdetail:videoid',
+    templateUrl: 'templates/public-details.html',
+    controller: 'publicdetailsCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

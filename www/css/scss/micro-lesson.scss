@@ -10,7 +10,7 @@ $graybg: #ececec;
 		height:187.5px;
 	}
 }
-.y_home_title{
+.y-home-title{
 	width:100%;
 	height:31px;
 	line-height:31px;
@@ -19,7 +19,7 @@ $graybg: #ececec;
 	color:#333;
 	background:$graybg;
 }
-.y_subscription{
+.y-subscription{
 	width:auto;
 	height:155px;
 	background:$graybg;
@@ -36,13 +36,13 @@ $graybg: #ececec;
 		border-radius:5px;
 		margin-left:5px;
 	}
-	.y_densigner_name{
+	.y-densigner-name{
 		bottom:27px;
 	}
-	.y_densigner_price{
+	.y-densigner-price{
 		bottom:7.5px;
 	}
-	.y_densigner_name,.y_densigner_price{
+	.y-densigner-name,.y-densigner-price{
 		position:absolute;
 		color:#fff;
 		font-size:12px;
@@ -51,10 +51,10 @@ $graybg: #ececec;
 	}
 }
 
-.special_title{
+.special-title{
 	background:#fff !important;
 }
-.y_special{
+.y-special{
 	.row{
 		padding:0 !important;
 		.col{
@@ -78,7 +78,7 @@ $graybg: #ececec;
 		}
 		
 	}
-	.y_row_bottom{
+	.y-row-bottom{
 		margin-top:5px;
 	}
 	
@@ -91,11 +91,11 @@ $graybg: #ececec;
 	align-items:center;
 	-webkit-align-items:center;
 }
-.s_between{
+.s-between{
 	justify-content: space-between;
   	-webkit-justify-content: space-between;
 }
-.y_recommend{
+.y-recommend{
   width:100%;
   margin:0 auto;
   .item{
@@ -103,13 +103,14 @@ $graybg: #ececec;
   	margin:0 auto;
   	padding:0 !important;
   	border:0 !important;
+  	position:relative;
   	img{
   		width:365px;
 	  	height:200px;
 	  	margin-bottom:4px;
 	  	border-radius:5px;
   	}
-  	.recom_title{
+  	.recom-title{
 	  	width:365px;
 	  	height:18px;
 	}

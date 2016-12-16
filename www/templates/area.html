@@ -1,0 +1,22 @@
+<ion-view>
+<ion-header-bar class="bar-light bar bar-header" align-title="center">
+	<button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item">
+	    <i class="icon ion-ios-arrow-back"></i>
+    </button>
+    <div class="title title-center header-item"><span ng-bind="topicName"></span></div>
+</ion-header-bar>
+<ion-content>
+	<div class="y-boutique-content y-office-content">
+		<div class="y-recommend">
+			<div class="item" ng-repeat="area in areaList">
+				<img ng-src="{{area.imgurl}}" alt="">
+				<div class="recom-title flex align s-between">
+					<div class="left flex align"><span ng-bind="area.teachername"></span>:<span ng-bind="area.name"></span></div>
+					<div class="right flex align"><span ng-bind="area.price"></span>元</div>
+				</div>
+				<span class="flex align watchnum"><span ng-bind="area.timelongs"></span>-<span ng-bind="area.watchnum"></span>人观看</span>
+			</div>
+		</div>
+	</div>
+</ion-content>
+</ion-view>

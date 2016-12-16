@@ -1,6 +1,23 @@
+<!-- 顶部导航 -->
+<div class="bar bar-header bar-positive home-bar">
+  <ion-tabs class="tabs-icon-only tabs-positive tabs-top hometab home-bar"> 
+      <ion-tab title="精选" ng-click="homeSwitch(1)">
 
+      </ion-tab>  
+  
+      <ion-tab title="付费精品" ng-click="homeSwitch(2)">
+      </ion-tab>   
+  
+      <ion-tab title="公开课" ng-click="homeSwitch(3)">  
+      </ion-tab>  
+  
+      <ion-tab title="课程表" ng-click="homeSwitch(4)">  
+      </ion-tab> 
+          
+  </ion-tabs>
+</div>
 <ion-view view-title="悦美课">
-  <ion-content>
+  <ion-content class="y-home-content y-home-content-1">
   	<!-- 轮播图 -->
   	<div class="home-banner">
   		<ion-slide-box auto-play="true" slide-interval="3000" does-continue="true" delegate-handle="slideimgs"  
@@ -11,34 +28,34 @@
 	    </ion-slide-box>
   	</div>
   	<!-- 专栏订阅 -->
-  	<div class="y_home_title">专栏订阅</div>
-  	<div class="y_subscription">
+  	<div class="y-home-title">专栏订阅</div>
+  	<div class="y-subscription">
   		<ion-scroll direction="x">
 	  		<div ng-repeat="subdesigner in subDesignerList" class="subItem">
 	  			<img ng-src="{{subdesigner.imgurl}}" alt="">
-	  			<span class="y_densigner_name"><span ng-bind="subdesigner.name"></span>-<span ng-bind="subdesigner.job"></span></span>
-	  			<span class="y_densigner_price">￥<span ng-bind="subdesigner.price"></span>/年</span>
+	  			<span class="y-densigner-name"><span ng-bind="subdesigner.name"></span>-<span ng-bind="subdesigner.job"></span></span>
+	  			<span class="y-densigner-price">￥<span ng-bind="subdesigner.price"></span>/年</span>
 			</div>  
         </ion-scroll>
   	</div>
   	<!-- 专题 -->
-  	<div class="y_home_title special_title">专题</div>
-  	<div class="y_special">
+  	<div class="y-home-title special-title">专题</div>
+  	<div class="y-special">
   		<div class="row">
-		  <div class="col col-50"><img ng-src="{{specialList[0].imgurl}}" alt=""><span ng-bind="specialList[0].name"></span></div>
-		  <div class="col col-50"><img ng-src="{{specialList[1].imgurl}}" alt=""><span ng-bind="specialList[1].name"></span></div>
+		  <div class="col col-50" ng-click="goArea(specialList[0])"><img ng-src="{{specialList[0].imgurl}}" alt=""><span ng-bind="specialList[0].name"></span></div>
+		  <div class="col col-50" ng-click="goArea(specialList[1])"><img ng-src="{{specialList[1].imgurl}}" alt=""><span ng-bind="specialList[1].name"></span></div>
 		</div>
-		<div class="row y_row_bottom">
-		  <div class="col col-50"><img ng-src="{{specialList[2].imgurl}}" alt=""><span ng-bind="specialList[2].name"></span></div>
-		  <div class="col col-50"><img ng-src="{{specialList[3].imgurl}}" alt=""><span ng-bind="specialList[3].name"></span></div>
+		<div class="row y-row-bottom">
+		  <div class="col col-50" ng-click="goArea(specialList[2])"><img ng-src="{{specialList[2].imgurl}}" alt=""><span ng-bind="specialList[2].name"></span></div>
+		  <div class="col col-50" ng-click="goArea(specialList[3])"><img ng-src="{{specialList[3].imgurl}}" alt=""><span ng-bind="specialList[3].name"></span></div>
 		</div>
   	</div>
 	<!-- 热门推荐 -->
-	<div class="y_home_title special_title">热门推荐</div>
-	<div class="y_recommend">
+	<div class="y-home-title special-title">热门推荐</div>
+	<div class="y-recommend">
 		<div class="item" ng-repeat="recomitem in recomList">
-			<img src="../images/recom_1.png" alt="">
-			<div class="recom_title flex align s_between">
+			<img ng-src="{{recomitem.imgurl}}" alt="">
+			<div class="recom-title flex align s-between">
 				<div class="left flex align"><span ng-bind="recomitem.video.teachername"></span>:<span ng-bind="recomitem.video.name"></span></div>
 				<div class="right flex align"><span ng-bind="recomitem.video.price"></span>元</div>
 			</div>
@@ -46,5 +63,47 @@
 		</div>
 	</div>
 	
+  </ion-content>
+  <!-- 付费精品 -->
+  <ion-content class="y-home-content y-home-content-2 y-simple-video">
+	<div class="y-boutique-content">
+		<div class="y-recommend">
+			<div class="item" ng-repeat="recomitem in boutiqueList" ng-click="goBoutiDetail(recomitem)">
+				<img ng-src="{{recomitem.imgurl}}" alt="">
+				<div class="recom-title flex align s-between">
+					<div class="left flex align"><span ng-bind="recomitem.teachername"></span>:<span ng-bind="recomitem.name"></span></div>
+					<div class="right flex align"><span ng-bind="recomitem.price"></span>元</div>
+				</div>
+				<span class="flex align watchnum"><span ng-bind="recomitem.timelongs"></span>-<span ng-bind="recomitem.watchnum"></span>人观看</span>
+			</div>
+		</div>
+	</div>
+  </ion-content>
+  <!-- 公开课 -->
+  <ion-content class="y-home-content y-home-content-3 y-simple-video">
+	<div class="y-boutique-content">
+		<div class="y-recommend">
+			<div class="item" ng-repeat="recomitem in publicList" ng-click="gopublicDetail(recomitem)">
+				<img ng-src="{{recomitem.imgurl}}" alt="">
+				<div class="recom-title flex align s-between">
+					<div class="left flex align"><span ng-bind="recomitem.teachername"></span>:<span ng-bind="recomitem.name"></span></div>
+				</div>
+				<span class="flex align watchnum"><span ng-bind="recomitem.timelongs"></span>-<span ng-bind="recomitem.watchnum"></span>人观看</span>
+			</div>
+		</div>
+	</div>
+  </ion-content>
+  <!-- 课程表 -->
+  <ion-content class="y-home-content y-home-content-4 y-simple-video">
+	<div class="y-curriculum-content">
+		<div class="y-curriculum-item" ng-repeat="curritem in curriculumList">
+			<img ng-src="curritem.imgurl" alt="" class="y-currImg">
+			<div class="y-currInfo">
+				<p class="curr-title" ng-bind="curritem.name"></p>
+				<p class="curr-teacherInfo"><span ng-bind="curritem.teachername"></span><span class="y-gd">|</span><span ng-bind="curritem.teacherjob"></span></p>
+				<p class="curr-status"><span class="curr-time" ng-bind="curritem.worktime"></span>预热中...</p>
+			</div>
+		</div>
+	</div>
   </ion-content>
 </ion-view>

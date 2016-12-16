@@ -3,6 +3,18 @@
 	    <div class="title title-center header-item">线下课</div>
 	</ion-header-bar>
     <ion-content>
-    	
+    	<div class="y-boutique-content y-office-content">
+			<div class="y-recommend">
+				<div class="item" ng-repeat="recomitem in lineList">
+					<img ng-src="{{recomitem.imgurl}}" alt="">
+					<span class="y-office-icon"><img src="../img/micro/line-icon.png" alt=""> <span class="y-office-status" ng-bind="recomitem.status"></span></span>
+
+					<div class="recom-title flex align s-between">
+						<div class="left flex align"><span ng-bind="recomitem.title"></span></div>
+					</div>
+					<span class="flex align watchnum"><span ng-bind="recomitem.timelongs"></span><span ng-bind="recomitem.worktime"></span>-<span ng-bind="recomitem.peoplenum"></span>人已报名</span>
+				</div>
+			</div>
+		</div>
     </ion-content>
 </ion-view>

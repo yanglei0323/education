@@ -1,3 +1,52 @@
+educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+	console.log('技术专区控制器');
+	var topicId=$stateParams.topicid;
+	var topicName=$stateParams.topicname;
+	$scope.topicName=topicName;
+	$scope.areaList = {};
+	var areaPage=1;
+	var data = {
+		topicid:topicId,
+		page:areaPage
+	};
+	Http.post('/page/unl/topicvideo.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			var videoList = resp.data.videolist;
+			for (var i = 0; i < videoList.length; i++) {
+				videoList[i].imgurl = picBasePath + videoList[i].imgurl;
+			}
+			$scope.areaList = videoList;
+			areaPage++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+}]);
+educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+	console.log('付费精品视频详情');
+	var videoId=$stateParams.videoid;
+	$scope.boutiDetailList = {};
+	var data = {
+		videoid:videoId
+	};
+	Http.post('/page/unl/videodetail.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			$scope.boutiDetailList =resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+}]);
 educationApp.controller('loginCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
 	
 	$scope.user = {};
@@ -44,8 +93,10 @@ educationApp.controller('meCtrl', ['$scope', '$state', '$location', function ($s
 	console.log('我的控制器');
 
 }]);
-educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope', function ($scope, Http, Popup, $rootScope) {
+educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
 	console.log('小悦微课控制器');
+	$('.y-home-content').css({'display':'none'});
+	$('.y-home-content-1').css({'display':'block'});
 	// 轮播图
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
@@ -103,6 +154,9 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		console.log(resp);
 	});
+	$scope.goArea=function(topic){
+		$state.go("area",{topicid:topic.id,topicname:topic.name,},{reload:true});
+	};
 
 	// 热门推荐
 	$scope.recomList = {};
@@ -122,9 +176,160 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		console.log(resp);
 	});
+	$scope.homeSwitch=function(index){
+		$('.y-home-content').css({'display':'none'});
+		$('.y-home-content-'+index).css({'display':'block'}); 
+	};
+	// 付费精品模块
+	$scope.boutiqueList = {};
+	var boutiquePage=1;
+	var data = {
+		page:boutiquePage
+	};
+	Http.post('/page/unl/payvidedo.json',data)
+	.success(function (resp) {
+		if (1 === resp.code) {
+			var payvidedoList = resp.data.payvidedolist;
+			for (var i = 0; i < payvidedoList.length; i++) {
+				payvidedoList[i].imgurl = picBasePath + payvidedoList[i].imgurl;
+			}
+			$scope.boutiqueList = payvidedoList;
+			boutiquePage++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	$scope.goBoutiDetail=function(data){
+		$state.go("boutiquedetail",{videoid:data.id},{reload:true});
+	};
+
+
+
+	// 公开课模块
+	$scope.publicList = {};
+	var publicPage=1;
+	var data = {
+		page:publicPage
+	};
+	Http.post('/page/unl/freevidedo.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			var freevidedoList = resp.data.freevidedolist;
+			for (var i = 0; i < freevidedoList.length; i++) {
+				freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+			}
+			$scope.publicList = freevidedoList;
+			publicPage++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	$scope.gopublicDetail=function(data){
+		$state.go("publicdetail",{videoid:data.id},{reload:true});
+	};
+
+	// 课程表模块
+	$scope.curriculumList = {};
+	var curriculumPage=1;
+	var data = {
+		page:curriculumPage
+	};
+	Http.post('/page/unl/schedule.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			var currList = resp.data.freevidedolist;
+			for (var i = 0; i < currList.length; i++) {
+				currList[i].imgurl = picBasePath + currList[i].imgurl;
+			}
+			$scope.curriculumList = currList;
+			curriculumPage++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
 }]);
-educationApp.controller('offlineLessonCtrl', ['$scope', function ($scope) {
-	console.log('下线课控制器');
+educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope', function ($scope, Http, Popup, $rootScope) {
+	console.log('线下课控制器');
+	
+	$scope.lineList = {};
+	var page=1;
+	var data = {
+		page:page
+	};
+	Http.post('/page/unl/activitylist.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			var activityList = resp.data.activitylist;
+			for (var i = 0; i < activityList.length; i++) {
+				activityList[i].imgurl = picBasePath + activityList[i].imgurl;
+			}
+			$scope.lineList = activityList;
+			page++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+}]);
+educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+	console.log('公开课视频详情');
+	var videoId=$stateParams.videoid;
+	$scope.boutiDetailList = {};
+	var data = {
+		videoid:videoId
+	};
+	Http.post('/page/unl/videodetail.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			$scope.boutiDetailList =resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+}]);
+educationApp.controller('publicCtrl', ['$scope','Http', 'Popup', '$rootScope', function ($scope, Http, Popup, $rootScope) {
+	console.log('公开课控制器');
+	
+	$scope.publicList = {};
+	var page=1;
+	var data = {
+		page:page
+	};
+	Http.post('/page/unl/freevidedo.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			var freevidedoList = resp.data.freevidedolist;
+			for (var i = 0; i < freevidedoList.length; i++) {
+				freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+			}
+			$scope.publicList = freevidedoList;
+			page++;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
 }]);
 educationApp.controller('registerCtrl', ['$scope', function ($scope) {
 	console.log('注册控制器');
