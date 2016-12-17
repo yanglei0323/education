@@ -5,6 +5,10 @@
   	{
   		"path": "/user/",
 	  	"proxyUrl": "http://101.200.205.162:8889/user/"
+  	},
+  	{
+  		"path": "/page/",
+	  	"proxyUrl": "http://101.200.205.162:8889/page/"
   	}
   ]
 }

@@ -1,4 +1,5 @@
-educationApp.controller('loginCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
+educationApp.controller('loginCtrl',
+	['$scope', 'Http', 'Popup', 'User', function ($scope, Http, Popup, User) {
 	
 	$scope.user = {};
 
@@ -26,17 +27,5 @@ educationApp.controller('loginCtrl', ['$scope', 'Http', 'Popup', function ($scop
 	};
 
 	// 登录按钮点击事件
-	$scope.login = function () {
-		var data = {
-			telephone: $scope.user.telephone,
-			check: $scope.user.code
-		};
-		Http.post('/user/unl/login.json', data)
-		.success(function (resp) {
-			console.log(resp);
-		})
-		.error(function (resp) {
-			console.log(resp);
-		});;
-	};
+	$scope.login = User.login;
 }]);

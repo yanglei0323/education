@@ -8,7 +8,7 @@
 var picBasePath = 'http://yuemeikeimg.oss-cn-beijing.aliyuncs.com';
 var educationApp = angular.module('education', ['ionic'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, User, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +21,13 @@ var educationApp = angular.module('education', ['ionic'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        if (toState.needLogin && !User.isLogin()) {
+          event.preventDefault();
+          $state.go('login');
+        }
+    });
   });
 })
 
@@ -34,6 +41,8 @@ var educationApp = angular.module('education', ['ionic'])
   // 设置android中tabs默认显示在底部
   $ionicConfigProvider.platform.android.tabs.position('bottom');
   $ionicConfigProvider.tabs.style('standard');
+  // 全局禁用cache
+  $ionicConfigProvider.views.maxCache(0);
 
   // 修改post请求默认配置
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
@@ -87,17 +96,15 @@ var educationApp = angular.module('education', ['ionic'])
         templateUrl: 'templates/tab-me.html',
         controller: 'meCtrl'
       }
-    }
+    },
+    needLogin: true,
+    cache: false
   })
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controller: 'loginCtrl'
-  })
-  .state('register', {
-    url: '/register',
-    templateUrl: 'templates/register.html',
-    controller: 'registerCtrl'
+    controller: 'loginCtrl',
+    cache: false
   })
   .state('area', {
     url: '/area:topicid/:topicname',
