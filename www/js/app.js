@@ -113,6 +113,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/publicdetail:videoid',
     templateUrl: 'templates/public-details.html',
     controller: 'publicdetailsCtrl'
+  })
+  .state('subscribdetails', {
+    url: '/subscribdetails:teacherid',
+    templateUrl: 'templates/subscrib-details.html',
+    controller: 'subscribdetailsCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

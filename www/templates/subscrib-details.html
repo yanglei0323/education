@@ -1,0 +1,63 @@
+<ion-view hide-nav-bar="false" view-title="悦美课">
+    <ion-content class="y-simple-video">
+    	<!-- 视频模块 -->
+		<div class="y-video">
+	        <video src="http://le.video.xinpianchang.com/5790867066932.mp4" controls loop poster="../img/boutique/poster.png"></video>
+	        <span class="y-back"><img src="../img/boutique/goback.png" alt=""></span>
+	        <span class="y-share"><img src="../img/boutique/share.png" alt=""></span>
+	        <span class="y-collection"><img src="../img/boutique/collection.png" alt=""></span>
+	    </div>
+	    
+	    <!-- 订阅详情 -->
+	    <div class="y-page y-page-1">
+	        <!-- 切换tab -->
+	        <div class="y-switch flex align s-around">
+	            <span class="y-item y-item-1 flex align column y-item-h" ng-click="goSwitch(1)">订阅详情</span>
+	            <span class="y-item y-item-2 flex align column" ng-click="goSwitch(2)">课程目录(<span ng-bind="subDetailList.columnnum"></span>)</span>
+	        </div>
+	       <div class="y-subInfo">
+	            <span class="y-sub-title">专栏简介</span>
+	            <span class="y-sub-number"><span ng-bind="subDetailList.keepnum"></span>人已订阅</span>
+	            <span class="y-designer-info">
+	                <img ng-src="subDetailList.avatar" alt="">
+	                <span ng-bind="subDetailList.name"></span>
+	                <span class="y-job-type" ng-bind="subDetailList.job"></span>
+	            </span>
+	        </div>
+	        <div class="y-describe">
+	            <span ng-bind="subDetailList.describe"></span>
+	        </div>
+	        <span class="y-notice">订阅须知</span>
+	        <div class="y-describe y-notice-info">
+	            <p ng-bind="subDetailList.info"></p>
+	        </div> 
+	    </div>
+	    <!-- 课程目录 -->
+	    <div class="y-page y-page-2">
+	        <!-- 切换tab -->
+	        <div class="y-switch flex align s-around">
+	            <span class="y-item y-item-1 flex align column" ng-click="goSwitch(1)">订阅详情</span>
+	            <span class="y-item y-item-2 flex align column y-item-h" ng-click="goSwitch(2)">课程目录(<span ng-bind="subDetailList.columnnum"></span>)</span>
+	        </div>
+	        <div class="y-curr-list">
+	            <div class="y-curr-item" ng-repeat="column in columnList">
+	                <span><img src="../img/boutique/play.png" alt="" class="y-play-btn"></span>
+	                <div class="y-curr-info">
+	                    <p class="y-curr-title" ng-bind="column.name"></p>
+	                    <span class="y-curr-time">
+	                        <img src="../img/boutique/time-icon.png" alt="">
+	                        <span ng-bind="column.timelongs"></span>
+	                    </span>
+	                </div>
+	                <span class="y-up-time" ng-bind="column.uploadtime"></span>
+	            </div>
+	            
+	        </div>
+	    </div>
+
+    </ion-content>
+    <!-- 订阅按钮模块 -->
+    <div class="y-pay-info">
+        <div class="y-pay-btn">订阅：￥<span ng-bind="subDetailList.price"></span>/年</div>
+    </div>
+</ion-view>

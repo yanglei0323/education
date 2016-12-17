@@ -40,6 +40,9 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		console.log(resp);
 	});
+	$scope.goSubDetails=function(index){
+		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
+	};
 
 	// 专题
 	$scope.specialList = {};
@@ -82,8 +85,10 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		console.log(resp);
 	});
 	$scope.homeSwitch=function(index){
+		$('.home-tab-item').removeClass("home-tab-active");
+		$('.home-tab-item-'+index).addClass("home-tab-active");
 		$('.y-home-content').css({'display':'none'});
-		$('.y-home-content-'+index).css({'display':'block'}); 
+		$('.y-home-content-'+index).css({'display':'block'});
 	};
 	// 付费精品模块
 	$scope.boutiqueList = {};

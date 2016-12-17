@@ -135,6 +135,9 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		console.log(resp);
 	});
+	$scope.goSubDetails=function(index){
+		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
+	};
 
 	// 专题
 	$scope.specialList = {};
@@ -177,8 +180,10 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		console.log(resp);
 	});
 	$scope.homeSwitch=function(index){
+		$('.home-tab-item').removeClass("home-tab-active");
+		$('.home-tab-item-'+index).addClass("home-tab-active");
 		$('.y-home-content').css({'display':'none'});
-		$('.y-home-content-'+index).css({'display':'block'}); 
+		$('.y-home-content-'+index).css({'display':'block'});
 	};
 	// 付费精品模块
 	$scope.boutiqueList = {};
@@ -333,6 +338,32 @@ educationApp.controller('publicCtrl', ['$scope','Http', 'Popup', '$rootScope', f
 }]);
 educationApp.controller('registerCtrl', ['$scope', function ($scope) {
 	console.log('注册控制器');
+}]);
+educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+	console.log('专栏订阅详情');
+	var teacherId=$stateParams.teacherid;
+	$scope.subDetailList = {};
+	var data = {
+		teacherid:teacherId
+	};
+	Http.post('/page/unl/teacherdetail.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			$scope.subDetailList =resp.data;
+			$scope.columnList =resp.data.columnlist;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 切换tab
+	$scope.goSwitch=function(index){
+		$('.y-page').css({'display':'none'});
+        $('.y-page-'+index).css({'display':'block'});
+	};
 }]);
 educationApp.controller('subscribedCtrl', ['$scope', function ($scope) {
 	console.log('已订阅控制器');
