@@ -1,12 +1,12 @@
-educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
-	console.log('付费精品视频详情');
-	var videoId=$stateParams.videoid;
+educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+	console.log('线下课详情');
+	var activityId=$stateParams.activityid;
 	$scope.boutiDetailList = {};
 	$scope.priceType = false;
 	var data = {
-		videoid:videoId
+		activityid:activityId
 	};
-	Http.post('/page/unl/videodetail.json',data)
+	Http.post('/page/unl/activitydetail.json',data)
 	.success(function (resp) {
 		console.log(resp);
 		if (1 === resp.code) {

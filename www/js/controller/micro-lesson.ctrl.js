@@ -1,8 +1,15 @@
-educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
+educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate) {
 	console.log('小悦微课控制器');
 	$('.y-home-content').css({'display':'none'});
 	$('.y-home-content-1').css({'display':'block'});
 	// 轮播图
+	$timeout(function(){
+
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
+
+    },100);
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
 	.success(function (resp) {

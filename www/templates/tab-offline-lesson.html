@@ -5,7 +5,7 @@
     <ion-content>
     	<div class="y-boutique-content y-office-content">
 			<div class="y-recommend">
-				<div class="item" ng-repeat="recomitem in lineList">
+				<div class="item" ng-repeat="recomitem in lineList"  ng-click="goOfficeDetails(recomitem)">
 					<img ng-src="{{recomitem.imgurl}}" alt="">
 					<span class="y-office-icon"><img src="../img/micro/line-icon.png" alt=""> <span class="y-office-status" ng-bind="recomitem.status"></span></span>
 

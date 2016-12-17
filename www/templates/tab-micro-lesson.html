@@ -59,7 +59,7 @@
 	<!-- 热门推荐 -->
 	<div class="y-home-title special-title">热门推荐</div>
 	<div class="y-recommend">
-		<div class="item" ng-repeat="recomitem in recomList">
+		<div class="item" ng-repeat="recomitem in recomList" ng-click="goBoutiDetail(recomitem)">
 			<img ng-src="{{recomitem.imgurl}}" alt="">
 			<div class="recom-title flex align s-between">
 				<div class="left flex align"><span ng-bind="recomitem.video.teachername"></span>:<span ng-bind="recomitem.video.name"></span></div>

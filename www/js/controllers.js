@@ -1,4 +1,4 @@
-educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
 	console.log('技术专区控制器');
 	var topicId=$stateParams.topicid;
 	var topicName=$stateParams.topicname;
@@ -26,11 +26,20 @@ educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$st
 	.error(function (resp) {
 		console.log(resp);
 	});
+	// 返回上一页
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
+	};
+	// 详情页跳转
+	$scope.goAreaDetail=function(data){
+		$state.go("boutiquedetail",{videoid:data.id},{reload:true});
+	};
 }]);
-educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
 	console.log('付费精品视频详情');
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
+	$scope.priceType = false;
 	var data = {
 		videoid:videoId
 	};
@@ -39,6 +48,10 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 		console.log(resp);
 		if (1 === resp.code) {
 			$scope.boutiDetailList =resp.data;
+			var priceType=parseInt(resp.data.price);
+			if(priceType>=0){
+				$scope.priceType = true;
+			}
 		}
 		else if (0 === resp.code) {
 		}
@@ -46,6 +59,30 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	.error(function (resp) {
 		console.log(resp);
 	});
+	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
+	$scope.keepDesigner = function (boutiDetailList) {
+		var postUrl = boutiDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';
+		var data2 = {
+			type:2,
+			id:boutiDetailList.id
+		};
+		Http.post(postUrl, data2)
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+			}
+			else if (1 === data.code) {
+				$scope.boutiDetailList.iskeep = !$scope.boutiDetailList.iskeep;
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	};
+	// 返回上一页
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
+	};
 }]);
 educationApp.controller('loginCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
 	
@@ -93,11 +130,18 @@ educationApp.controller('meCtrl', ['$scope', '$state', '$location', function ($s
 	console.log('我的控制器');
 
 }]);
-educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
+educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate) {
 	console.log('小悦微课控制器');
 	$('.y-home-content').css({'display':'none'});
 	$('.y-home-content-1').css({'display':'block'});
 	// 轮播图
+	$timeout(function(){
+
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
+
+    },100);
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
 	.success(function (resp) {
@@ -264,7 +308,56 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		console.log(resp);
 	});
 }]);
-educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope', function ($scope, Http, Popup, $rootScope) {
+educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+	console.log('线下课详情');
+	var activityId=$stateParams.activityid;
+	$scope.boutiDetailList = {};
+	$scope.priceType = false;
+	var data = {
+		activityid:activityId
+	};
+	Http.post('/page/unl/activitydetail.json',data)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			$scope.boutiDetailList =resp.data;
+			var priceType=parseInt(resp.data.price);
+			if(priceType>=0){
+				$scope.priceType = true;
+			}
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
+	$scope.keepDesigner = function (boutiDetailList) {
+		var postUrl = boutiDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';
+		var data2 = {
+			type:2,
+			id:boutiDetailList.id
+		};
+		Http.post(postUrl, data2)
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+			}
+			else if (1 === data.code) {
+				$scope.boutiDetailList.iskeep = !$scope.boutiDetailList.iskeep;
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	};
+	// 返回上一页
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
+	};
+}]);
+educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
 	console.log('线下课控制器');
 	
 	$scope.lineList = {};
@@ -289,8 +382,11 @@ educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootSc
 	.error(function (resp) {
 		console.log(resp);
 	});
+	$scope.goOfficeDetails=function(index){
+		$state.go("officedetails",{activityid:index.id},{reload:true});
+	};
 }]);
-educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
 	console.log('公开课视频详情');
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
@@ -309,6 +405,30 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	.error(function (resp) {
 		console.log(resp);
 	});
+	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
+	$scope.keepDesigner = function (boutiDetailList) {
+		var postUrl = boutiDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';
+		var data2 = {
+			type:2,
+			id:boutiDetailList.id
+		};
+		Http.post(postUrl, data2)
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+			}
+			else if (1 === data.code) {
+				$scope.boutiDetailList.iskeep = !$scope.boutiDetailList.iskeep;
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	};
+	// 返回上一页
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
+	};
 }]);
 educationApp.controller('publicCtrl', ['$scope','Http', 'Popup', '$rootScope', function ($scope, Http, Popup, $rootScope) {
 	console.log('公开课控制器');
@@ -339,7 +459,7 @@ educationApp.controller('publicCtrl', ['$scope','Http', 'Popup', '$rootScope', f
 educationApp.controller('registerCtrl', ['$scope', function ($scope) {
 	console.log('注册控制器');
 }]);
-educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams', function ($scope,Http, Popup, $rootScope,$state,$stateParams) {
+educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
 	console.log('专栏订阅详情');
 	var teacherId=$stateParams.teacherid;
 	$scope.subDetailList = {};
@@ -352,6 +472,10 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		if (1 === resp.code) {
 			$scope.subDetailList =resp.data;
 			$scope.columnList =resp.data.columnlist;
+			var priceType=parseInt(resp.data.price);
+			if(priceType>=0){
+				$scope.priceType = true;
+			}
 		}
 		else if (0 === resp.code) {
 		}
@@ -363,6 +487,30 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	$scope.goSwitch=function(index){
 		$('.y-page').css({'display':'none'});
         $('.y-page-'+index).css({'display':'block'});
+	};
+	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
+	$scope.keepDesigner = function (subDetailList) {
+		var postUrl = subDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';
+		var data2 = {
+			type:1,
+			id:subDetailList.id
+		};
+		Http.post(postUrl, data2)
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+			}
+			else if (1 === data.code) {
+				$scope.subDetailList.iskeep = !$scope.subDetailList.iskeep;
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	};
+	// 返回上一页
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
 	};
 }]);
 educationApp.controller('subscribedCtrl', ['$scope', function ($scope) {
