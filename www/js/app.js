@@ -77,7 +77,9 @@ var educationApp = angular.module('education', ['ionic'])
           templateUrl: 'templates/tab-subscribed.html',
           controller: 'subscribedCtrl'
         }
-      }
+      },
+      needLogin: true,
+      cache: false
     })
     .state('tab.offline-lesson', {
       url: '/offline-lesson',
