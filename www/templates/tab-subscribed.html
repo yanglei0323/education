@@ -9,7 +9,7 @@
     			<div class="no_content_text">暂无订阅</div>
     		</div>
             <div class="subscribed" ng-show="showSubscribed">
-                <div class="subscribed-item">
+                <!-- <div class="subscribed-item">
                     <div class="subscribed-img">
                         <img ng-src="" alt="">
                     </div>
@@ -22,18 +22,18 @@
                         </div>
                         <div class="subscribed-price">￥350</div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="subscribed-item" ng-repeat="subscribeditem in followTeacherList">
                     <div class="subscribed-img">
                         <img ng-src="{{subscribeditem.imgurl}}" alt="">
                     </div>
                     <div class="subscribed-text">
-                        <div class="subscribed-title">{{subscribeditem.name}}</div>
+                        <div class="subscribed-title">{{subscribeditem.teacher.name}}</div>
                         <div class="subscribed-subtitle">
                             <div class="">专栏订阅</div>
                             <div class="subscribed-dividing-line"></div>
-                            <div class="subscribed-time"></div>
+                            <div class="subscribed-time">{{subscribeditem.time}}</div>
                         </div>
                         <div class="subscribed-price">￥{{subscribeditem.price}}</div>
                     </div>
