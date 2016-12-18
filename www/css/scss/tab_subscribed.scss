@@ -14,3 +14,48 @@ ion-content {
 	font-size: 15px;
 	color: #666666;
 }
+.subscribed {
+	width: 100%;
+}
+.subscribed-item {
+	width: 100%;
+	height: 106px;
+	background-color: #ffffff;
+}
+.subscribed-img {
+	width: 75px%;
+	height: 75px;
+	margin-top: 16px;
+	margin-left: 16px;
+    margin-right: 15px;
+	background-color: #ccc;
+}
+.subscribed-text {
+	height: 60px;
+	margin-top: 26px;
+}
+.subscribed-title {
+	font-size: 14px;
+	color: #333333;
+}
+.subscribed-subtitle {
+	font-size: 12px;
+	color: #666666;
+	margin-top: 17px;
+}
+.subscribed-dividing-line {
+	width: 1px;
+	height: 15px;
+	margin-left: 10px;
+    margin-right: 10px;
+    background-color: #dbdbdb;
+}
+.subscribed-time {
+	font-size: 10px;
+	color: #999999;
+}
+.subscribed-price {
+	font-size: 14px;
+	color: #f5a523;
+	margin-top: 10px;
+}
