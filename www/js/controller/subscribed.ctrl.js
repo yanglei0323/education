@@ -1,7 +1,7 @@
 educationApp.controller('subscribedCtrl', ['$scope', 'Popup', function ($scope, Popup) {
 	console.log('已订阅控制器');
-	$scope.showNoSubscribed = true;
-	$scope.showSubscribed =  false;
+	$scope.showNoSubscribed = false;
+	$scope.showSubscribed = true;
 
 	// 我订阅的老师列表
 	// $scope.followTeacherList = {};
