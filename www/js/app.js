@@ -70,7 +70,6 @@ var educationApp = angular.module('education', ['ionic'])
       }
     }
   })
-
   .state('tab.subscribed', {
       url: '/subscribed',
       views: {
@@ -130,6 +129,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/officedetails:activityid',
     templateUrl: 'templates/office-details.html',
     controller: 'officedetailCtrl'
+  })
+  .state('binding-phone', {
+    url: '/binding-phone',
+    templateUrl: 'templates/binding-phone.html',
+    controller: 'bindingPhoneCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
