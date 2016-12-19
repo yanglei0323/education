@@ -10,11 +10,28 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	.success(function (resp) {
 		console.log(resp);
 		if (1 === resp.code) {
+			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			$scope.boutiDetailList =resp.data;
 			var priceType=parseInt(resp.data.price);
 			if(priceType>=0){
 				$scope.priceType = true;
 			}
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 视频功能
+	var data1 = {
+		videoed:videoId
+	};
+	console.log(data1);
+	Http.post('/unl/playurl.json',data1)
+	.success(function (resp) {
+		if (1 === resp.code) {
+			$scope.videoInfo=resp.data;
 		}
 		else if (0 === resp.code) {
 		}

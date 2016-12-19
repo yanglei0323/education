@@ -27,6 +27,22 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		$('.y-page').css({'display':'none'});
         $('.y-page-'+index).css({'display':'block'});
 	};
+	// 视频功能
+	var data1 = {
+		columnid:teacherId
+	};
+	console.log(data1);
+	Http.post('/unl/playurl.json',data1)
+	.success(function (resp) {
+		if (1 === resp.code) {
+			$scope.videoInfo=resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
 	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
 	$scope.keepDesigner = function (subDetailList) {
 		var postUrl = subDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';

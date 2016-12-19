@@ -9,7 +9,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 
         $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
 
-    },100);
+    },1000);
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
 	.success(function (resp) {

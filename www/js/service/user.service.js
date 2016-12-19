@@ -10,7 +10,7 @@ educationApp.factory('User',
 		return {
 			getUser: function () {
 				return JSON.parse(localStorage.getItem('user')) || {};
-			}
+			},
 			isLogin: function () {
 				return !!localStorage.getItem('isLogin') || false;
 			},
