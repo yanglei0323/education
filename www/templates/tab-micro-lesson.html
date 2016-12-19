@@ -63,7 +63,8 @@
 			<img ng-src="{{recomitem.imgurl}}" alt="">
 			<div class="recom-title flex align s-between">
 				<div class="left flex align"><span ng-bind="recomitem.video.teachername"></span>:<span ng-bind="recomitem.video.name"></span></div>
-				<div class="right flex align"><span ng-bind="recomitem.video.price"></span>元</div>
+				<div class="right flex align" ng-if="recomitem.showprice"><span ng-bind="recomitem.video.price"></span>元</div>
+				<div class="right flex align" ng-if="!recomitem.showprice"><span ng-bind="recomitem.video.price"></span></div>
 			</div>
 			<span class="flex align watchnum"><span ng-bind="recomitem.video.timelongs"></span>-<span ng-bind="recomitem.video.watchnum"></span>人观看</span>
 		</div>

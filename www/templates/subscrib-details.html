@@ -20,7 +20,7 @@
 	            <span class="y-sub-title">专栏简介</span>
 	            <span class="y-sub-number"><span ng-bind="subDetailList.keepnum"></span>人已订阅</span>
 	            <span class="y-designer-info">
-	                <img ng-src="subDetailList.avatar" alt="">
+	                <img ng-src="{{subDetailList.avatar}}" alt="">
 	                <span ng-bind="subDetailList.name"></span>
 	                <span class="y-job-type" ng-bind="subDetailList.job"></span>
 	            </span>
@@ -59,6 +59,7 @@
     </ion-content>
     <!-- 订阅按钮模块 -->
     <div class="y-pay-info" ng-if="priceType">
-        <div class="y-pay-btn">订阅：￥<span ng-bind="subDetailList.price"></span>/年</div>
+        <div class="y-pay-btn" ng-if="showPrice"><span>订阅：￥</span><span ng-bind="subDetailList.price"></span><span>/年</span></div>
+        <div class="y-pay-btn" ng-if="!showPrice">订阅：<span ng-bind="subDetailList.price"></span></div>
     </div>
 </ion-view>

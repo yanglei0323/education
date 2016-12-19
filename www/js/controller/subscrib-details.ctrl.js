@@ -2,6 +2,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	console.log('专栏订阅详情');
 	var teacherId=$stateParams.teacherid;
 	$scope.subDetailList = {};
+	$scope.showPrice = true;
 	var data = {
 		teacherid:teacherId
 	};
@@ -12,8 +13,11 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 			$scope.subDetailList =resp.data;
 			$scope.columnList =resp.data.columnlist;
 			var priceType=parseInt(resp.data.price);
-			if(priceType>=0){
+			if(priceType>=0 || $scope.columnList.price == '免费'){
 				$scope.priceType = true;
+			}
+			if($scope.columnList.price == '免费'){
+				$scope.showPrice = false;
 			}
 		}
 		else if (0 === resp.code) {

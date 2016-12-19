@@ -37,7 +37,10 @@
     </ion-content>
     <!-- 订阅按钮模块 -->
     <div class="y-pay-info" ng-if="priceType">
-        <span class="y-pay-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买<span class="y-pay-price">￥<span ng-bind="boutiDetailList.price"></span></span></span>
+        <span class="y-pay-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买
+        	<span class="y-pay-price" ng-if="!showPrice"><span ng-bind="boutiDetailList.price"></span></span>
+        	<span class="y-pay-price" ng-if="showPrice">￥<span ng-bind="boutiDetailList.price"></span></span>
+        </span>
         <input type="submit" class="y-pay-btn" value="立即购买">
     </div>
 </ion-view>

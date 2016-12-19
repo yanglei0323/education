@@ -13,6 +13,10 @@
     {
       "path": "/teacher/",
       "proxyUrl": "http://101.200.205.162:8889/teacher/"
+    },
+    {
+      "path": "/activity/",
+      "proxyUrl": "http://101.200.205.162:8889/activity/"
     }
   ]
 }

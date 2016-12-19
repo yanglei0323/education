@@ -12,7 +12,8 @@
 				<img ng-src="{{area.imgurl}}" alt="">
 				<div class="recom-title flex align s-between">
 					<div class="left flex align"><span ng-bind="area.teachername"></span>:<span ng-bind="area.name"></span></div>
-					<div class="right flex align"><span ng-bind="area.price"></span>元</div>
+					<div class="right flex align" ng-if="area.showprice"><span ng-bind="area.price"></span>元</div>
+					<div class="right flex align" ng-if="!area.showprice"><span ng-bind="area.price"></span></div>
 				</div>
 				<span class="flex align watchnum"><span ng-bind="area.timelongs"></span>-<span ng-bind="area.watchnum"></span>人观看</span>
 			</div>

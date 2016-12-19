@@ -82,6 +82,11 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 			var hotvideoList = resp.data.hotvideolist;
 			for (var i = 0; i < hotvideoList.length; i++) {
 				hotvideoList[i].imgurl = picBasePath + hotvideoList[i].imgurl;
+				if(parseInt(hotvideoList[i].video.price) >= 0){
+					hotvideoList[i].showprice=true;
+				}else{
+					hotvideoList[i].showprice=false;
+				}
 			}
 			$scope.recomList = hotvideoList;
 		}

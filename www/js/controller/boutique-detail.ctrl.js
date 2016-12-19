@@ -3,6 +3,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
 	$scope.priceType = false;
+	$scope.showPrice = true;
 	var data = {
 		videoid:videoId
 	};
@@ -13,8 +14,11 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			$scope.boutiDetailList =resp.data;
 			var priceType=parseInt(resp.data.price);
-			if(priceType>=0){
+			if(priceType>=0 || $scope.boutiDetailList.price == '免费'){
 				$scope.priceType = true;
+			}
+			if($scope.boutiDetailList.price == '免费'){
+				$scope.showPrice = false;
 			}
 		}
 		else if (0 === resp.code) {
