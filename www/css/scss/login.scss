@@ -13,9 +13,7 @@ $floatDirection: right !default;
 .button-login {
 	width: 335px;
     height: 44px;
-    margin-top: 50px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-top: 50px !important;
     font-size: 14px;
     color: #fff;
     border: none;
@@ -32,8 +30,8 @@ $floatDirection: right !default;
 .input-telephone {
     width: 335px;
     height: 44px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 14px;
     color: #fff;
     border: none;

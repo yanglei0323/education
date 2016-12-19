@@ -22,7 +22,7 @@ educationApp.controller('loginCtrl',
 			}
 		})
 		.error(function (resp) {
-			console.log(resp);
+			Popup.alert('数据请求失败，请稍后再试');
 		});
 	};
 

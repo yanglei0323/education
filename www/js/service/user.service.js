@@ -26,8 +26,10 @@ educationApp.factory('User',
 						// 登录成功
 						localStorage.setItem('isLogin', true);
 						localStorage.setItem('user', JSON.stringify(resp.data));
-						// Popup.alert('登录成功');
-						$ionicHistory.goBack();
+						var confirm = Popup.alert('登录成功');
+						confirm.then(function () {
+							$ionicHistory.goBack();
+						});
 					}
 				})
 				.error(function (resp) {
