@@ -144,6 +144,16 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/registration:activityid',
     templateUrl: 'templates/registration.html',
     controller: 'registrationCtrl'
+  })
+  .state('setup', {
+    url: '/setup',
+    templateUrl: 'templates/setUp.html',
+    controller: 'setUpCtrl'
+  })
+  .state('complaints', {
+    url: '/complaints',
+    templateUrl: 'templates/complaints.html',
+    controller: 'complaintsCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback
