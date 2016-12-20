@@ -8,8 +8,10 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	Http.post('/page/unl/teacherdetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
+			resp.data.avatar=picBasePath + resp.data.avatar;
+			resp.data.imgurl=picBasePath + resp.data.imgurl;
 			$scope.subDetailList =resp.data;
 			$scope.columnList =resp.data.columnlist;
 			var priceType=parseInt(resp.data.price);
@@ -35,7 +37,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	var data1 = {
 		columnid:teacherId
 	};
-	console.log(data1);
+	// console.log(data1);
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
 		if (1 === resp.code) {

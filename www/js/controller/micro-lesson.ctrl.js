@@ -13,7 +13,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var homeAdList = resp.data.adlist;
 			for (var i = 0; i < homeAdList.length; i++) {
@@ -25,7 +25,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		}
 	})
 	.error(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 	});
 
 
@@ -33,7 +33,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.subDesignerList = {};
 	Http.post('/page/unl/chooseteacherlist.json')
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var teacherList = resp.data.teacherlist;
 			for (var i = 0; i < teacherList.length; i++) {
@@ -55,7 +55,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.specialList = {};
 	Http.post('/page/unl/choosetopic.json')
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var topicList = resp.data.topiclist;
 			for (var i = 0; i < topicList.length; i++) {
@@ -77,7 +77,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.recomList = {};
 	Http.post('/page/unl/choosehotvideo.json')
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var hotvideoList = resp.data.hotvideolist;
 			for (var i = 0; i < hotvideoList.length; i++) {
@@ -138,7 +138,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	};
 	Http.post('/page/unl/freevidedo.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var freevidedoList = resp.data.freevidedolist;
 			for (var i = 0; i < freevidedoList.length; i++) {
@@ -165,7 +165,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	};
 	Http.post('/page/unl/schedule.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var currList = resp.data.freevidedolist;
 			for (var i = 0; i < currList.length; i++) {

@@ -8,5 +8,7 @@ educationApp.controller('setUpCtrl', ['$scope','Http', 'Popup', '$rootScope','$s
 	$scope.goComplaints= function () {
 	    $state.go("complaints",{reload:true});
 	};
-
+	$scope.goAboutUs= function () {
+	    $state.go("aboutus",{reload:true});
+	};
 }]);

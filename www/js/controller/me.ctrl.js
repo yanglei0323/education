@@ -12,6 +12,7 @@ educationApp.controller('meCtrl',
     //  alertPopup.then(function(res) {
     //    console.log('Thank you for not eating my delicious ice cream cone');
     //  });
+    
 	function getCookie(name){ 
         var strCookie = document.cookie; 
         var arrCookie = strCookie.split("; "); 
@@ -23,8 +24,12 @@ educationApp.controller('meCtrl',
         } 
         return ""; 
     }
-
-
+    // 获取个人信息
+    // var userInfo=JSON.parse(localStorage.getItem('user'));
+    // userInfo.avatar=picBasePath + userInfo.avatar;
+    // console.log(userInfo);
+    // $scope.userInfo=userInfo;
+    // 切换信息
     $scope.goTab=function(index){
         $('.y-meTab-item').removeClass("meTab-item-h");
         $('.y-meTab-item-'+index).addClass("meTab-item-h");
@@ -115,8 +120,12 @@ educationApp.controller('meCtrl',
     .error(function (resp) {
         console.log(resp);
     });
-
+    // 设置跳转
     $scope.goSetUp=function(){
         $state.go("setup",{reload:true});
+    };
+    // 收藏跳转
+    $scope.goCollection=function(){
+        $state.go("collection",{reload:true});
     };
 }]);

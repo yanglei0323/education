@@ -4,21 +4,21 @@
       <!-- <button type="button" ng-click="logout()">退出登录</button>
       <a ui-sref="binding-phone">绑定手机号</a> -->
       <div class="user-info">
-      	<img src="../../assets/images/head-none.png" class="head-img">
-        <div class="y-username"><span>用户名</span></div>
+      	<img ng-src="{{userInfo.avatar}}" class="head-img">
+        <div class="y-username"><span ng-bind="userInfo.nickname"></span></div>
         <div class="bottom-info">
             <span class="y-info-item" ng-click="navigate(1)">
-		        <span>
-		            <img src="../img/me/collection.png">
-		        </span>      
-		        <span class="text">收藏</span>
-		    </span>
-		    <span class="y-info-item" ng-click="navigate(1)">
-		        <span>
-		            <img src="../img/me/365.png">
-		        </span>      
-		        <span class="text">365大咖成长联盟</span>
-		    </span>
+    		        <span>
+    		            <img src="../img/me/collection.png" ng-click="goCollection()">
+    		        </span>      
+    		        <span class="text" ng-click="goCollection()">收藏</span>
+    		    </span>
+    		    <span class="y-info-item" ng-click="navigate(1)">
+    		        <span>
+    		            <img src="../img/me/365.png">
+    		        </span>      
+    		        <span class="text">365大咖成长联盟</span>
+    		    </span>
         </div>
         <div class="y-vertical"></div>
         <div class="y-setUp"><img src="../img/me/setUp.png" alt="" ng-click="goSetUp()"></div>
@@ -57,11 +57,15 @@
   		</div>
       </div>
       <div class="y-page y-page-3">
-      	<div class="y-personInfo" ng-repeat="signitem in signList">
-      		<img src="{{signitem.imgurl}}" alt="" class="learnImg">
+      	<div class="y-personInfo" ng-repeat="activeitem in activityList">
+      		<img src="{{activeitem.imgurl}}" alt="" class="learnImg">
       		<div class="learn-info">
-      			<span class="learn-name"><span ng-bind="signitem.teachername"></span>: <span ng-bind="signitem.name"></span></span>
-      			<span class="learn-detail">购买于：<span ng-bind=""></span></span>
+      			<span class="active-name"><span ng-bind="activeitem.teachername"></span>: <span ng-bind="activeitem.name"></span></span>
+      			<span class="y-active-info">
+              <img src="../img/me/position.png" alt=""><span ng-bind="activeitem.position" class="y-mr"></span>
+              <img src="../img/me/time.png" alt=""><span ng-bind="activeitem.worktime"></span>
+            </span>
+            <span class="y-active-price" ng-bind="activeitem.price"></span>
       		</div>
       	</div>
       	<div class="y-nocontent" ng-if="nosign">

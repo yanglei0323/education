@@ -8,7 +8,7 @@ educationApp.controller('publicCtrl', ['$scope','Http', 'Popup', '$rootScope', f
 	};
 	Http.post('/page/unl/freevidedo.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var freevidedoList = resp.data.freevidedolist;
 			for (var i = 0; i < freevidedoList.length; i++) {

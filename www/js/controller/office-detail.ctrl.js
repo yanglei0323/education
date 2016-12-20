@@ -9,7 +9,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 	};
 	Http.post('/page/unl/activitydetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			$scope.boutiDetailList =resp.data;
