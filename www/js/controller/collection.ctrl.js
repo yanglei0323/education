@@ -1,5 +1,8 @@
 educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User) {
 	console.log('收藏列表控制器');
+	$scope.nocolumn=true;
+	$scope.novideo=true;
+	$scope.noactivity=true;
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
@@ -20,6 +23,11 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
                 teacherList[i].imgurl = picBasePath + teacherList[i].imgurl;
             }
             $scope.columnList = teacherList;
+            if(teacherList.length == 0){
+                $scope.nocolumn=true;
+            }else{
+                $scope.nocolumn=false;
+            }
             page++;
         }
         else if (0 === resp.code) {
@@ -39,11 +47,16 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .success(function (resp) {
         console.log(resp);
         if (1 === resp.code) {
-            var teacherList = resp.data.teacherlist;
-            for (var i = 0; i < teacherList.length; i++) {
-                teacherList[i].imgurl = picBasePath + teacherList[i].imgurl;
+            var videoList = resp.data.videolist;
+            for (var i = 0; i < videoList.length; i++) {
+                videoList[i].imgurl = picBasePath + videoList[i].imgurl;
             }
-            $scope.videoList = teacherList;
+            $scope.videoList = videoList;
+            if(videoList.length == 0){
+                $scope.novideo=true;
+            }else{
+                $scope.novideo=false;
+            }
             page1++;
         }
         else if (0 === resp.code) {
@@ -63,11 +76,16 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .success(function (resp) {
         console.log(resp);
         if (1 === resp.code) {
-            var teacherList = resp.data.teacherlist;
-            for (var i = 0; i < teacherList.length; i++) {
-                teacherList[i].imgurl = picBasePath + teacherList[i].imgurl;
+            var activityList = resp.data.activitylist;
+            for (var i = 0; i < activityList.length; i++) {
+                activityList[i].imgurl = picBasePath + activityList[i].imgurl;
             }
-            $scope.activityList = teacherList;
+            $scope.activityList = activityList;
+            if(activityList.length == 0){
+                $scope.activity=true;
+            }else{
+                $scope.activity=false;
+            }
             page2++;
         }
         else if (0 === resp.code) {
@@ -76,4 +94,11 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .error(function (resp) {
         console.log(resp);
     });
+    // 切换显示列表
+    $scope.collSwitch=function(index){
+		$('.coll-tab-item').removeClass("coll-tab-active");
+		$('.coll-tab-item-'+index).addClass("coll-tab-active");
+		$('.y-collection-content').css({'display':'none'});
+		$('.y-collection-content-'+index).css({'display':'block'});
+	};
 }]);

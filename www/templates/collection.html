@@ -5,7 +5,50 @@
     </button>
     <div class="title title-center header-item"><span>收藏</span></div>
 </ion-header-bar>
+<div class="coll-bar flex align s-around">
+  <span class="coll-tab-item coll-tab-item-1 flex align coll-tab-active" ng-click="collSwitch(1)">专栏</span>
+  <span class="coll-tab-item coll-tab-item-2 flex align" ng-click="collSwitch(2)">视频</span>
+  <span class="coll-tab-item coll-tab-item-3 flex align" ng-click="collSwitch(3)">活动</span>
+</div>
 <ion-content class="y-simple-video">
-	
+	<div class="y-collection-content y-collection-content-1">
+		<div class="coll-item" ng-repeat="item in columnList">
+			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
+			<div class="coll-item-info">
+				<span ng-bind="item.name"></span>：
+				<span ng-bind="item.job"></span>
+			</div>
+		</div>
+		<div class="y-nocontent" ng-if="nocolumn">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无收藏</div>
+  		</div>
+	</div>
+	<div class="y-collection-content y-collection-content-2">
+		<div class="coll-item" ng-repeat="item in videoList">
+			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
+			<div class="coll-item-info">
+				<span ng-bind="item.name"></span>：
+				<span ng-bind="item.job"></span>
+			</div>
+		</div>
+		<div class="y-nocontent" ng-if="novideo">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无收藏</div>
+  		</div>
+	</div>
+	<div class="y-collection-content y-collection-content-3">
+		<div class="coll-item" ng-repeat="item in activityList">
+			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
+			<div class="coll-item-info">
+				<span ng-bind="item.name"></span>：
+				<span ng-bind="item.job"></span>
+			</div>
+		</div>
+		<div class="y-nocontent" ng-if="noactivity">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无收藏</div>
+  		</div>
+	</div>
 </ion-content>
 </ion-view>
