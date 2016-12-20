@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
 	console.log('已订阅控制器');
 	$scope.showSubscribed = true;
@@ -12,12 +14,17 @@ educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function (
 	var data = {
 		page:page
 	};
-	Http.get('/teacher/followteacherlist.json',data)
+	Http.post('/teacher/followteacherlist.json',data)
 	.success(function (resp) {
 		console.log(resp);
 		if (1 === resp.code) {
 			var teacherList = resp.data.teacherlist;
 			var teacherListLength = teacherList.length;
+			if (0 === teacherListLength) {
+				$scope.showSubscribed = false;
+				$scope.showNoSubscribed = true;
+				return;
+			}
 			for (var i = 0; i < teacherListLength; i++) {
 				teacherList[i].teacher.imgurl = picBasePath + teacherList[i].teacher.imgurl;
 			}
@@ -36,5 +43,13 @@ educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function (
 	// $scope.goinfo=function(tid){
 	// 	$state.go("",{id:tid},{reload:true});
 	// };
+=======
+educationApp.controller('subscribedCtrl', ['$scope', 'Http', function ($scope) {
+	console.log('已订阅控制器');
+>>>>>>> origin/master
+=======
+educationApp.controller('subscribedCtrl', ['$scope', 'Http', function ($scope) {
+	console.log('已订阅控制器');
+>>>>>>> origin/master
 
 }]);

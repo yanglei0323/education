@@ -136,6 +136,36 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/binding-phone',
     templateUrl: 'templates/binding-phone.html',
     controller: 'bindingPhoneCtrl'
+  })
+  .state('map', {
+    url: '/map:positionx/:positiony',
+    templateUrl: 'templates/map.html',
+    controller: 'mapCtrl'
+  })
+  .state('registration', {
+    url: '/registration:activityid',
+    templateUrl: 'templates/registration.html',
+    controller: 'registrationCtrl'
+  })
+  .state('setup', {
+    url: '/setup',
+    templateUrl: 'templates/setUp.html',
+    controller: 'setUpCtrl'
+  })
+  .state('complaints', {
+    url: '/complaints',
+    templateUrl: 'templates/complaints.html',
+    controller: 'complaintsCtrl'
+  })
+  .state('aboutus', {
+    url: '/aboutus',
+    templateUrl: 'templates/aboutus.html',
+    controller: 'aboutusCtrl'
+  })
+  .state('collection', {
+    url: '/collection',
+    templateUrl: 'templates/collection.html',
+    controller: 'collectionCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

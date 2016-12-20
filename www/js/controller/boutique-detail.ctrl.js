@@ -3,18 +3,39 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
 	$scope.priceType = false;
+	$scope.showPrice = true;
 	var data = {
 		videoid:videoId
 	};
 	Http.post('/page/unl/videodetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
+			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			$scope.boutiDetailList =resp.data;
 			var priceType=parseInt(resp.data.price);
-			if(priceType>=0){
+			if(priceType>=0 || $scope.boutiDetailList.price == '免费'){
 				$scope.priceType = true;
 			}
+			if($scope.boutiDetailList.price == '免费'){
+				$scope.showPrice = false;
+			}
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 视频功能
+	var data1 = {
+		videoed:videoId
+	};
+	// console.log(data1);
+	Http.post('/unl/playurl.json',data1)
+	.success(function (resp) {
+		if (1 === resp.code) {
+			$scope.videoInfo=resp.data;
 		}
 		else if (0 === resp.code) {
 		}

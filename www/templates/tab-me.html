@@ -1,7 +1,77 @@
 <ion-view view-title="悦美课">
 
-  <ion-content>
-      <button type="button" ng-click="logout()">退出登录</button>
-      <a ui-sref="binding-phone">绑定手机号</a>
+  <ion-content class="y-simple-video">
+      <!-- <button type="button" ng-click="logout()">退出登录</button>
+      <a ui-sref="binding-phone">绑定手机号</a> -->
+      <div class="user-info">
+      	<img ng-src="{{userInfo.avatar}}" class="head-img">
+        <div class="y-username"><span ng-bind="userInfo.nickname"></span></div>
+        <div class="bottom-info">
+            <span class="y-info-item" ng-click="navigate(1)">
+    		        <span>
+    		            <img src="../img/me/collection.png" ng-click="goCollection()">
+    		        </span>      
+    		        <span class="text" ng-click="goCollection()">收藏</span>
+    		    </span>
+    		    <span class="y-info-item" ng-click="navigate(1)">
+    		        <span>
+    		            <img src="../img/me/365.png">
+    		        </span>      
+    		        <span class="text">365大咖成长联盟</span>
+    		    </span>
+        </div>
+        <div class="y-vertical"></div>
+        <div class="y-setUp"><img src="../img/me/setUp.png" alt="" ng-click="goSetUp()"></div>
+      </div>
+      <!-- 切换tab -->
+      <div class="y-me-tab flex align s-around">
+      		<span class="y-meTab-item y-meTab-item-1 flex align meTab-item-h" ng-click="goTab(1)">学习记录</span>
+      		<span class="y-meTab-item y-meTab-item-2 flex align" ng-click="goTab(2)">已购买</span>
+      		<span class="y-meTab-item y-meTab-item-3 flex align" ng-click="goTab(3)">报名记录</span>
+      </div>
+      <div class="y-page y-page-1">
+      	<div class="y-personInfo" ng-repeat="studyInfo in studyList">
+      		<img src="{{studyInfo.video.imgurl}}" alt="" class="learnImg">
+      		<div class="learnImg-info" ng-bind="studyInfo.alreadytimes"></div>
+      		<div class="learn-info">
+      			<span class="learn-name"><span ng-bind="studyInfo.video.teachername"></span>: <span ng-bind="studyInfo.video.name"></span></span>
+      			<span class="learn-detail">剩余：<span ng-bind=""></span><span class="y-ml-15">第<span ng-bind=""></span>集/共<span ng-bind=""></span>集</span></span>
+      		</div>
+      	</div>
+      	<div class="y-nocontent" ng-if="nocontent">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无学习记录</div>
+  		</div>
+      </div>
+      <div class="y-page y-page-2">
+      	<div class="y-personInfo" ng-repeat="buyitem in buyList">
+      		<img src="{{buyitem.imgurl}}" alt="" class="learnImg">
+      		<div class="learn-info">
+      			<span class="learn-name"><span ng-bind="buyitem.teachername"></span>: <span ng-bind="buyitem.name"></span></span>
+      			<span class="learn-detail">购买于：<span ng-bind=""></span></span>
+      		</div>
+      	</div>
+      	<div class="y-nocontent" ng-if="nobuy">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无购买记录</div>
+  		</div>
+      </div>
+      <div class="y-page y-page-3">
+      	<div class="y-personInfo" ng-repeat="activeitem in activityList">
+      		<img src="{{activeitem.imgurl}}" alt="" class="learnImg">
+      		<div class="learn-info">
+      			<span class="active-name"><span ng-bind="activeitem.teachername"></span>: <span ng-bind="activeitem.name"></span></span>
+      			<span class="y-active-info">
+              <img src="../img/me/position.png" alt=""><span ng-bind="activeitem.position" class="y-mr"></span>
+              <img src="../img/me/time.png" alt=""><span ng-bind="activeitem.worktime"></span>
+            </span>
+            <span class="y-active-price" ng-bind="activeitem.price"></span>
+      		</div>
+      	</div>
+      	<div class="y-nocontent" ng-if="nosign">
+      		<img src="../img/no_content.png" alt="">
+      		<div>暂无报名记录</div>
+  		</div>
+      </div>
   </ion-content>
 </ion-view>
