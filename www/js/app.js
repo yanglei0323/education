@@ -77,7 +77,9 @@ var educationApp = angular.module('education', ['ionic'])
           templateUrl: 'templates/tab-subscribed.html',
           controller: 'subscribedCtrl'
         }
-      }
+      },
+      needLogin: true,
+      cache: false
     })
     .state('tab.offline-lesson', {
       url: '/offline-lesson',
@@ -164,6 +166,7 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/collection',
     templateUrl: 'templates/collection.html',
     controller: 'collectionCtrl'
+<<<<<<< HEAD
   })
   .state('personalcenter', {
     url: '/personalcenter',
@@ -174,6 +177,8 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/activitydetail:useractivityid',
     templateUrl: 'templates/activitydetail.html',
     controller: 'activitydetailCtrl'
+=======
+>>>>>>> origin/master
   });
 
   // if none of the above states are matched, use this as the fallback

@@ -25,10 +25,10 @@ educationApp.controller('meCtrl',
         return ""; 
     }
     // 获取个人信息
-    var userInfo=JSON.parse(localStorage.getItem('user'));
-    userInfo.avatar=picBasePath + userInfo.avatar;
-    console.log(userInfo);
-    $scope.userInfo=userInfo;
+    // var userInfo=JSON.parse(localStorage.getItem('user'));
+    // userInfo.avatar=picBasePath + userInfo.avatar;
+    // console.log(userInfo);
+    // $scope.userInfo=userInfo;
     // 切换信息
     $scope.goTab=function(index){
         $('.y-meTab-item').removeClass("meTab-item-h");
@@ -131,6 +131,7 @@ educationApp.controller('meCtrl',
     $scope.goCollection=function(){
         $state.go("collection",{reload:true});
     };
+<<<<<<< HEAD
     // 个人中心跳转
     $scope.goPerCenter=function(){
         $state.go("personalcenter",{reload:true});
@@ -139,4 +140,6 @@ educationApp.controller('meCtrl',
     $scope.goActivityDetail=function(data){
         $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
     };
+=======
+>>>>>>> origin/master
 }]);
