@@ -60,4 +60,5 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 	$scope.goRegistration=function(data){
 		$state.go("registration",{activityinfo:data},{reload:true});
 	};
+	
 }]);

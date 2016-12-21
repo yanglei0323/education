@@ -64,6 +64,9 @@ educationApp.controller('meCtrl',
     .error(function (resp) {
         console.log(resp);
     });
+    $scope.goBoutiDetail=function(data){
+        $state.go("boutiquedetail",{videoid:data.id},{reload:true});
+    };
     // 获取购买记录
     $scope.buyList='';
     var page1=1;
@@ -131,5 +134,9 @@ educationApp.controller('meCtrl',
     // 个人中心跳转
     $scope.goPerCenter=function(){
         $state.go("personalcenter",{reload:true});
+    };
+    // 报名信息跳转
+    $scope.goActivityDetail=function(data){
+        $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
     };
 }]);

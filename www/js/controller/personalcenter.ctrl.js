@@ -31,15 +31,15 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
              },
           buttonClicked: function(index) {
           	switch (index) {
-				case 0:
-					$scope.sexname='男神';
-					userInfo.sexflag=1;
-					break;
-				case 1:
-					$scope.sexname='女王';
-					userInfo.sexflag=2;
-					break;
-			}
+      				case 0:
+      					$scope.sexname='男神';
+      					userInfo.sexflag=1;
+      					break;
+      				case 1:
+      					$scope.sexname='女王';
+      					userInfo.sexflag=2;
+      					break;
+      			}
             return true;
           }
       });
@@ -108,10 +108,12 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
         company:userInfo.company,
         job:userInfo.job
       };
-      console.log(dataInfo);
       Http.post('/user/edit.json',dataInfo)
         .success(function (resp) {
           if (1 === resp.code) {
+            // 更新用户信息
+            localStorage.removeItem('user');
+            localStorage.setItem('user', JSON.stringify(resp.data));
             Popup.alert('保存个人信息成功！');
           }
           else if (0 === resp.code) {
@@ -121,4 +123,61 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
           console.log(resp);
         });
     };
+
+
+    // 选择头像
+    $scope.selectImg = function() {
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [{
+                    text: '相册'
+                }, {
+                    text: '拍照'
+                }
+            ],
+            titleText: '选择图片',
+            cancelText: '取消',
+            cancel: function() {
+                // add cancel code..
+            },
+            buttonClicked: function(index) {
+                // navigator.camera.getPicture(cameraSuccess, cameraError, {
+                //     sourceType: index
+                // }); //调用系统相册、拍照
+            }
+        });
+    };
+    // function cameraSuccess(img) {
+    //     $scope.img = img;//这里返回的img是选择的图片的地址，可以直接赋给img标签的src，就能显示了
+    //     window.resolveLocalFileSystemURL(img, function success(fileEntry) { 
+    //         upload(fileEntry.toInternalURL());//将获取的文件地址转换成file transfer插件需要的绝对地址
+    //     }, function() {
+    //         alert("上传失败");
+    //     });
+    // }
+
+    // function cameraError(img) {
+    //    alert("上传失败");
+    // }
+
+    // function upload(fileURL) {//上传图片
+    //     var win = function(r) {//成功回调方法
+    //         var response = JSON.parse(r.response);//你的上传接口返回的数据
+    //         if(response.datas.state){
+    //             alert("修改成功");
+    //         }else {
+    //             alert(response.datas.error);
+    //         }
+    //     }
+    //     var fail = function(error) {//失败回调方法
+    //         alert("上传失败");
+    //     }
+
+    //     var options = new FileUploadOptions();
+    //     options.fileKey = "pic";//这是你的上传接口的文件标识，服务器通过这个标识获取文件
+    //     options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+    //     options.mimeType = "image/gif";//图片
+
+    //     var ft = new FileTransfer();
+    //     ft.upload(fileURL, encodeURI('uploadurl'), win, fail, options);//开始上传，uoloadurl是你的上传接口地址
+    // }
 }]);

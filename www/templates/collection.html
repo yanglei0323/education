@@ -12,11 +12,11 @@
 </div>
 <ion-content class="y-simple-video">
 	<div class="y-collection-content y-collection-content-1">
-		<div class="coll-item" ng-repeat="item in columnList">
+		<div class="coll-item" ng-repeat="item in columnList" ng-click="goSubDetails(item)">
 			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
 			<div class="coll-item-info">
 				<span ng-bind="item.name"></span>：
-				<span ng-bind="item.job"></span>
+				<span ng-bind="item.title"></span>
 			</div>
 		</div>
 		<div class="y-nocontent" ng-if="nocolumn">
@@ -25,11 +25,11 @@
   		</div>
 	</div>
 	<div class="y-collection-content y-collection-content-2">
-		<div class="coll-item" ng-repeat="item in videoList">
+		<div class="coll-item" ng-repeat="item in videoList" ng-click="goBoutiDetail(item)">
 			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
 			<div class="coll-item-info">
 				<span ng-bind="item.name"></span>：
-				<span ng-bind="item.job"></span>
+				<span ng-bind="item.title"></span>
 			</div>
 		</div>
 		<div class="y-nocontent" ng-if="novideo">
@@ -38,11 +38,11 @@
   		</div>
 	</div>
 	<div class="y-collection-content y-collection-content-3">
-		<div class="coll-item" ng-repeat="item in activityList">
+		<div class="coll-item" ng-repeat="item in activityList" ng-click="goOfficeDetails(item)">
 			<img ng-src="{{item.imgurl}}" alt="" class="coll-item-img">
 			<div class="coll-item-info">
 				<span ng-bind="item.name"></span>：
-				<span ng-bind="item.job"></span>
+				<span ng-bind="item.title"></span>
 			</div>
 		</div>
 		<div class="y-nocontent" ng-if="noactivity">

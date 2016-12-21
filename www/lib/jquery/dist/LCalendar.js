@@ -46,6 +46,7 @@ window.LCalendar = (function() {
                 _self.gearDate.innerHTML = '<div class="date_ctrl slideInUp">' +
                     '<div class="date_btn_box">' +
                     '<div class="date_btn lcalendar_cancel">取消</div>' +
+                    '<div class="date_btn"></div>' +
                     '<div class="date_btn lcalendar_finish">确定</div>' +
                     '</div>' +
                     '<div class="date_roll_mask">' +
@@ -118,6 +119,7 @@ window.LCalendar = (function() {
                 _self.gearDate.innerHTML = '<div class="date_ctrl slideInUp">' +
                     '<div class="date_btn_box">' +
                     '<div class="date_btn lcalendar_cancel">取消</div>' +
+                    '<div class="date_btn"></div>' +
                     '<div class="date_btn lcalendar_finish">确定</div>' +
                     '</div>' +
                     '<div class="date_roll_mask">' +
@@ -177,6 +179,7 @@ window.LCalendar = (function() {
                 _self.gearDate.innerHTML = '<div class="date_ctrl slideInUp">' +
                     '<div class="date_btn_box">' +
                     '<div class="date_btn lcalendar_cancel">取消</div>' +
+                    '<div class="date_btn"></div>' +
                     '<div class="date_btn lcalendar_finish">确定</div>' +
                     '</div>' +
                     '<div class="date_roll_mask">' +
@@ -276,6 +279,7 @@ window.LCalendar = (function() {
                 _self.gearDate.innerHTML = '<div class="date_ctrl slideInUp">' +
                     '<div class="date_btn_box">' +
                     '<div class="date_btn lcalendar_cancel">取消</div>' +
+                    '<div class="date_btn"></div>' +
                     '<div class="date_btn lcalendar_finish">确定</div>' +
                     '</div>' +
                     '<div class="date_roll_mask">' +

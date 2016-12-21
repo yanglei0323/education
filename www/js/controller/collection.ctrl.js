@@ -36,6 +36,9 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .error(function (resp) {
         console.log(resp);
     });
+    $scope.goSubDetails=function(index){
+        $state.go("subscribdetails",{teacherid:index.id},{reload:true});
+    };
     // 获取收藏记录(2视频)
     $scope.videoList='';
     var page1=1;
@@ -65,6 +68,9 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .error(function (resp) {
         console.log(resp);
     });
+    $scope.goBoutiDetail=function(data){
+        $state.go("boutiquedetail",{videoid:data.id},{reload:true});
+    };
     // 获取收藏记录(3活动)
     $scope.activityList='';
     var page2=1;
@@ -94,6 +100,9 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     .error(function (resp) {
         console.log(resp);
     });
+    $scope.goOfficeDetails=function(index){
+        $state.go("officedetails",{activityid:index.id},{reload:true});
+    };
     // 切换显示列表
     $scope.collSwitch=function(index){
 		$('.coll-tab-item').removeClass("coll-tab-active");
