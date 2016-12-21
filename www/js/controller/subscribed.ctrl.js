@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
 	console.log('已订阅控制器');
 	$scope.showSubscribed = true;
@@ -43,13 +41,5 @@ educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function (
 	// $scope.goinfo=function(tid){
 	// 	$state.go("",{id:tid},{reload:true});
 	// };
-=======
-educationApp.controller('subscribedCtrl', ['$scope', 'Http', function ($scope) {
-	console.log('已订阅控制器');
->>>>>>> origin/master
-=======
-educationApp.controller('subscribedCtrl', ['$scope', 'Http', function ($scope) {
-	console.log('已订阅控制器');
->>>>>>> origin/master
 
 }]);
