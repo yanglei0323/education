@@ -17,6 +17,10 @@
     {
       "path": "/activity/",
       "proxyUrl": "http://101.200.205.162:8889/activity/"
+    },
+    {
+      "path": "/video/",
+      "proxyUrl": "http://101.200.205.162:8889/video/"
     }
   ]
 }
