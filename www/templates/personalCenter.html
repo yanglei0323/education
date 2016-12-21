@@ -18,11 +18,11 @@
         </label>
         <label class="item item-input" ng-click="showSex()">
           <span class="input-label">性别：</span>
-          <input type="text" ng-model="sexflag" readOnly="true" class="sexflag-input">
+          <input type="text" ng-model="sexname" readOnly="true" class="sexflag-input">
         </label>
         <label class="item item-input">
           <span class="input-label">星座：</span>
-          <input type="text" ng-model="starflag" readOnly="true" class="starflag-input">
+          <input type="text" ng-model="starname" readOnly="true" class="starflag-input" id="y-dateSelect">
         </label>
       </div>
     </div>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="y-save-info">保存</div>
+    <div class="y-save-info" ng-click="goSaveInfo()">保存</div>
 
 </ion-content>
 </ion-view>
