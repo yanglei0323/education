@@ -131,7 +131,6 @@ educationApp.controller('meCtrl',
     $scope.goCollection=function(){
         $state.go("collection",{reload:true});
     };
-<<<<<<< HEAD
     // 个人中心跳转
     $scope.goPerCenter=function(){
         $state.go("personalcenter",{reload:true});
@@ -140,6 +139,4 @@ educationApp.controller('meCtrl',
     $scope.goActivityDetail=function(data){
         $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
     };
-=======
->>>>>>> origin/master
 }]);
