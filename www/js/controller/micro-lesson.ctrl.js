@@ -1,4 +1,4 @@
-educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate) {
+educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher) {
 	console.log('小悦微课控制器');
 	$('.y-home-content').css({'display':'none'});
 	$('.y-home-content-1').css({'display':'block'});
@@ -49,6 +49,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	});
 	$scope.goSubDetails=function(index){
 		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 
 	// 专题
@@ -71,6 +72,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	});
 	$scope.goArea=function(topic){
 		$state.go("area",{topicid:topic.id,topicname:topic.name,},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 
 	// 热门推荐
@@ -126,6 +128,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	});
 	$scope.goBoutiDetail=function(data){
 		$state.go("boutiquedetail",{videoid:data.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 
 
@@ -155,6 +158,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	});
 	$scope.gopublicDetail=function(data){
 		$state.go("publicdetail",{videoid:data.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 
 	// 课程表模块

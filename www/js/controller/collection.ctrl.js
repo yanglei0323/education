@@ -1,4 +1,4 @@
-educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User) {
+educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User,$ionicViewSwitcher) {
 	console.log('收藏列表控制器');
 	$scope.nocolumn=true;
 	$scope.novideo=true;
@@ -6,6 +6,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+        $ionicViewSwitcher.nextDirection("back");
 	};
 	// 获取收藏记录(1专栏)
     $scope.columnList='';
@@ -38,6 +39,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     });
     $scope.goSubDetails=function(index){
         $state.go("subscribdetails",{teacherid:index.id},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 获取收藏记录(2视频)
     $scope.videoList='';
@@ -70,6 +72,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     });
     $scope.goBoutiDetail=function(data){
         $state.go("boutiquedetail",{videoid:data.id},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 获取收藏记录(3活动)
     $scope.activityList='';
@@ -102,6 +105,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     });
     $scope.goOfficeDetails=function(index){
         $state.go("officedetails",{activityid:index.id},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 切换显示列表
     $scope.collSwitch=function(index){

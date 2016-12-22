@@ -1,4 +1,4 @@
-educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicActionSheet', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicActionSheet) {
+educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicActionSheet','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicActionSheet,$ionicViewSwitcher) {
 	console.log('个人中心控制器');
 	// 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
@@ -16,6 +16,7 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+      $ionicViewSwitcher.nextDirection("back");
 	};
 	// 性别选择
 	$scope.showSex = function() {

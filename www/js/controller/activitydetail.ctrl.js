@@ -1,4 +1,4 @@
-educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('报名详情详情控制器');
 	var useractivityId=$stateParams.useractivityid;
 	$scope.activityDetailsInfo = {};
@@ -23,9 +23,11 @@ educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+	    $ionicViewSwitcher.nextDirection("back");
 	};
 	// 活动详情跳转
 	$scope.goOfficeDetails=function(index){
 		$state.go("officedetails",{activityid:index.activity.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 }]);

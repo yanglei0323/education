@@ -1,4 +1,4 @@
-educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('填写参加人信息');
 	// 获取线下课信息
 	var activityInfo=$stateParams.activityinfo;
@@ -7,6 +7,7 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+        $ionicViewSwitcher.nextDirection("back");
 	};
 	function checkParams() {
         if ($('.company').val() == '') {

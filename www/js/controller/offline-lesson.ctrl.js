@@ -1,4 +1,4 @@
-educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
+educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$ionicViewSwitcher) {
 	console.log('线下课控制器');
 	
 	$scope.lineList = {};
@@ -25,5 +25,6 @@ educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootSc
 	});
 	$scope.goOfficeDetails=function(index){
 		$state.go("officedetails",{activityid:index.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 }]);

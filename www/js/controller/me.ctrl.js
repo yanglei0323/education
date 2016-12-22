@@ -1,5 +1,5 @@
 educationApp.controller('meCtrl',
-	['$scope', '$state', '$location', 'User','Http', function ($scope, $state, $location, User,Http) {
+	['$scope', '$state', '$location', 'User','Http','$ionicViewSwitcher', function ($scope, $state, $location, User,Http,$ionicViewSwitcher) {
 	console.log('我的控制器');
 	$scope.logout = User.logout;
     $scope.nocontent=true;
@@ -66,6 +66,7 @@ educationApp.controller('meCtrl',
     });
     $scope.goBoutiDetail=function(data){
         $state.go("boutiquedetail",{videoid:data.id},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 获取购买记录
     $scope.buyList='';
@@ -126,17 +127,26 @@ educationApp.controller('meCtrl',
     // 设置跳转
     $scope.goSetUp=function(){
         $state.go("setup",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 收藏跳转
     $scope.goCollection=function(){
         $state.go("collection",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 个人中心跳转
     $scope.goPerCenter=function(){
         $state.go("personalcenter",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
     // 报名信息跳转
     $scope.goActivityDetail=function(data){
         $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
+    // 365大咖成长跳转
+    $scope.goVip=function(){
+        $state.go("vip",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
     };
 }]);

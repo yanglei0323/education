@@ -176,6 +176,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/activitydetail:useractivityid',
     templateUrl: 'templates/activitydetail.html',
     controller: 'activitydetailCtrl'
+  })
+  .state('vip', {
+    url: '/vip',
+    templateUrl: 'templates/vip.html',
+    controller: 'vipCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

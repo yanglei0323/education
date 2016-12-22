@@ -1,4 +1,4 @@
-educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('技术专区控制器');
 	var topicId=$stateParams.topicid;
 	var topicName=$stateParams.topicname;
@@ -34,9 +34,11 @@ educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$st
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+	    $ionicViewSwitcher.nextDirection("back");
 	};
 	// 详情页跳转
 	$scope.goAreaDetail=function(data){
 		$state.go("boutiquedetail",{videoid:data.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 }]);
