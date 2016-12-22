@@ -31,7 +31,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 	$scope.keepDesigner = function (boutiDetailList) {
 		var postUrl = boutiDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';
 		var data2 = {
-			type:2,
+			type:3,
 			id:boutiDetailList.id
 		};
 		Http.post(postUrl, data2)

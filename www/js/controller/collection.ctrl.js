@@ -88,9 +88,9 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
             }
             $scope.activityList = activityList;
             if(activityList.length == 0){
-                $scope.activity=true;
+                $scope.noactivity=true;
             }else{
-                $scope.activity=false;
+                $scope.noactivity=false;
             }
             page2++;
         }

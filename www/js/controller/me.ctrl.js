@@ -25,10 +25,10 @@ educationApp.controller('meCtrl',
         return ""; 
     }
     // 获取个人信息
-    // var userInfo=JSON.parse(localStorage.getItem('user'));
-    // userInfo.avatar=picBasePath + userInfo.avatar;
-    // console.log(userInfo);
-    // $scope.userInfo=userInfo;
+    var userInfo=JSON.parse(localStorage.getItem('user'));
+    userInfo.avatar=picBasePath + userInfo.avatar;
+    console.log(userInfo);
+    $scope.userInfo=userInfo;
     // 切换信息
     $scope.goTab=function(index){
         $('.y-meTab-item').removeClass("meTab-item-h");
