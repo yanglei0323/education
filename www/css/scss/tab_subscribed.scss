@@ -46,13 +46,17 @@
 	color: #666666;
 	margin-top: 5px;
 }
+.clear {
+	clear: both;
+}
+.subscribed-subtitle div {
+	float: left;
+}
 .subscribed-dividing-line {
-    display: inline-block;
     width: 1px;
-    height: 10px;
 	margin-left: 10px;
     margin-right: 10px;
-    background-color: #dbdbdb;
+    color: #dbdbdb;
 }
 .subscribed-time {
 	font-size: 10px;

@@ -1,4 +1,4 @@
-educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function ($scope, Http, Popup) {
+educationApp.controller('subscribedCtrl', ['$scope', '$rootScope', '$state', 'Http', 'Popup', function ($scope, $rootScope, $state, Http, Popup) {
 	console.log('已订阅控制器');
 	$scope.showSubscribed = true;
 	$scope.showNoSubscribed = false;
@@ -38,8 +38,9 @@ educationApp.controller('subscribedCtrl', ['$scope', 'Http', 'Popup', function (
 	.error(function (resp) {
 		console.log(resp);
 	});
-	// $scope.goinfo=function(tid){
-	// 	$state.go("",{id:tid},{reload:true});
-	// };
+
+	$scope.goinfo=function(tid){
+		$state.go("subscribdetails",{teacherid:tid},{reload:true});
+	};
 
 }]);
