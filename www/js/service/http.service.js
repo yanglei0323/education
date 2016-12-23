@@ -6,6 +6,9 @@ educationApp.factory('Http', ['$http', function ($http) {
 	return {
 		post: function (url, data, config) {
 			return $http.post(baseUrl + url, data, config);
+		},
+		get: function (url, data, config) {
+			return $http.get(baseUrl + url, data, config);
 		}
 	};
 }]);

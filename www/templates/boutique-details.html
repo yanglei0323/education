@@ -2,7 +2,7 @@
     <ion-content class="y-simple-video">
     	<!-- 视频模块 -->
 		<div class="y-video">
-	        <video src="http://le.video.xinpianchang.com/5790867066932.mp4" controls loop poster="../img/boutique/poster.png"></video>
+	        <video ng-src="{{videoInfo.playurl}}" controls loop poster="../img/boutique/poster.png"></video>
 	        <span class="y-back" ng-click="ionicBack()"><img src="../img/boutique/goback.png" alt=""></span>
 	        <span class="y-share"><img src="../img/boutique/share.png" alt=""></span>
 	        <span class="y-collection" ng-if="!boutiDetailList.iskeep" ng-click="keepDesigner(boutiDetailList)"><img src="../img/boutique/collection.png" alt=""></span>
@@ -19,7 +19,7 @@
 	            <span class="y-sub-title">导师简介</span>
 	            <span class="y-sub-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买</span>
 	            <span class="y-designer-info">
-	                <img ng-src="boutiDetailList.teacheravatar" alt="">
+	                <img ng-src="{{boutiDetailList.teacheravatar}}" alt="">
 	                <span ng-bind="boutiDetailList.teachername"></span>
 	                <span class="y-job-type" ng-bind="boutiDetailList.teacherjob"></span>
 	            </span>
@@ -37,7 +37,10 @@
     </ion-content>
     <!-- 订阅按钮模块 -->
     <div class="y-pay-info" ng-if="priceType">
-        <span class="y-pay-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买<span class="y-pay-price">￥<span ng-bind="boutiDetailList.price"></span></span></span>
+        <span class="y-pay-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买
+        	<span class="y-pay-price" ng-if="!showPrice"><span ng-bind="boutiDetailList.price"></span></span>
+        	<span class="y-pay-price" ng-if="showPrice">￥<span ng-bind="boutiDetailList.price"></span></span>
+        </span>
         <input type="submit" class="y-pay-btn" value="立即购买">
     </div>
 </ion-view>

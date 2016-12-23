@@ -1,4 +1,4 @@
-educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state', function ($scope, Http, Popup, $rootScope,$state) {
+educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$ionicViewSwitcher) {
 	console.log('线下课控制器');
 	
 	$scope.lineList = {};
@@ -8,7 +8,7 @@ educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootSc
 	};
 	Http.post('/page/unl/activitylist.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			var activityList = resp.data.activitylist;
 			for (var i = 0; i < activityList.length; i++) {
@@ -25,5 +25,6 @@ educationApp.controller('offlineLessonCtrl', ['$scope','Http', 'Popup', '$rootSc
 	});
 	$scope.goOfficeDetails=function(index){
 		$state.go("officedetails",{activityid:index.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
 	};
 }]);

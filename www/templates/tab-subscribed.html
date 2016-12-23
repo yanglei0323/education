@@ -2,12 +2,28 @@
 	<ion-header-bar class="bar bar-header bar-light" align-title="center">
 	    <div class="title title-center header-item">订阅</div>
 	</ion-header-bar>
-    <ion-content>
+    <ion-content class="subscribed-bg">
     	<div class="subscribed-content">
-    		<div class="no-subscribed">
+    		<div class="no-subscribed" ng-show="showNoSubscribed">
     			<img ng-src="../img/no_content.png" width="85">
     			<div class="no_content_text">暂无订阅</div>
     		</div>
+            <div class="subscribed" ng-show="showSubscribed">
+                <div class="subscribed-item" ng-repeat="subscribeditem in followTeacherList">
+                    <div class="subscribed-img">
+                        <img ng-src="{{subscribeditem.imgurl}}" alt="">
+                    </div>
+                    <div class="subscribed-text">
+                        <div class="subscribed-title">{{subscribeditem.teacher.name}}</div>
+                        <div class="subscribed-subtitle">
+                            <div class="">专栏订阅</div>
+                            <div class="subscribed-dividing-line"></div>
+                            <div class="subscribed-time">{{subscribeditem.time}}</div>
+                        </div>
+                        <div class="subscribed-price">￥{{subscribeditem.price}}</div>
+                    </div>
+                </div>
+            </div>
     	</div>
     </ion-content>
 </ion-view>

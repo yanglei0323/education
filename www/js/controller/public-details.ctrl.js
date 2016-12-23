@@ -1,4 +1,4 @@
-educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory) {
+educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('公开课视频详情');
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
@@ -7,9 +7,26 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	};
 	Http.post('/page/unl/videodetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
+			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			$scope.boutiDetailList =resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 视频功能
+	var data1 = {
+		videoed:videoId
+	};
+	// console.log(data1);
+	Http.post('/unl/playurl.json',data1)
+	.success(function (resp) {
+		if (1 === resp.code) {
+			$scope.videoInfo=resp.data;
 		}
 		else if (0 === resp.code) {
 		}
@@ -40,5 +57,6 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
+	    $ionicViewSwitcher.nextDirection("back");
 	};
 }]);
