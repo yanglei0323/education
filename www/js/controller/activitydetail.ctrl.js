@@ -30,4 +30,5 @@ educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootS
 		$state.go("officedetails",{activityid:index.activity.id},{reload:true});
 		$ionicViewSwitcher.nextDirection("forward");
 	};
+	
 }]);

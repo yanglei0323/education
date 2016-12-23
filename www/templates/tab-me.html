@@ -9,19 +9,19 @@
         <div class="bottom-info">
             <span class="y-info-item" ng-click="navigate(1)">
     		        <span>
-    		            <img src="../img/me/collection.png" ng-click="goCollection()">
+    		            <img src="./img/me/collection.png" ng-click="goCollection()">
     		        </span>      
     		        <span class="text" ng-click="goCollection()">收藏</span>
     		    </span>
     		    <span class="y-info-item" ng-click="navigate(1)">
     		        <span>
-    		            <img src="../img/me/365.png" ng-click="goVip()">
+    		            <img src="./img/me/365.png" ng-click="goVip()">
     		        </span>      
     		        <span class="text" ng-click="goVip()">365大咖成长联盟</span>
     		    </span>
         </div>
         <div class="y-vertical"></div>
-        <div class="y-setUp"><img src="../img/me/setUp.png" alt="" ng-click="goSetUp()"></div>
+        <div class="y-setUp"><img src="./img/me/setUp.png" alt="" ng-click="goSetUp()"></div>
       </div>
       <!-- 切换tab -->
       <div class="y-me-tab flex align s-around">
@@ -35,7 +35,7 @@
       		<div class="learnImg-info" ng-bind="studyInfo.alreadytimes"></div>
       		<div class="learn-info">
       			<span class="learn-name"><span ng-bind="studyInfo.video.teachername"></span>: <span ng-bind="studyInfo.video.name"></span></span>
-      			<span class="learn-detail">剩余：<span ng-bind=""></span><span class="y-ml-15">第<span ng-bind=""></span>集/共<span ng-bind=""></span>集</span></span>
+      			<span class="learn-detail">剩余：<span ng-bind="studyInfo.scolumn"></span><span class="y-ml-15">第<span ng-bind="studyInfo.scolumn.totalnum"></span>集/共<span ng-bind="studyInfo.scolumn.number"></span>集</span></span>
       		</div>
       	</div>
       	<div class="y-nocontent" ng-if="nocontent">
@@ -52,7 +52,7 @@
       		</div>
       	</div>
       	<div class="y-nocontent" ng-if="nobuy">
-      		<img src="../img/no_content.png" alt="">
+      		<img src="./img/no_content.png" alt="">
       		<div>暂无购买记录</div>
   		</div>
       </div>
@@ -62,15 +62,15 @@
       		<div class="learn-info">
       			<span class="active-name"><span ng-bind="activeitem.teachername"></span>: <span ng-bind="activeitem.name"></span></span>
       			<span class="y-active-info">
-              <img src="../img/me/position.png" alt=""><span ng-bind="activeitem.position" class="y-mr"></span>
-              <img src="../img/me/time.png" alt=""><span ng-bind="activeitem.worktime"></span>
+              <img src="./img/me/position.png" alt=""><span ng-bind="activeitem.position" class="y-mr"></span>
+              <img src="./img/me/time.png" alt=""><span ng-bind="activeitem.worktime"></span>
             </span>
             <span class="y-active-price" ng-bind="activeitem.price"></span>
       		</div>
           <div class="y-activity-status"><span ng-bind="activeitem.status"></span></div>
       	</div>
       	<div class="y-nocontent" ng-if="nosign">
-      		<img src="../img/no_content.png" alt="">
+      		<img src="./img/no_content.png" alt="">
       		<div>暂无报名记录</div>
   		</div>
       </div>

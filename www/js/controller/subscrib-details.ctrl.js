@@ -69,6 +69,26 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 			console.log('数据请求失败，请稍后再试！');
 		});
 	};
+	// 分享功能
+	$scope.goShare = function (index) {
+		var data3 = {
+			kind:2,
+			id:index.id
+		};
+		Http.post('/user/unl/share.json', data3)
+		.success(function (data) {
+			console.log(data);
+			if (-1 === data.code) {
+				console.log('用户未登录');
+			}
+			else if (1 === data.code) {
+				Popup.alert('分享成功！');
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	};
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();

@@ -1,38 +1,34 @@
 educationApp.controller('vipCtrl',
-	['$scope', '$state', '$location', 'User','Http','$ionicHistory','$ionicViewSwitcher', function ($scope, $state, $location, User,Http,$ionicHistory,$ionicViewSwitcher) {
+	['$scope', '$state', '$location', 'User','Http','$ionicHistory','$ionicViewSwitcher','$ionicPopover','$ionicModal','Popup', function ($scope, $state, $location, User,Http,$ionicHistory,$ionicViewSwitcher,$ionicPopover,$ionicModal,Popup) {
 	console.log('365大咖控制器');
     // 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
     userInfo.avatar=picBasePath + userInfo.avatar;
+    userInfo.vip.smallimgurl=picBasePath + userInfo.vip.smallimgurl;
     console.log(userInfo);
     $scope.userInfo=userInfo;
-    // 判断用户会员等级，显示相应信息
     switch (userInfo.vip.id) {
-        case 1:
-            $scope.vipOne=true;
-            $scope.vipTwo=true;
-            $scope.vipThr=true;
-            $scope.iconOne=true;
-            break;
-        case 2:
-            $scope.vipOne=false;
-            $scope.vipTwo=true;
-            $scope.vipThr=true;
-            $scope.iconTwo=true;
-            break;
-        case 3:
-            $scope.vipOne=false;
-            $scope.vipTwo=false;
-            $scope.vipThr=true;
-            $scope.iconThr=true;
-            break;
-        case 4:
-            $scope.vipOne=false;
-            $scope.vipTwo=false;
-            $scope.vipThr=false;
-            $scope.iconFour=true;
-            break;
-    }
+         case 1:
+             $scope.vipOne=true;
+             $scope.vipTwo=true;
+             $scope.vipThr=true;
+             break;
+         case 2:
+             $scope.vipOne=false;
+             $scope.vipTwo=true;
+             $scope.vipThr=true;
+             break;
+         case 3:
+             $scope.vipOne=false;
+             $scope.vipTwo=false;
+             $scope.vipThr=true;
+             break;
+         case 4:
+             $scope.vipOne=false;
+             $scope.vipTwo=false;
+             $scope.vipThr=false;
+             break;
+     }
     // 切换tab控制参数
     $scope.basics=true;//基础
     $scope.senior=false;//高级
@@ -83,5 +79,36 @@ educationApp.controller('vipCtrl',
         $ionicHistory.goBack();
         $ionicViewSwitcher.nextDirection("back");
     };
-    
+     
+    // 显示入会信息模块
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+      
+    $scope.createContact = function(user) {  
+        if(user.firstName.length<=1){
+            Popup.alert('请填写有效姓名！');
+            return;
+        }
+        if(user.tel.length<=10){
+            Popup.alert('请填写有效手机号码！');
+            return;
+        }
+        if(user.company.length<=1){
+            Popup.alert('请填写有效公司名称！');
+            return;
+        }
+        if(user.job.length<=1){
+            Popup.alert('请填写有效工作名称！');
+            return;
+        }
+        if(user.city.length<=1){
+            Popup.alert('请填写有效城市名称！');
+            return;
+        }
+        console.log('成功');      
+        $scope.modal.hide();
+    };
 }]);
