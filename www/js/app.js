@@ -127,6 +127,11 @@ var educationApp = angular.module('education', ['ionic'])
     templateUrl: 'templates/subscrib-details.html',
     controller: 'subscribdetailsCtrl'
   })
+  .state('subscribpay', {
+    url: '/subscribpay:teacherid',
+    templateUrl: 'templates/subscrib-pay.html',
+    controller: 'subscribpayCtrl'
+  })
   .state('officedetails', {
     url: '/officedetails:activityid',
     templateUrl: 'templates/office-details.html',
