@@ -89,6 +89,10 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 			console.log('数据请求失败，请稍后再试！');
 		});
 	};
+	// 付费订阅支付页
+	$scope.subscribPay = function (tid) {
+		$state.go("subscribpay", {teacherid:tid},{reload:true});
+	}
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
