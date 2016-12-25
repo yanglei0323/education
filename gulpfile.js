@@ -25,6 +25,7 @@ gulp.task('sass', function (done) {
   gulp.src('./www/css/scss/ionic.app.scss')
       .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
       .pipe(sass())
+      .pipe(px2rem({'width_design': 375,'valid_num': 4,'pieces': 10}))
       // .pipe(minifyCss())
       // .pipe(rename({ extname: '.min.css' }))
       .pipe(gulp.dest('./www/css/'))
