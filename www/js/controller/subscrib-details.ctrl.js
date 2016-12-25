@@ -72,23 +72,32 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	// 分享功能
 	$scope.goShare = function (index) {
-		var data3 = {
-			kind:2,
-			id:index.id
-		};
-		Http.post('/user/unl/share.json', data3)
-		.success(function (data) {
-			console.log(data);
-			if (-1 === data.code) {
-				console.log('用户未登录');
-			}
-			else if (1 === data.code) {
-				Popup.alert('分享成功！');
-			}
-		})
-		.error(function (data) {
-			console.log('数据请求失败，请稍后再试！');
+		// 更多分享功能查看：https://github.com/xu-li/cordova-plugin-wechat
+		Wechat.share({
+		    text: "This is just a plain string",
+		    scene: Wechat.Scene.TIMELINE
+		}, function () {
+		    alert("Success");
+		}, function (reason) {
+		    alert("Failed: " + reason);
 		});
+		// var data3 = {
+		// 	kind:2,
+		// 	id:index.id
+		// };
+		// Http.post('/user/unl/share.json', data3)
+		// .success(function (data) {
+		// 	console.log(data);
+		// 	if (-1 === data.code) {
+		// 		console.log('用户未登录');
+		// 	}
+		// 	else if (1 === data.code) {
+		// 		Popup.alert('分享成功！');
+		// 	}
+		// })
+		// .error(function (data) {
+		// 	console.log('数据请求失败，请稍后再试！');
+		// });
 	};
 	// 付费订阅支付页
 	$scope.subscribPay = function (tid) {
