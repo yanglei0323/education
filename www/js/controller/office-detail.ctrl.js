@@ -38,6 +38,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 		.success(function (data) {
 			if (-1 === data.code) {
 				console.log('用户未登录');
+				$state.go('login');
 			}
 			else if (1 === data.code) {
 				$scope.boutiDetailList.iskeep = !$scope.boutiDetailList.iskeep;
@@ -55,7 +56,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 		};
 		Http.post('/user/unl/share.json', data3)
 		.success(function (data) {
-			console.log(data);
+			// console.log(data);
 			if (-1 === data.code) {
 				console.log('用户未登录');
 			}
@@ -80,8 +81,21 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 	};
 	// 报名信息填写页面跳转
 	$scope.goRegistration=function(data){
-		$state.go("registration",{activityinfo:data},{reload:true});
-		$ionicViewSwitcher.nextDirection("forward");
+		Http.post('/user/mine.json')
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+				$state.go('login');
+			}
+			else if (1 === data.code) {
+				$state.go("registration",{activityinfo:data},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
 	};
 	
 }]);

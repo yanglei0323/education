@@ -58,7 +58,8 @@ educationApp.controller('meCtrl',
                 $scope.nocontent=false;
             }
         }
-        else if (0 === resp.code) {
+        else if (-1 === resp.code) {
+            $state.go('login');
         }
     })
     .error(function (resp) {
@@ -90,7 +91,8 @@ educationApp.controller('meCtrl',
                 $scope.nobuy=false;
             }
         }
-        else if (0 === resp.code) {
+        else if (-1 === resp.code) {
+            $state.go('login');
         }
     })
     .error(function (resp) {
@@ -118,7 +120,8 @@ educationApp.controller('meCtrl',
                 $scope.nosign=false;
             }
         }
-        else if (0 === resp.code) {
+        else if (-1 === resp.code) {
+            $state.go('login');
         }
     })
     .error(function (resp) {

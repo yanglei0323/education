@@ -54,6 +54,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 		.success(function (data) {
 			if (-1 === data.code) {
 				console.log('用户未登录');
+				$state.go('login');
 			}
 			else if (1 === data.code) {
 				$scope.boutiDetailList.iskeep = !$scope.boutiDetailList.iskeep;

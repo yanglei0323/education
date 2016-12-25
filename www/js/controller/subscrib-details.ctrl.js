@@ -60,6 +60,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		.success(function (data) {
 			if (-1 === data.code) {
 				console.log('用户未登录');
+				$state.go('login');
 			}
 			else if (1 === data.code) {
 				$scope.subDetailList.iskeep = !$scope.subDetailList.iskeep;
@@ -91,7 +92,21 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	// 付费订阅支付页
 	$scope.subscribPay = function (tid) {
-		$state.go("subscribpay", {teacherid:tid},{reload:true});
+		Http.post('/user/mine.json')
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+				$state.go('login');
+			}
+			else if (1 === data.code) {
+				$state.go("subscribpay", {teacherid:tid},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
 	}
 	// 返回上一页
 	$scope.ionicBack= function () {
