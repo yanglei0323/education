@@ -5,13 +5,13 @@
     <ion-content class="subscribed-bg">
         <div class="subscribed-content">
             <div class="no-subscribed" ng-show="showNoSubscribed">
-                <img ng-src="../img/no_content.png" width="85">
-                <div class="no_content_text">暂无订阅</div>
+                <img ng-src="img/no_content.png" width="85">
+                <div class="no-content-text">暂无订阅</div>
             </div>
             <div class="subscribed" ng-show="showSubscribed">
                 <div class="subscribed-item" ng-repeat="subscribeditem in followTeacherList" ng-click="goinfo(subscribeditem.teacher.id)">
                     <div class="subscribed-img">
-                        <img ng-src="{{subscribeditem.imgurl}}" alt="">
+                        <img ng-src="{{subscribeditem.teacher.imgurl}}" alt="">
                     </div>
                     <div class="subscribed-text">
                         <div class="subscribed-title">{{subscribeditem.teacher.name}}</div>
@@ -21,7 +21,7 @@
                             <div class="subscribed-time">{{subscribeditem.time}}</div>
                         </div>
                         <div class="clear"></div>
-                        <div class="subscribed-price">￥{{subscribeditem.price}}</div>
+                        <div class="subscribed-price">￥{{subscribeditem.teacher.price}}</div>
                     </div>
                 </div>
             </div>

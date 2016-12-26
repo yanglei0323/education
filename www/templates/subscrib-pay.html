@@ -10,7 +10,7 @@
             <div class="subscribed">
                 <div class="subscribed-item" ng-click="goinfo(subscribeditem.teacher.id)">
                     <div class="subscribed-img">
-                        <img ng-src="{{subDetailList.imgurl}}" alt="" width="75">
+                        <img ng-src="{{subDetailList.imgurl}}" alt="">
                     </div>
                     <div class="subscribed-text">
                         <div class="subscribed-title">{{subDetailList.name}}</div>
@@ -29,25 +29,26 @@
                 <div class="payment-method">支付方式：</div>
                 <div class="pay-radio">
                     <div class="pay-radio-icon">
-                        <img src="../img/boutique/wx_pay.png" width="15">
+                        <img src="img/boutique/wx_pay.png" class="pay-icon-wx">
                     </div>
                     <div class="pay-">
                         <span>微信支付</span>
                     </div>
 
                     <div class="pay-radio-radio">
-                        <img src="../img/boutique/radio.png" width="15">
+                        <img src="img/boutique/radio.png" class="pay-icon-radio">
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
 
-            <div class="pay-bar">
-                <div class="pay-bar-price">合计：<span>￥</span><span ng-bind="subDetailList.price"></span></div>
-                <div class="pay-bar-btn">
-                    <span>确认支付</span>
-                </div>
-            </div>
+            
         </div>
     </ion-content>
+    <div class="pay-bar">
+        <div class="pay-bar-price">合计：<span>￥</span><span ng-bind="subDetailList.price"></span></div>
+        <div class="pay-bar-btn">
+            <span>确认支付</span>
+        </div>
+    </div>
 </ion-view>

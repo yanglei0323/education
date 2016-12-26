@@ -34,12 +34,15 @@ educationApp.controller('subscribedCtrl', ['$scope', '$rootScope', '$state', 'Ht
 			$scope.showSubscribed = false;
 			$scope.showNoSubscribed = true;
 		}
+		else if (-1 === resp.code) {
+			$state.go('login');
+		}
 	})
 	.error(function (resp) {
 		console.log(resp);
 	});
 
-	$scope.goinfo=function(tid){
+	$scope.goinfo = function (tid) {
 		$state.go("subscribdetails",{teacherid:tid},{reload:true});
 	};
 

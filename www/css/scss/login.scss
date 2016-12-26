@@ -5,7 +5,7 @@ $floatDirection: right !default;
 }
 .login-logo-div {
 	width: 100%;
-	height: 290px;
+	height: 265px;
 }
 .login-input-div{
     width: 100%;
@@ -16,7 +16,7 @@ $floatDirection: right !default;
 }
 .button-login {
     display: block;
-    width: 335px;
+    width: 300px;
     height: 44px;
     margin-top: 50px !important;
     margin-left: auto;
@@ -35,7 +35,7 @@ $floatDirection: right !default;
     margin-right: 40px;
 }
 .input-telephone {
-    width: 335px;
+    width: 300px;
     height: 44px;
     margin-left: auto;
     margin-right: auto;
@@ -68,20 +68,20 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     line-height: 16px;
 }
 .icon-user {
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     background: url(../img/icon_user.png) no-repeat;
-    background-size: 22px;
+    background-size: 23px;
 }
 .icon-pwd {
-    width: 22px;
-    height: 22px;
+    width: 23px;
+    height: 23px;
     background: url(../img/icon_pwd.png) no-repeat;
-    background-size: 22px;
+    background-size: 23px;
 }
 .quick-login {
     /* display: none; */
-    width: 336px;
+    width: 300px;
     /* background-color: #ccc; */
     height: 110px;
     /* position: absolute; */
@@ -92,7 +92,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 .login-line {
     float: left;
-    width: 130px;
+    width: 110px;
     height: 1px;
     background-color: #d8d8d8;
     margin-top: 10px;
@@ -105,13 +105,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-right: 18px;
 }
 .quick-login-box {
-    margin-top: 30px;
-    margin-left: 70px;
-    margin-right: 70px;
+    margin-top: 20px;
     width: 100%;
+    text-align: center;
 }
 .quick-login-button {
-    float: left;
+    display: inline-block;
     width: 30px;
     height: 30px;
 }
@@ -124,16 +123,18 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .icon-wx {
 	background: url(../img/icon_wx.png) no-repeat;
 	background-size: 30px;
+    float: left;
+    margin-left: 50px;
 }
 .icon-weibo {
-	margin-left: 65px;
 	background: url(../img/icon_weibo.png) no-repeat;
 	background-size: 30px;
 }
 .icon-qq {
-	margin-left: 65px;
 	background: url(../img/icon_qq.png) no-repeat;
 	background-size: 30px;
+    float: right;
+    margin-right: 50px;
 }
 
 
