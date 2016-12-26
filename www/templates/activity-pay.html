@@ -8,19 +8,19 @@
     <ion-content class="subscribed-bg">
         <div class="subscribed-content">
             <div class="subscribed">
-                <div class="subscribed-item" ng-click="goinfo(subscribeditem.teacher.id)">
+                <div class="subscribed-item">
                     <div class="subscribed-img">
-                        <img ng-src="{{subDetailList.imgurl}}" alt="">
+                        <img ng-src="{{boutiDetailList.teacheravatar}}" alt="">
                     </div>
                     <div class="subscribed-text">
-                        <div class="subscribed-title">{{subDetailList.name}}</div>
+                        <div class="subscribed-title">{{boutiDetailList.name}}</div>
                         <div class="subscribed-subtitle">
                             <div class="">专栏订阅</div>
                             <div class="subscribed-dividing-line">|</div>
-                            <div class="subscribed-time"></div>
+                            <div class="subscribed-time">{{boutiDetailList.endtime}}</div>
                         </div>
                         <div class="clear"></div>
-                        <div class="subscribed-price"><span>￥</span><span ng-bind="subDetailList.price"></span></div>
+                        <div class="subscribed-price"><span>￥</span><span ng-bind="boutiDetailList.price"></span></div>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
         </div>
     </ion-content>
     <div class="pay-bar">
-        <div class="pay-bar-price">合计：<span>￥</span><span ng-bind="subDetailList.price"></span></div>
+        <div class="pay-bar-price">合计：<span>￥</span><span ng-bind="boutiDetailList.price"></span></div>
         <div class="pay-bar-btn">
             <span>确认支付</span>
         </div>

@@ -1,7 +1,8 @@
 educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('填写参加人信息');
 	// 获取线下课信息
-	var activityInfo=$stateParams.activityinfo;
+	var activityId=$stateParams.activityid;
+    console.log(activityId);
 	var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
     var pwdRe = /^[0-9a-zA-Z_]{6,20}/;
 	// 返回上一页
@@ -33,6 +34,25 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
         if (-1 === checkParams()) {
             return;
         }
-        console.log('跳转支付');
+        var data = {
+            activityid:activityId,
+            name:$('.username').val(),
+            telephone:$('.userphone').val(),
+            company:$('.company').val(),
+            job:$('.profession').val()
+        };
+        Http.post('/activity/add.json',data)
+        .success(function (resp) {
+            console.log(resp);
+            if (1 === resp.code) {
+                $state.go("activitypay", {activityid:activityId},{reload:true});
+                $ionicViewSwitcher.nextDirection("forward");
+            }
+            else if (0 === resp.code) {
+            }
+        })
+        .error(function (resp) {
+            console.log(resp);
+        });
     };
 }]);

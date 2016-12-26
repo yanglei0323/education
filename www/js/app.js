@@ -117,6 +117,11 @@ var educationApp = angular.module('education', ['ionic'])
     templateUrl: 'templates/boutique-details.html',
     controller: 'boutiquedetailCtrl'
   })
+  .state('boutiquepay', {
+    url: '/boutiquepay:videoid',
+    templateUrl: 'templates/boutique-pay.html',
+    controller: 'boutiquepayCtrl'
+  })
   .state('publicdetail', {
     url: '/publicdetail:videoid',
     templateUrl: 'templates/public-details.html',
@@ -151,6 +156,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/registration:activityid',
     templateUrl: 'templates/registration.html',
     controller: 'registrationCtrl'
+  })
+  .state('activitypay', {
+    url: '/activitypay:activityid',
+    templateUrl: 'templates/activity-pay.html',
+    controller: 'activitypayCtrl'
   })
   .state('setup', {
     url: '/setup',

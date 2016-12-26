@@ -123,7 +123,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 		// window.location.href='http://map.baidu.com/mobile/webapp/index/index/qt=cur&wd=%E5%8C%97%E4%BA%AC%E5%B8%82&from=maponline&tn=m01&ie=utf-8/vt=map';
 	};
 	// 报名信息填写页面跳转
-	$scope.goRegistration=function(data){
+	$scope.goRegistration=function(){
 		Http.post('/user/mine.json')
 		.success(function (data) {
 			if (-1 === data.code) {
@@ -131,7 +131,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 				$state.go('login');
 			}
 			else if (1 === data.code) {
-				$state.go("registration",{activityinfo:data},{reload:true});
+				$state.go("registration",{activityid:activityId},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 
 			}

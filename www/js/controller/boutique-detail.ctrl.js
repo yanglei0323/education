@@ -132,4 +132,22 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	    $ionicHistory.goBack();
 	    $ionicViewSwitcher.nextDirection("back");
 	};
+	// 付费支付页
+	$scope.goBoutiquePay = function (tid) {
+		Http.post('/user/mine.json')
+		.success(function (data) {
+			if (-1 === data.code) {
+				console.log('用户未登录');
+				$state.go('login');
+			}
+			else if (1 === data.code) {
+				$state.go("boutiquepay", {videoid:tid},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+
+			}
+		})
+		.error(function (data) {
+			console.log('数据请求失败，请稍后再试！');
+		});
+	}
 }]);

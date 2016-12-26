@@ -9,7 +9,7 @@
     margin-right: auto;
     text-align: center;
 }
-.no_content_text {
+.no-content-text {
 	margin-top: 15px;
 	font-size: 15px;
 	color: #666666;
@@ -31,6 +31,10 @@
 	margin-left: 16px;
     margin-right: 15px;
 	background-color: #ccc;
+}
+.subscribed-img img{
+	width: 75px;
+	height: 75px;
 }
 .subscribed-text {
 	float: left;
@@ -88,6 +92,11 @@
 .pay-radio div{
 	float: left;
 }
+.pay-icon-wx, .pay-icon-radio {
+	width: 15px;
+	height: 15px;
+	margin-top: 15px;
+}
 .pay-radio-icon {
 	width: 15px;
 	height: 15px;
@@ -102,14 +111,17 @@
     margin-right: 24px;
 }
 .pay-bar {
-	width: 100%;
-	height: 44px;
-	font-size: 14px;
-	line-height: 44px;
-	text-align: center;
-	color: #333333;
-	background-color: #ffffff;
-    margin-top: 363px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 44px;
+    font-size: 14px;
+    line-height: 44px;
+    text-align: center;
+    color: #333333;
+    background-color: #ffffff;
+    /* margin-top: 363px; */
 }
 .pay-bar-price {
 	float: left;

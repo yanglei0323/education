@@ -24,6 +24,9 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 		}
 		else if (0 === resp.code) {
 		}
+		else if (-1 === resp.code) {
+			$state.go('login');
+		}
 	})
 	.error(function (resp) {
 		console.log(resp);

@@ -41,6 +41,6 @@
         	<span class="y-pay-price" ng-if="!showPrice"><span ng-bind="boutiDetailList.price"></span></span>
         	<span class="y-pay-price" ng-if="showPrice">￥<span ng-bind="boutiDetailList.price"></span></span>
         </span>
-        <input type="submit" class="y-pay-btn" value="立即购买">
+        <input type="submit" class="y-pay-btn" value="立即购买" ng-click="goBoutiquePay(boutiDetailList.id)">
     </div>
 </ion-view>
