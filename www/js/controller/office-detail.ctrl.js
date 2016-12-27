@@ -2,6 +2,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 	console.log('线下课详情');
 	var activityId=$stateParams.activityid;
 	$scope.boutiDetailList = {};
+	$scope.activityId = activityId;
 	$scope.priceType = false;
 	$scope.showPrice = true;
 	var data = {
@@ -88,7 +89,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 				$state.go('login');
 			}
 			else if (1 === data.code) {
-				$state.go("registration",{activityinfo:data},{reload:true});
+				$state.go("registration",{activityid:$scope.activityId},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 
 			}

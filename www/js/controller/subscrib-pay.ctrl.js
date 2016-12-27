@@ -2,17 +2,16 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 	console.log('专栏订阅支付');
 	var teacherId　=　$stateParams.teacherid;
 	$scope.subDetailList = {};
-	$scope.showPrice = true;
 	var data = {
 		teacherid:teacherId
 	};
-	Http.post('/page/unl/teacherdetail.json',data)
+	Http.post('/teacher/follow.json',data)
 	.success(function (resp) {
 		console.log(resp);
 		if (1 === resp.code) {
-			resp.data.avatar=picBasePath + resp.data.avatar;
-			resp.data.imgurl=picBasePath + resp.data.imgurl;
-			$scope.subDetailList =resp.data;
+			// resp.data.avatar = picBasePath + resp.data.avatar;
+			resp.data.imgurl = picBasePath + resp.data.imgurl;
+			$scope.subDetailList = resp.data;
 			// $scope.columnList =resp.data.columnlist;
 			// var priceType=parseInt(resp.data.price);
 			// if(priceType>=0 || $scope.columnList.price == '免费'){
@@ -23,6 +22,7 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 			// }
 		}
 		else if (0 === resp.code) {
+			Popup.alert(resp.reason);
 		}
 		else if (-1 === resp.code) {
 			$state.go('login');
@@ -32,10 +32,6 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 		console.log(resp);
 	});
 	
-	// 视频功能
-	var data1 = {
-		columnid:teacherId
-	};
 	// console.log(data1);
 	// Http.post('/unl/playurl.json',data1)
 	// .success(function (resp) {

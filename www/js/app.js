@@ -117,6 +117,11 @@ var educationApp = angular.module('education', ['ionic'])
     templateUrl: 'templates/boutique-details.html',
     controller: 'boutiquedetailCtrl'
   })
+  .state('buyvideo', {
+    url: '/buyvideo:videoid',
+    templateUrl: 'templates/buyvideo.html',
+    controller: 'buyvideoCtrl'
+  })
   .state('publicdetail', {
     url: '/publicdetail:videoid',
     templateUrl: 'templates/public-details.html',
@@ -136,6 +141,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/officedetails:activityid',
     templateUrl: 'templates/office-details.html',
     controller: 'officedetailCtrl'
+  })
+  .state('payactivity', {
+    url: 'payactivity/:activityid/:name/:telephone/:company/:job',
+    templateUrl: 'templates/pay-activity.html',
+    controller: 'payactivityCtrl'
   })
   .state('binding-phone', {
     url: '/binding-phone',
@@ -186,6 +196,11 @@ var educationApp = angular.module('education', ['ionic'])
     url: '/vip',
     templateUrl: 'templates/vip.html',
     controller: 'vipCtrl'
+  })
+  .state('payvip', {
+    url: '/payvip/:vipid/:name/:telephone/:company/:job/:city',
+    templateUrl: 'templates/pay-vip.html',
+    controller: 'payvipCtrl'
   });
 
   // if none of the above states are matched, use this as the fallback

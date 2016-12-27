@@ -1,9 +1,16 @@
 educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('填写参加人信息');
-	// 获取线下课信息
-	var activityInfo=$stateParams.activityinfo;
-	var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+	// 获取线下课ID
+    var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
     var pwdRe = /^[0-9a-zA-Z_]{6,20}/;
+	var activityId = $stateParams.activityid;
+    console.log('activityId ' + activityId);
+    $scope.activityId = activityId;
+    $scope.username = '';
+    $scope.userphone = '';
+    $scope.company = '';
+    $scope.job = '';
+	
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
@@ -29,10 +36,13 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
         return 1;
     };
     // 信息填写完毕，跳转到支付页面
-    $scope.goPayOffice = function () {
+    $scope.goPayOffice = function (username, userphone, Company, Job) {
         if (-1 === checkParams()) {
             return;
         }
         console.log('跳转支付');
+        $state.go('payactivity'
+            ,{activityid:activityId, name:username, telephone:userphone, company:Company, job:Job}
+            ,{reload:true});
     };
 }]);

@@ -81,7 +81,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 }
 .quick-login {
     /* display: none; */
-    width: 300px;
+    width: 304px;
     /* background-color: #ccc; */
     height: 110px;
     /* position: absolute; */
@@ -152,11 +152,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   color: #999999;
 }
 .button-binding {
-    width: 335px;
+    width: 300px;
     height: 44px;
     margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 14px;
     color: #fff;
     border: none;
@@ -164,42 +164,52 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-color: #f5a523;
 }
 .input-telephone-binding {
-    width: 335px;
+    width: 300px;
     height: 44px;
     margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 14px;
     color: #999999;
     border: none;
     border-radius: 4px;
     background-color: #ffffff;
 }
+.input-binding-box {
+    width: 300px;
+    height: 44px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.input-code-binding {
+    float: left;
+    width: 150px;
+    height: 44px;
+    margin-top: 0;
+    font-size: 14px;
+    color: #999;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
 .get-checkcode-binding {
     float: right;
-    width: 159px;
+    width: 140px;
     height: 44px;
     line-height: 44px;
     font-size: 14px;
     text-align: center;
     color: #ffffff;
     padding: 0;
-    margin-top: 10px;
     margin-left: 10px;
-    margin-right: 40px;
     border: none;
     border-radius: 4px;
     background-color: #f5a523;
 }
-.input-code-binding {
-    float: left;
-    width: 165px;
+.button-binding-submit {
+    width: 300px;
     height: 44px;
-    margin-left: 40px;
-    margin-right: 0;
-    font-size: 14px;
-    color: #999;
-    border: none;
-    border-radius: 4px;
-    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
 }
