@@ -34,6 +34,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	// console.log(data1);
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
+		console.log(resp);
 		if (1 === resp.code) {
 			$scope.videoInfo=resp.data;
 		}
