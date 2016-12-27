@@ -217,35 +217,64 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		}
 	};
 	// 公开课上拉加载
-	// $scope.noMorePage1=false;
-	// $scope.loading1=false;
-	// $scope.loadMore=function(){
-	//  	if(!$scope.loading1){
-	// 		$scope.loading1=true;
-	// 		Http.post('/page/unl/freevidedo.json',{page:publicPage})
-	// 		.success(function (resp) {
-	// 			console.log(resp);
-	// 			if (1 === resp.code) {
-	// 				var freevidedoList = resp.data.freevidedolist;
-	// 				for (var i = 0; i < freevidedoList.length; i++) {
-	// 					freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
-	// 					$scope.publicList.push(freevidedoList[i]);
-	// 				}
-	// 				publicPage+=1;
-	// 				$scope.$broadcast('scroll.infiniteScrollComplete');
-	// 				$scope.loading1=false;
-	// 				if (freevidedoList.length === 0) {
-	// 	                $scope.noMorePage1=true;//禁止滚动触发事件
-	// 	            } 
-	// 			}
-	// 			else if (0 === resp.code) {
-	// 			}
-	// 		})
-	// 		.error(function (resp) {
-	// 			console.log(resp);
-	// 		});
-	// 	}
-	// };
-
+	$scope.noMorePage1=false;
+	$scope.loading1=false;
+	$scope.loadMore1=function(){
+	 	if(!$scope.loading1){
+			$scope.loading1=true;
+			Http.post('/page/unl/freevidedo.json',{page:publicPage})
+			.success(function (resp) {
+				console.log(resp);
+				if (1 === resp.code) {
+					var freevidedoList = resp.data.freevidedolist;
+					for (var i = 0; i < freevidedoList.length; i++) {
+						freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+						$scope.publicList.push(freevidedoList[i]);
+					}
+					publicPage+=1;
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					$scope.loading1=false;
+					if (freevidedoList.length === 0) {
+		                $scope.noMorePage1=true;//禁止滚动触发事件
+		            } 
+				}
+				else if (0 === resp.code) {
+				}
+			})
+			.error(function (resp) {
+				console.log(resp);
+			});
+		}
+	};
+	// 课程表上拉加载
+	$scope.noMorePage2=false;
+	$scope.loading2=false;
+	$scope.loadMore2=function(){
+	 	if(!$scope.loading2){
+			$scope.loading2=true;
+			Http.post('/page/unl/schedule.json',{page:curriculumPage})
+			.success(function (resp) {
+				console.log(resp);
+				if (1 === resp.code) {
+					var currList = resp.data.freevidedolist;
+					for (var i = 0; i < currList.length; i++) {
+						currList[i].imgurl = picBasePath + currList[i].imgurl;
+						$scope.curriculumList.push(currList[i]);
+					}
+					curriculumPage+=1;
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					$scope.loading2=false;
+					if (currList.length === 0) {
+		                $scope.noMorePage2=true;//禁止滚动触发事件
+		            } 
+				}
+				else if (0 === resp.code) {
+				}
+			})
+			.error(function (resp) {
+				console.log(resp);
+			});
+		}
+	};
 
 }]);
