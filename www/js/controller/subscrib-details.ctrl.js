@@ -9,7 +9,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			$scope.videoInfo=resp.data;
 		}

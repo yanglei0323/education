@@ -111,4 +111,8 @@ educationApp.controller('vipCtrl',
         console.log('成功');      
         $scope.modal.hide();
     };
+    $scope.goHomePage=function(){
+        $state.go("tab.micro-lesson",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
 }]);
