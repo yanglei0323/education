@@ -1,14 +1,35 @@
-educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet) {
+educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet','$sce', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet,$sce) {
 	console.log('专栏订阅详情');
 	var teacherId=$stateParams.teacherid;
 	$scope.subDetailList = {};
 	$scope.showPrice = true;
+	// 视频功能
+	var data1 = {
+		columnid:teacherId
+	};
+	Http.post('/unl/playurl.json',data1)
+	.success(function (resp) {
+		console.log(resp);
+		if (1 === resp.code) {
+			$scope.videoInfo=resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	// 对视频添加信任
+	$scope.videoUrl = function(url){  
+        return $sce.trustAsResourceUrl(url);  
+    };
+
 	var data = {
 		teacherid:teacherId
 	};
 	Http.post('/page/unl/teacherdetail.json',data)
 	.success(function (resp) {
-		// console.log(resp);
+		console.log(resp);
 		if (1 === resp.code) {
 			resp.data.avatar=picBasePath + resp.data.avatar;
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
@@ -33,22 +54,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		$('.y-page').css({'display':'none'});
         $('.y-page-'+index).css({'display':'block'});
 	};
-	// 视频功能
-	var data1 = {
-		columnid:teacherId
-	};
-	// console.log(data1);
-	Http.post('/unl/playurl.json',data1)
-	.success(function (resp) {
-		if (1 === resp.code) {
-			$scope.videoInfo=resp.data;
-		}
-		else if (0 === resp.code) {
-		}
-	})
-	.error(function (resp) {
-		console.log(resp);
-	});
+	
 	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
 	$scope.keepDesigner = function (subDetailList) {
 		var postUrl = subDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';

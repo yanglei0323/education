@@ -1,30 +1,14 @@
-educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet) {
+educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet','$sce', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet,$sce) {
 	console.log('公开课视频详情');
 	var videoId=$stateParams.videoid;
 	$scope.boutiDetailList = {};
-	var data = {
-		videoid:videoId
-	};
-	Http.post('/page/unl/videodetail.json',data)
-	.success(function (resp) {
-		// console.log(resp);
-		if (1 === resp.code) {
-			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
-			$scope.boutiDetailList =resp.data;
-		}
-		else if (0 === resp.code) {
-		}
-	})
-	.error(function (resp) {
-		console.log(resp);
-	});
 	// 视频功能
 	var data1 = {
-		videoed:videoId
+		videoid:videoId
 	};
-	// console.log(data1);
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
+		// console.log(resp);
 		if (1 === resp.code) {
 			$scope.videoInfo=resp.data;
 		}
@@ -34,6 +18,29 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	.error(function (resp) {
 		console.log(resp);
 	});
+	// 对视频添加信任
+	$scope.videoUrl = function(url){  
+        return $sce.trustAsResourceUrl(url);  
+    };
+    // 获取视频信息
+	var data = {
+		videoid:videoId
+	};
+	Http.post('/page/unl/videodetail.json',data)
+	.success(function (resp) {
+		// console.log(resp);
+		if (1 === resp.code) {
+			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
+			resp.data.imgurl=picBasePath + resp.data.imgurl;
+			$scope.boutiDetailList =resp.data;
+		}
+		else if (0 === resp.code) {
+		}
+	})
+	.error(function (resp) {
+		console.log(resp);
+	});
+	
 	// 关注（收藏）或者取消关注（取消收藏）发型师/课程/活动
 	$scope.keepDesigner = function (boutiDetailList) {
 		var postUrl = boutiDetailList.iskeep ? '/user/unkeep.json' : '/user/keep.json';

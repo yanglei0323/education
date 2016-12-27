@@ -20,6 +20,7 @@
 		position:absolute;
 		left:15px;
 		top:10px;
+		z-index:111;
 	}
 	.y-back img,.y-share img,.y-collection img{
 		width:22px;
@@ -30,12 +31,14 @@
 		position:absolute;
 		right:42px;
 		top:10px;
+		z-index:111;
 	}
 
 	.y-collection{
 		position:absolute;
 		right:10px;
 		top:10px;
+		z-index:111;
 	}
 }
 .y-switch{
