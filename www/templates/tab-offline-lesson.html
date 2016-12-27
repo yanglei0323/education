@@ -16,5 +16,7 @@
 				</div>
 			</div>
 		</div>
+		<ion-infinite-scroll ng-if="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="1%" ></ion-infinite-scroll>
+		<div ng-if="noMorePage" class="y-nomorepage">没有更多内容</div>
     </ion-content>
 </ion-view>

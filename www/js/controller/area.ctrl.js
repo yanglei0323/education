@@ -1,4 +1,4 @@
-educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$timeout', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$timeout) {
 	console.log('技术专区控制器');
 	var topicId=$stateParams.topicid;
 	var topicName=$stateParams.topicname;
@@ -40,5 +40,38 @@ educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$st
 	$scope.goAreaDetail=function(data){
 		$state.go("boutiquedetail",{videoid:data.id},{reload:true});
 		$ionicViewSwitcher.nextDirection("forward");
+	};
+	// 上拉加载
+	$scope.noMorePage=false;
+	$scope.loading=false;
+	$scope.loadMore=function(){
+	 	if(!$scope.loading){
+			$scope.loading=true;
+			$timeout(function(){
+		        Http.post('/page/unl/topicvideo.json',{topicid:topicId,page:areaPage})
+				.success(function (resp) {
+					console.log(resp);
+					if (1 === resp.code) {
+						var videoList = resp.data.videolist;
+						for (var i = 0; i < videoList.length; i++) {
+							videoList[i].imgurl = picBasePath + videoList[i].imgurl;
+							$scope.areaList.push(videoList[i]);
+						}
+						areaPage+=1;
+						$scope.$broadcast('scroll.infiniteScrollComplete');
+						$scope.loading=false;
+						if (videoList.length === 0) {
+			                $scope.noMorePage=true;//禁止滚动触发事件
+			            } 
+					}
+					else if (0 === resp.code) {
+					}
+				})
+				.error(function (resp) {
+					console.log(resp);
+				});
+		    },1000);
+			
+		}
 	};
 }]);

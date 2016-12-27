@@ -1,4 +1,4 @@
-educationApp.controller('subscribedCtrl', ['$scope', '$rootScope', '$state', 'Http', 'Popup', function ($scope, $rootScope, $state, Http, Popup) {
+educationApp.controller('subscribedCtrl', ['$scope', '$rootScope', '$state', 'Http', 'Popup','$timeout', function ($scope, $rootScope, $state, Http, Popup,$timeout) {
 	console.log('已订阅控制器');
 	$scope.showSubscribed = true;
 	$scope.showNoSubscribed = false;
@@ -45,5 +45,43 @@ educationApp.controller('subscribedCtrl', ['$scope', '$rootScope', '$state', 'Ht
 	$scope.goinfo = function (tid) {
 		$state.go("subscribdetails",{teacherid:tid},{reload:true});
 	};
-
+	// 上拉加载
+	$scope.noMorePage=false;
+	$scope.noMorePageText=false;
+	$scope.loading=false;
+	$scope.loadMore=function(){
+	 	if(!$scope.loading){
+			$scope.loading=true;
+			$timeout(function(){
+		        Http.post('/teacher/followteacherlist.json',{page:page})
+				.success(function (resp) {
+					console.log(resp);
+					if (1 === resp.code) {
+						var teacherList = resp.data.teacherlist;
+						for (var i = 0; i < teacherList.length; i++) {
+							teacherList[i].teacher.imgurl = picBasePath + teacherList[i].teacher.imgurl;
+							$scope.followTeacherList.push(teacherList[i]);
+						}
+						page+=1;
+						$scope.$broadcast('scroll.infiniteScrollComplete');
+						$scope.loading=false;
+						if (teacherList.length === 0) {
+			                $scope.noMorePage=true;//禁止滚动触发事件
+			                if($scope.showNoSubscribed){
+			                	$scope.noMorePageText=false;
+			                }else{
+			                	$scope.noMorePageText=true;
+			                }
+			            } 
+					}
+					else if (0 === resp.code) {
+					}
+				})
+				.error(function (resp) {
+					console.log(resp);
+				});
+		    },1000);
+			
+		}
+	};
 }]);

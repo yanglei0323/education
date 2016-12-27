@@ -68,7 +68,6 @@
 			<span class="flex align watchnum"><span ng-bind="recomitem.video.timelongs"></span>-<span ng-bind="recomitem.video.watchnum"></span>人观看</span>
 		</div>
 	</div>
-	
   </ion-content>
   <!-- 付费精品 -->
   <ion-content class="y-home-content y-home-content-2 y-simple-video">
@@ -84,6 +83,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<ion-infinite-scroll ng-if="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="1%" ></ion-infinite-scroll>
+	<div ng-if="noMorePage" class="y-nomorepage">没有更多内容</div>
   </ion-content>
   <!-- 公开课 -->
   <ion-content class="y-home-content y-home-content-3 y-simple-video">

@@ -3,13 +3,6 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$('.y-home-content').css({'display':'none'});
 	$('.y-home-content-1').css({'display':'block'});
 	// 轮播图
-	$timeout(function(){
-
-        $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
-
-        $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
-
-    },1000);
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
 	.success(function (resp) {
@@ -27,7 +20,13 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		// console.log(resp);
 	});
+	$timeout(function(){
 
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
+
+        $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
+
+    },1000);
 
 	// 专栏订阅
 	$scope.subDesignerList = {};
@@ -184,4 +183,69 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	.error(function (resp) {
 		console.log(resp);
 	});
+	// 付费精品上拉加载
+	$scope.noMorePage=false;
+	$scope.loading=false;
+	$scope.loadMore=function(){
+	 	if(!$scope.loading){
+			$scope.loading=true;
+			$timeout(function(){
+				Http.post('/page/unl/payvidedo.json',{page:boutiquePage})
+				.success(function (resp) {
+					console.log(resp);
+					if (1 === resp.code) {
+						var payvidedoList = resp.data.payvidedolist;
+						for (var i = 0; i < payvidedoList.length; i++) {
+							payvidedoList[i].imgurl = picBasePath + payvidedoList[i].imgurl;
+							$scope.boutiqueList.push(payvidedoList[i]);
+						}
+						boutiquePage+=1;
+						$scope.$broadcast('scroll.infiniteScrollComplete');
+						$scope.loading=false;
+						if (payvidedoList.length === 0) {
+			                $scope.noMorePage=true;//禁止滚动触发事件
+			            } 
+					}
+					else if (0 === resp.code) {
+					}
+				})
+				.error(function (resp) {
+					console.log(resp);
+				});
+			},1000);
+			
+		}
+	};
+	// 公开课上拉加载
+	// $scope.noMorePage1=false;
+	// $scope.loading1=false;
+	// $scope.loadMore=function(){
+	//  	if(!$scope.loading1){
+	// 		$scope.loading1=true;
+	// 		Http.post('/page/unl/freevidedo.json',{page:publicPage})
+	// 		.success(function (resp) {
+	// 			console.log(resp);
+	// 			if (1 === resp.code) {
+	// 				var freevidedoList = resp.data.freevidedolist;
+	// 				for (var i = 0; i < freevidedoList.length; i++) {
+	// 					freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+	// 					$scope.publicList.push(freevidedoList[i]);
+	// 				}
+	// 				publicPage+=1;
+	// 				$scope.$broadcast('scroll.infiniteScrollComplete');
+	// 				$scope.loading1=false;
+	// 				if (freevidedoList.length === 0) {
+	// 	                $scope.noMorePage1=true;//禁止滚动触发事件
+	// 	            } 
+	// 			}
+	// 			else if (0 === resp.code) {
+	// 			}
+	// 		})
+	// 		.error(function (resp) {
+	// 			console.log(resp);
+	// 		});
+	// 	}
+	// };
+
+
 }]);

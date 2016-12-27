@@ -49,6 +49,7 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
                 $ionicViewSwitcher.nextDirection("forward");
             }
             else if (0 === resp.code) {
+                Popup.alert(resp.reason);
             }
         })
         .error(function (resp) {
