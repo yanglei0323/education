@@ -1,5 +1,5 @@
 educationApp.controller('loginCtrl',
-	['$scope', 'Http', 'Popup', 'User', '$http', '$state', function ($scope, Http, Popup, User, $http, $state) {
+	['$scope', 'Http', 'Popup', 'User', '$http', '$state', '$ionicLoading', function ($scope, Http, Popup, User, $http, $state, $ionicLoading) {
 	
 	$scope.user = {};
 
@@ -37,6 +37,9 @@ educationApp.controller('loginCtrl',
 		    // 授权成功，根据code等获取appid等信息
 		    $http.get('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx55bde7209676fe4c&secret=34932985e0a2540c9b490e06940243ab&grant_type=authorization_code&code=' + resp.code)
 		    .success(function (resp) {
+		    	$ionicLoading.show({
+			        template: 'Loading...'
+			    });
 		    	// 获取openid失败
 		    	if (resp.errcode) {
 		    		Popup.alert(resp.errmsg);
@@ -49,8 +52,11 @@ educationApp.controller('loginCtrl',
 		    		};
 		    		Http.post('/user/unl/thirdlogin.json', data)
 		    		.success(function (resp) {
+		    			$ionicLoading.hide();
 		    			if (1 === resp.code) {
 		    				// 登录成功(用户已绑定手机号)
+		    				localStorage.setItem('isLogin', true);
+							localStorage.setItem('user', JSON.stringify(resp.data));
 		    				var confirm = Popup.alert('登录成功');
 							confirm.then(function () {
 								$ionicHistory.goBack();
@@ -69,6 +75,7 @@ educationApp.controller('loginCtrl',
 		    			}
 		    		})
 		    		.error(function () {
+		    			$ionicLoading.hide();
 		    			Popup.alert('数据请求失败，请稍后再试');
 		    		});
 		    	}
