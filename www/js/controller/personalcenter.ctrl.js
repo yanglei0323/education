@@ -2,7 +2,11 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
 	console.log('个人中心控制器');
 	// 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
-    userInfo.avatar=picBasePath + userInfo.avatar;
+    if(userInfo.avatar == ''){
+        userInfo.avatar ='./img/head-none.png';
+    }else{
+        userInfo.avatar=picBasePath + userInfo.avatar;
+    }
     // console.log(userInfo);
     // 将用户信息写入页面
     $scope.userInfo=userInfo;

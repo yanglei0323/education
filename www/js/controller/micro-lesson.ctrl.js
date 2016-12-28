@@ -1,7 +1,6 @@
 educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher) {
 	console.log('小悦微课控制器');
-	$('.y-home-content').css({'display':'none'});
-	$('.y-home-content-1').css({'display':'block'});
+	
 	// 轮播图
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
@@ -21,13 +20,26 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		// console.log(resp);
 	});
 	$timeout(function(){
+        var mySwiper = new Swiper("#indexbanner",{  
+	   		autoplayDisableOnInteraction : false,/*触摸后是否停止自动播放*/ 
+	        direction:"horizontal",/*横向滑动*/  
+	        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/  
+	        pagination:".swiper-pagination",/*分页器*/   
+	        autoplay:3000/*每隔3秒自动播放*/  
+	    })
 
-        $ionicSlideBoxDelegate.$getByHandle('slideimgs').update();
-
-        $ionicSlideBoxDelegate.$getByHandle('slideimgs').loop(true);
-
-    },1000);
-
+    },500);
+    //判断显示状态
+	var tabNum=JSON.parse(sessionStorage.getItem('tabNum'));
+	if(tabNum == null){
+		$('.y-home-content').css({'display':'none'});
+		$('.y-home-content-1').css({'display':'block'});
+	}else{
+		$('.home-tab-item').removeClass("home-tab-active");
+		$('.home-tab-item-'+tabNum).addClass("home-tab-active");
+		$('.y-home-content').css({'display':'none'});
+		$('.y-home-content-'+tabNum).css({'display':'block'});
+	}
 	// 专栏订阅
 	$scope.subDesignerList = {};
 	Http.post('/page/unl/chooseteacherlist.json')
@@ -102,6 +114,19 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		$('.home-tab-item-'+index).addClass("home-tab-active");
 		$('.y-home-content').css({'display':'none'});
 		$('.y-home-content-'+index).css({'display':'block'});
+		sessionStorage.setItem('tabNum',index);
+		if(index == 1){
+			$timeout(function(){
+		        var mySwiper = new Swiper("#indexbanner",{  
+			   		autoplayDisableOnInteraction : false,/*触摸后是否停止自动播放*/ 
+			        direction:"horizontal",/*横向滑动*/  
+			        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/  
+			        pagination:".swiper-pagination",/*分页器*/   
+			        autoplay:3000/*每隔3秒自动播放*/  
+			    })
+
+		    },10);
+		}
 	};
 	// 付费精品模块
 	$scope.boutiqueList = {};

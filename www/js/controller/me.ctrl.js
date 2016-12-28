@@ -29,7 +29,12 @@ educationApp.controller('meCtrl',
     }
     // 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
-    userInfo.avatar=picBasePath + userInfo.avatar;
+    if(userInfo.avatar == ''){
+        userInfo.avatar ='./img/head-none.png';
+    }else{
+        userInfo.avatar=picBasePath + userInfo.avatar;
+    }
+    
     console.log(userInfo);
     $scope.userInfo=userInfo;
     // 切换信息
@@ -38,7 +43,18 @@ educationApp.controller('meCtrl',
         $('.y-meTab-item-'+index).addClass("meTab-item-h");
         $('.y-page').css({'display':'none'});
         $('.y-page-'+index).css({'display':'block'});
+        sessionStorage.setItem('meTab',index);
     };
+    // 判断显示状态
+    var meTab=JSON.parse(sessionStorage.getItem('meTab'));
+    if(meTab == null){
+        return;
+    }else{
+        $('.y-meTab-item').removeClass("meTab-item-h");
+        $('.y-meTab-item-'+meTab).addClass("meTab-item-h");
+        $('.y-page').css({'display':'none'});
+        $('.y-page-'+meTab).css({'display':'block'});
+    }
     // 获取学习记录
     $scope.studyList='';
     var page=1;

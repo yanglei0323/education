@@ -33,7 +33,6 @@ educationApp.controller('vipCtrl',
     $scope.basics=true;//基础
     $scope.senior=false;//高级
     $scope.custom=false;//定制
-    $scope.vipid = 3;
 
     // 切换信息
     $scope.vipTab=function(index){
@@ -81,7 +80,11 @@ educationApp.controller('vipCtrl',
         $ionicHistory.goBack();
         $ionicViewSwitcher.nextDirection("back");
     };
-     
+    $scope.goBuyVip=function(index){
+        $scope.vipid = index;
+        // console.log($scope.vipid);
+        $scope.modal.show();
+    };
     // 显示入会信息模块
     $ionicModal.fromTemplateUrl('templates/modal.html', {
         scope: $scope
