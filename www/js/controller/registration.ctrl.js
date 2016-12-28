@@ -30,30 +30,14 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
         return 1;
     };
     // 信息填写完毕，跳转到支付页面
-    $scope.goPayOffice = function () {
-        if (-1 === checkParams()) {
-            return;
-        }
-        var data = {
-            activityid:activityId,
-            name:$('.username').val(),
-            telephone:$('.userphone').val(),
-            company:$('.company').val(),
-            job:$('.profession').val()
-        };
-        Http.post('/activity/add.json',data)
-        .success(function (resp) {
-            console.log(resp);
-            if (1 === resp.code) {
-                $state.go("activitypay", {activityid:activityId},{reload:true});
-                $ionicViewSwitcher.nextDirection("forward");
-            }
-            else if (0 === resp.code) {
-                Popup.alert(resp.reason);
-            }
-        })
-        .error(function (resp) {
-            console.log(resp);
-        });
-    };
+    $scope.goPayOffice = function (username, userphone, Company, Job) {
+         if (-1 === checkParams()) {
+             return;
+         }
+         console.log('跳转支付');
+        $state.go('payactivity'
+            ,{activityid:activityId, name:username, telephone:userphone, company:Company, job:Job}
+            ,{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+     };
 }]);

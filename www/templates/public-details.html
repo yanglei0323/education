@@ -3,7 +3,7 @@
     <ion-content class="y-simple-video">
     	<!-- 视频模块 -->
 		<div class="y-video">
-	        <video ng-src="{{videoUrl(videoInfo.playurl)}}" controls loop poster="{{boutiDetailList.imgurl}}"></video>
+	        <video ng-src="{{videoUrl(videoInfo.playurl)}}" controls loop poster="{{boutiDetailList.imgurl}}" id="playVideo"></video>
 	        <span class="y-back" ng-click="ionicBack()"><img src="./img/boutique/goback.png" alt=""></span>
 	        <span class="y-share" ng-click="goShare(boutiDetailList)"><img src="./img/boutique/share.png" alt=""></span>
 	        <span class="y-collection" ng-if="!boutiDetailList.iskeep" ng-click="keepDesigner(boutiDetailList)"><img src="./img/boutique/collection.png" alt=""></span>

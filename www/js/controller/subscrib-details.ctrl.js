@@ -151,6 +151,27 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 				$state.go('login');
 			}
 			else if (1 === data.code) {
+				var time=Math.floor(document.getElementById("playVideo").currentTime);
+				if(time>=1){
+					// 存储观看记录
+					var dataTime = {
+						type:1,
+						id:videoId,
+						time:time
+					};
+					// console.log(dataTime);
+					Http.post('/endplay.json',dataTime)
+					.success(function (resp) {
+						console.log(resp);
+						if (1 === resp.code) {
+						}
+						else if (0 === resp.code) {
+						}
+					})
+					.error(function (resp) {
+						console.log(resp);
+					});
+				}
 				$state.go("subscribpay", {teacherid:tid},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 
@@ -162,6 +183,27 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	}
 	// 返回上一页
 	$scope.ionicBack= function () {
+		var time=Math.floor(document.getElementById("playVideo").currentTime);
+		if(time>=1){
+			// 存储观看记录
+			var dataTime = {
+				type:1,
+				id:videoId,
+				time:time
+			};
+			// console.log(dataTime);
+			Http.post('/endplay.json',dataTime)
+			.success(function (resp) {
+				console.log(resp);
+				if (1 === resp.code) {
+				}
+				else if (0 === resp.code) {
+				}
+			})
+			.error(function (resp) {
+				console.log(resp);
+			});
+		}
 	    $ionicHistory.goBack();
 	    $ionicViewSwitcher.nextDirection("back");
 	};
