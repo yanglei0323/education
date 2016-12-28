@@ -10,7 +10,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	};
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			$scope.videoInfo=resp.data;
 		}
@@ -30,7 +30,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	};
 	Http.post('/page/unl/videodetail.json',data)
 	.success(function (resp) {
-		// console.log(resp);
+		console.log(resp);
 		if (1 === resp.code) {
 			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
@@ -140,8 +140,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	    $ionicHistory.goBack();
 	    $ionicViewSwitcher.nextDirection("back");
 	};
-	// 付费支付页
-	$scope.goBoutiquePay = function (tid) {
+	$scope.goBuyVideo = function (vid) {
 		Http.post('/user/mine.json')
 		.success(function (data) {
 			if (-1 === data.code) {
@@ -149,32 +148,12 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 				$state.go('login');
 			}
 			else if (1 === data.code) {
-				var time=document.getElementById("playVideo").currentTime;
-				// 存储观看记录
-				var dataTime = {
-					type:1,
-					id:videoId,
-					time:time
-				};
-				console.log(dataTime);
-				Http.post('/endplay.json',dataTime)
-				.success(function (resp) {
-					console.log(resp);
-					if (1 === resp.code) {
-					}
-					else if (0 === resp.code) {
-					}
-				})
-				.error(function (resp) {
-					console.log(resp);
-				});
-				// $state.go("boutiquepay", {videoid:tid},{reload:true});
-				// $ionicViewSwitcher.nextDirection("forward");
-
+				$state.go("buyvideo", {videoid:vid},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
 			}
 		})
 		.error(function (data) {
 			console.log('数据请求失败，请稍后再试！');
 		});
-	}
+	};
 }]);

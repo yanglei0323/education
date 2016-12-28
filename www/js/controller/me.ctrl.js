@@ -1,7 +1,7 @@
 educationApp.controller('meCtrl',
-	['$scope', '$state', '$location', 'User','Http','$ionicViewSwitcher','$timeout', function ($scope, $state, $location, User,Http,$ionicViewSwitcher,$timeout) {
-	console.log('我的控制器');
-	$scope.logout = User.logout;
+    ['$scope', '$state', '$location', 'User','Http','$ionicViewSwitcher','$timeout', function ($scope, $state, $location, User,Http,$ionicViewSwitcher,$timeout) {
+    console.log('我的控制器');
+    $scope.logout = User.logout;
     $scope.nocontent=true;
     $scope.nobuy=true;
     $scope.nosign=true;
@@ -16,7 +16,7 @@ educationApp.controller('meCtrl',
     //    console.log('Thank you for not eating my delicious ice cream cone');
     //  });
     
-	function getCookie(name){ 
+    function getCookie(name){ 
         var strCookie = document.cookie; 
         var arrCookie = strCookie.split("; "); 
         for(var i = 0; i < arrCookie.length; i++){ 

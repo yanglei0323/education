@@ -33,6 +33,8 @@ educationApp.controller('vipCtrl',
     $scope.basics=true;//基础
     $scope.senior=false;//高级
     $scope.custom=false;//定制
+    $scope.vipid = 3;
+
     // 切换信息
     $scope.vipTab=function(index){
         switch (index) {
@@ -110,6 +112,9 @@ educationApp.controller('vipCtrl',
         }
         console.log('成功');      
         $scope.modal.hide();
+        $state.go('payvip'
+            ,{vipid:$scope.vipid, name:user.firstName, telephone:user.tel, company:user.company, job:user.job, city:user.city}
+            ,{reload:true});
     };
     $scope.goHomePage=function(){
         $state.go("tab.micro-lesson",{reload:true});

@@ -5,8 +5,8 @@
     <ion-content class="subscribed-bg">
         <div class="subscribed-content">
             <div class="no-subscribed" ng-show="showNoSubscribed">
-                <img ng-src="./img/no_content.png" width="85">
-                <div class="no_content_text">暂无订阅</div>
+                <img ng-src="img/no_content.png" width="85">
+                <div class="no-content-text">暂无订阅</div>
             </div>
             <div class="subscribed" ng-show="showSubscribed">
                 <div class="subscribed-item" ng-repeat="subscribeditem in followTeacherList" ng-click="goinfo(subscribeditem.teacher.id)">

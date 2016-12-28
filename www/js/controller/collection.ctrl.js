@@ -1,17 +1,17 @@
 educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User','$ionicViewSwitcher','$timeout', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User,$ionicViewSwitcher,$timeout) {
-	console.log('收藏列表控制器');
-	$scope.nocolumn=true;
-	$scope.novideo=true;
-	$scope.noactivity=true;
+    console.log('收藏列表控制器');
+    $scope.nocolumn=true;
+    $scope.novideo=true;
+    $scope.noactivity=true;
     $scope.noMorePage=false;
     $scope.noMorePage1=false;
     $scope.noMorePage2=false;
-	// 返回上一页
-	$scope.ionicBack= function () {
-	    $ionicHistory.goBack();
+    // 返回上一页
+    $scope.ionicBack= function () {
+        $ionicHistory.goBack();
         $ionicViewSwitcher.nextDirection("back");
-	};
-	// 获取收藏记录(1专栏)
+    };
+    // 获取收藏记录(1专栏)
     $scope.columnList='';
     var page=1;
     var data = {
@@ -220,9 +220,9 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     };
     // 切换显示列表
     $scope.collSwitch=function(index){
-		$('.coll-tab-item').removeClass("coll-tab-active");
-		$('.coll-tab-item-'+index).addClass("coll-tab-active");
-		$('.y-collection-content').css({'display':'none'});
-		$('.y-collection-content-'+index).css({'display':'block'});
-	};
+        $('.coll-tab-item').removeClass("coll-tab-active");
+        $('.coll-tab-item-'+index).addClass("coll-tab-active");
+        $('.y-collection-content').css({'display':'none'});
+        $('.y-collection-content-'+index).css({'display':'block'});
+    };
 }]);

@@ -1,16 +1,16 @@
 educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
-	console.log('填写参加人信息');
-	// 获取线下课信息
-	var activityId=$stateParams.activityid;
+    console.log('填写参加人信息');
+    // 获取线下课信息
+    var activityId=$stateParams.activityid;
     console.log(activityId);
-	var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    var phoneRe = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
     var pwdRe = /^[0-9a-zA-Z_]{6,20}/;
-	// 返回上一页
-	$scope.ionicBack= function () {
-	    $ionicHistory.goBack();
+    // 返回上一页
+    $scope.ionicBack= function () {
+        $ionicHistory.goBack();
         $ionicViewSwitcher.nextDirection("back");
-	};
-	function checkParams() {
+    };
+    function checkParams() {
         if ($('.company').val() == '') {
             Popup.alert('请填写有效公司名称！');
             return -1;
