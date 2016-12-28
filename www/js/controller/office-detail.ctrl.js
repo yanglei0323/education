@@ -1,8 +1,7 @@
-educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet) {
 	console.log('线下课详情');
 	var activityId=$stateParams.activityid;
 	$scope.boutiDetailList = {};
-	$scope.activityId = activityId;
 	$scope.priceType = false;
 	$scope.showPrice = true;
 	var data = {
@@ -62,13 +61,56 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 				console.log('用户未登录');
 			}
 			else if (1 === data.code) {
-				Popup.alert('分享成功！');
+				$scope.title=data.data.topic;
+				$scope.desc=data.data.info;
+				$scope.url=data.data.jumpurl;
+				$scope.thumb=data.data.imgurl;
+				$ionicActionSheet.show({
+			          buttons: [
+			            { text: '微信朋友圈' },
+			            { text: '微信好友' }
+			          ],
+			          titleText: '分享',
+			          cancelText: '取消',
+			          cancel: function() {
+			               // add cancel code..
+			             },
+			          buttonClicked: function(index) {
+			          	switch (index) {
+			      				case 0:
+			      					$scope.shareViaWechat(1,$scope.title,$scope.desc,$scope.url,$scope.thumb);
+			      					break;
+			      				case 1:
+			      					$scope.shareViaWechat(0,$scope.title,$scope.desc,$scope.url,$scope.thumb);
+			      					break;
+			      			}
+			            return true;
+			          }
+			      });
 			}
 		})
 		.error(function (data) {
 			console.log('数据请求失败，请稍后再试！');
 		});
 	};
+	$scope.shareViaWechat = function(scene,title,desc,url,thumb) {
+	      Wechat.share({
+	        message: {
+	          title: title,
+	          description: desc,
+	          thumb: thumb,
+	          media: {
+	            type: Wechat.Type.WEBPAGE,
+	            webpageUrl: url
+	          }
+	        },
+	        scene: scene // share to Timeline
+	      }, function() {
+	        Popup.alert('分享成功！');
+	      }, function(reason) {
+	        Popup.alert(reason);
+	      });
+    };
 	// 返回上一页
 	$scope.ionicBack= function () {
 	    $ionicHistory.goBack();
@@ -81,7 +123,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 		// window.location.href='http://map.baidu.com/mobile/webapp/index/index/qt=cur&wd=%E5%8C%97%E4%BA%AC%E5%B8%82&from=maponline&tn=m01&ie=utf-8/vt=map';
 	};
 	// 报名信息填写页面跳转
-	$scope.goRegistration=function(data){
+	$scope.goRegistration=function(){
 		Http.post('/user/mine.json')
 		.success(function (data) {
 			if (-1 === data.code) {
@@ -89,7 +131,7 @@ educationApp.controller('officedetailCtrl', ['$scope','Http', 'Popup', '$rootSco
 				$state.go('login');
 			}
 			else if (1 === data.code) {
-				$state.go("registration",{activityid:$scope.activityId},{reload:true});
+				$state.go("registration",{activityid:activityId},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 
 			}
