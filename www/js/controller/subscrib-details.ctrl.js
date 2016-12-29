@@ -51,7 +51,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	});
 	// 切换tab
 	$scope.goSwitch=function(index){
-		$('.y-page').css({'display':'none'});
+		$('.y-bPage').css({'display':'none'});
         $('.y-page-'+index).css({'display':'block'});
 	};
 	

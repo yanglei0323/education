@@ -1,6 +1,20 @@
 educationApp.controller('meCtrl',
     ['$scope', '$state', '$location', 'User','Http','$ionicViewSwitcher','$timeout', function ($scope, $state, $location, User,Http,$ionicViewSwitcher,$timeout) {
     console.log('我的控制器');
+    // 判断登录状态
+    Http.post('/user/mine.json')
+    .success(function (data) {
+        if (-1 === data.code) {
+            console.log('用户未登录');
+            $state.go('login');
+        }
+        else if (1 === data.code) {
+
+        }
+    })
+    .error(function (data) {
+        console.log('数据请求失败，请稍后再试！');
+    });
     $scope.logout = User.logout;
     $scope.nocontent=true;
     $scope.nobuy=true;
@@ -8,25 +22,32 @@ educationApp.controller('meCtrl',
     $scope.noMorePage=false;
     $scope.noMorePage1=false;
     $scope.noMorePage2=false;
-    // var alertPopup = $ionicPopup.alert({
-    //    title: 'JSESSIONID',
-    //    template: $scope.session_id
-    //  });
-    //  alertPopup.then(function(res) {
-    //    console.log('Thank you for not eating my delicious ice cream cone');
-    //  });
     
-    function getCookie(name){ 
-        var strCookie = document.cookie; 
-        var arrCookie = strCookie.split("; "); 
-        for(var i = 0; i < arrCookie.length; i++){ 
-            var arr = arrCookie[i].split("="); 
-            if(arr[0] == name){
-                return arr[1];
-            }
-        } 
-        return ""; 
-    }
+    // 设置跳转
+    $scope.goSetUp=function(){
+        $state.go("setup",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
+    // 收藏跳转
+    $scope.goCollection=function(){
+        $state.go("collection",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
+    // 个人中心跳转
+    $scope.goPerCenter=function(){
+        $state.go("personalcenter",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
+    // 报名信息跳转
+    $scope.goActivityDetail=function(data){
+        $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
+    // 365大咖成长跳转
+    $scope.goVip=function(){
+        $state.go("vip",{reload:true});
+        $ionicViewSwitcher.nextDirection("forward");
+    };
     // 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
     if(userInfo.avatar == ''){
@@ -35,7 +56,7 @@ educationApp.controller('meCtrl',
         userInfo.avatar=picBasePath + userInfo.avatar;
     }
     
-    console.log(userInfo);
+    // console.log(userInfo);
     $scope.userInfo=userInfo;
     // 切换信息
     $scope.goTab=function(index){
@@ -45,16 +66,7 @@ educationApp.controller('meCtrl',
         $('.y-page-'+index).css({'display':'block'});
         sessionStorage.setItem('meTab',index);
     };
-    // 判断显示状态
-    var meTab=JSON.parse(sessionStorage.getItem('meTab'));
-    if(meTab == null){
-        return;
-    }else{
-        $('.y-meTab-item').removeClass("meTab-item-h");
-        $('.y-meTab-item-'+meTab).addClass("meTab-item-h");
-        $('.y-page').css({'display':'none'});
-        $('.y-page-'+meTab).css({'display':'block'});
-    }
+    
     // 获取学习记录
     $scope.studyList='';
     var page=1;
@@ -251,29 +263,14 @@ educationApp.controller('meCtrl',
             
         }
     };
-    // 设置跳转
-    $scope.goSetUp=function(){
-        $state.go("setup",{reload:true});
-        $ionicViewSwitcher.nextDirection("forward");
-    };
-    // 收藏跳转
-    $scope.goCollection=function(){
-        $state.go("collection",{reload:true});
-        $ionicViewSwitcher.nextDirection("forward");
-    };
-    // 个人中心跳转
-    $scope.goPerCenter=function(){
-        $state.go("personalcenter",{reload:true});
-        $ionicViewSwitcher.nextDirection("forward");
-    };
-    // 报名信息跳转
-    $scope.goActivityDetail=function(data){
-        $state.go("activitydetail",{useractivityid:data.useractivityid},{reload:true});
-        $ionicViewSwitcher.nextDirection("forward");
-    };
-    // 365大咖成长跳转
-    $scope.goVip=function(){
-        $state.go("vip",{reload:true});
-        $ionicViewSwitcher.nextDirection("forward");
-    };
+    // 判断显示状态
+    var meTab=JSON.parse(sessionStorage.getItem('meTab'));
+    if(meTab == null){
+        return;
+    }else{
+        $('.y-meTab-item').removeClass("meTab-item-h");
+        $('.y-meTab-item-'+meTab).addClass("meTab-item-h");
+        $('.y-page').css({'display':'none'});
+        $('.y-page-'+meTab).css({'display':'block'});
+    }
 }]);

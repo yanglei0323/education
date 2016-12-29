@@ -140,6 +140,8 @@
 .vip-bar{
 	height:44px;
 	background-size:0 0;
+	text-align:center;
+	overflow:hidden;
 	.vip-btn{
 		right:10px !important;
 	}
@@ -149,7 +151,7 @@
     }
 }
 .y-padding{
-	padding:1px 15px;
+	padding:3px 15px;
 	.vip-input{
 		border:1px solid #bebebe;
 		border-radius:3px;

@@ -3,7 +3,11 @@ educationApp.controller('vipCtrl',
 	console.log('365大咖控制器');
     // 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
-    userInfo.avatar=picBasePath + userInfo.avatar;
+    if(userInfo.avatar == ''){
+        userInfo.avatar ='./img/head-none.png';
+    }else{
+        userInfo.avatar=picBasePath + userInfo.avatar;
+    }
     userInfo.vip.smallimgurl=picBasePath + userInfo.vip.smallimgurl;
     console.log(userInfo);
     $scope.userInfo=userInfo;
