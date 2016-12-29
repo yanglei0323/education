@@ -1,4 +1,4 @@
-educationApp.controller('bindingPhoneCtrl', ['$scope', '$state', 'Http', 'Popup', function ($scope, $state, Http, Popup) {
+educationApp.controller('bindingPhoneCtrl', ['$scope', '$rootScope', '$state', 'Http', 'Popup', function ($scope, $rootScope, $state, Http, Popup) {
 	
 	$scope.user = {};
 
@@ -41,7 +41,8 @@ educationApp.controller('bindingPhoneCtrl', ['$scope', '$state', 'Http', 'Popup'
 				localStorage.setItem('user', JSON.stringify(resp.data));
 				var confirm = Popup.alert('登录成功');
 				confirm.then(function () {
-					$ionicHistory.goBack();
+					// $ionicHistory.goBack();
+					$rootScope.$ionicGoBack();
 				});
 			} else if ( 0 === resp.code ) {
 				Popup.alert(resp.reason);

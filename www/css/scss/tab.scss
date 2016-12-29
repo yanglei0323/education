@@ -41,9 +41,9 @@ $tabSize: 25px;
 ion-tabs.tabs-color-active-positive {
 	.tab-item.tab-item-active {
 		color: $orange !important;
+		text-decoration: none;
 	}
 }
-
 
 .home-bar{
 	width:100%;
