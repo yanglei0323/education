@@ -1,8 +1,10 @@
-educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet','$sce', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet,$sce) {
+educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher','$ionicActionSheet','$sce','$timeout', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher,$ionicActionSheet,$sce,$timeout) {
 	console.log('专栏订阅详情');
 	var teacherId=$stateParams.teacherid;
 	$scope.subDetailList = {};
 	$scope.showPrice = true;
+	$('.y-bPage').css({'display':'none'});
+    $('.y-page-1').css({'display':'block'});
 	// 视频功能
 	var data1 = {
 		columnid:teacherId
@@ -35,6 +37,10 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
 			$scope.subDetailList =resp.data;
 			$scope.columnList =resp.data.columnlist;
+			for (var i = 0; i < $scope.columnList.length; i++) {
+				$scope.columnList[i].isplay = false;
+				$scope.columnList[i].indexnum = i;
+			}
 			var priceType=parseInt(resp.data.price);
 			if(priceType>=0 || $scope.columnList.price == '免费'){
 				$scope.priceType = true;
@@ -155,8 +161,8 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 				if(time>=1){
 					// 存储观看记录
 					var dataTime = {
-						type:1,
-						id:videoId,
+						type:0,
+						id:$scope.subDetailList.id,
 						time:time
 					};
 					// console.log(dataTime);
@@ -187,8 +193,8 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		if(time>=1){
 			// 存储观看记录
 			var dataTime = {
-				type:1,
-				id:videoId,
+				type:0,
+				id:$scope.subDetailList.id,
 				time:time
 			};
 			// console.log(dataTime);
@@ -206,5 +212,70 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 		}
 	    $ionicHistory.goBack();
 	    $ionicViewSwitcher.nextDirection("back");
+	};
+	// 课程目录跳转
+	$scope.playVideoId=0;
+	$scope.indexNum='';
+	var video = document.getElementById("playVideo");
+	// 视频播放状态监听,将状态赋给课程目录中的元素
+	$timeout(function(){
+		video.addEventListener('play',function(){
+			if($scope.indexNum == ''){
+				return;
+			}else{
+				var m=parseInt($scope.indexNum);
+				$scope.columnList[m].isplay = true;
+			}    
+		});
+		video.addEventListener('pause',function(){
+			if($scope.indexNum == ''){
+				return;
+			}else{
+				var m=parseInt($scope.indexNum);
+				$scope.columnList[m].isplay = false;
+			}      
+		});
+    },500);
+	$scope.goPlayVideo=function(index){
+		if(index.isplay){
+			// 暂停
+			index.isplay=!index.isplay;
+			video.pause();
+		}else{
+			if($scope.playVideoId == index.id){
+				index.isplay=true;
+				video.play();
+				return;
+			}else{
+				$scope.videoInfo={};
+				// 获取视频地址，自动播放（第一次播放此视频执行）
+				var data1 = {
+					videoid:index.id
+				};
+				// console.log(data1);
+				Http.post('/unl/playurl.json',data1)
+				.success(function (resp) {
+					if (1 === resp.code) {
+						$scope.videoInfo=resp.data;
+						$scope.playVideoId=index.id;
+						$scope.indexNum=index.indexnum;
+						for (var i = 0; i < $scope.columnList.length; i++) {
+							$scope.columnList[i].isplay = false;
+						}
+						index.isplay=true;
+						$timeout(function(){
+							video.play();
+					    },500);
+					}
+					else if (0 === resp.code) {
+					}
+				})
+				.error(function (resp) {
+					console.log(resp);
+				});
+			}
+			
+		}
+		
 	};
 }]);

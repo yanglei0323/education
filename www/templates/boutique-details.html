@@ -18,7 +18,7 @@
 	        </div>
 	       <div class="y-subInfo">
 	            <span class="y-sub-title">导师简介</span>
-	            <span class="y-sub-number"><span ng-bind="boutiDetailList.keepnum"></span>人已购买</span>
+	            <span class="y-sub-number"ng-if="!priceType"><span ng-bind="boutiDetailList.keepnum"></span>人已购买</span>
 	            <span class="y-designer-info">
 	                <img ng-src="{{boutiDetailList.teacheravatar}}" alt="">
 	                <span ng-bind="boutiDetailList.teachername"></span>
@@ -31,7 +31,8 @@
 	        <span class="y-notice">课程介绍</span>
 	        <div class="y-describe y-notice-info">
 	            <p>1、课程时长：<span ng-bind="boutiDetailList.timelongs"></span></p>
-	            <p>2、上传时间：<span ng-bind="boutiDetailList.uploadtime"></span></p>
+	            <p>2、观看人数：<span ng-bind="boutiDetailList.watchnum"></span></p>
+	            <p>3、上传时间：<span ng-bind="boutiDetailList.uploadtime"></span></p>
 	        </div> 
 	    </div>
 	<div class="marginB54"></div>

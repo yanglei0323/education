@@ -68,7 +68,8 @@ educationApp.controller('meCtrl',
     };
     
     // 获取学习记录
-    $scope.studyList='';
+    $scope.studyList=[];
+    $scope.studyVideoList=[];
     var page=1;
     var data = {
         page:page
@@ -79,9 +80,14 @@ educationApp.controller('meCtrl',
         if (1 === resp.code) {
             var studyhistoryList = resp.data.studyhistorylist;
             for (var i = 0; i < studyhistoryList.length; i++) {
-                studyhistoryList[i].video.imgurl = picBasePath + studyhistoryList[i].video.imgurl;
+                if(studyhistoryList[i].type == 0){//专栏学习记录
+                    studyhistoryList[i].scolumn.imgurl = picBasePath + studyhistoryList[i].scolumn.imgurl;
+                    $scope.studyList.push(studyhistoryList[i]);
+                }else{//视频学习记录
+                    studyhistoryList[i].video.imgurl = picBasePath + studyhistoryList[i].video.imgurl;
+                    $scope.studyVideoList.push(studyhistoryList[i]);
+                }
             }
-            $scope.studyList = studyhistoryList;
             page++;
             if(studyhistoryList.length == 0){
                 $scope.nocontent=true;
@@ -114,8 +120,13 @@ educationApp.controller('meCtrl',
                     if (1 === resp.code) {
                         var studyhistoryList = resp.data.studyhistorylist;
                         for (var i = 0; i < studyhistoryList.length; i++) {
-                            studyhistoryList[i].video.imgurl = picBasePath + studyhistoryList[i].video.imgurl;
-                            $scope.studyList.push(studyhistoryList[i]);
+                            if(studyhistoryList[i].type == 0){//专栏学习记录
+                                studyhistoryList[i].scolumn.imgurl = picBasePath + studyhistoryList[i].scolumn.imgurl;
+                                $scope.studyList.push(studyhistoryList[i]);
+                            }else{//视频学习记录
+                                studyhistoryList[i].video.imgurl = picBasePath + studyhistoryList[i].video.imgurl;
+                                $scope.studyVideoList.push(studyhistoryList[i]);
+                            }
                         }
                         page+=1;
                         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -136,7 +147,7 @@ educationApp.controller('meCtrl',
         }
     };
     // 获取购买记录
-    $scope.buyList='';
+    $scope.buyList=[];
     var page1=1;
     var data1 = {
         page:page1
@@ -200,7 +211,7 @@ educationApp.controller('meCtrl',
         }
     };
     // 获取报名记录
-    $scope.signList='';
+    $scope.signList=[];
     var page2=1;
     var data2 = {
         page:page2

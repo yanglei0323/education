@@ -12,7 +12,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
         $ionicViewSwitcher.nextDirection("back");
     };
     // 获取收藏记录(1专栏)
-    $scope.columnList='';
+    $scope.columnList=[];
     var page=1;
     var data = {
         page:page,
@@ -82,7 +82,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
 
 
     // 获取收藏记录(2视频)
-    $scope.videoList='';
+    $scope.videoList=[];
     var page1=1;
     var data1 = {
         page:page1,
@@ -151,7 +151,7 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
     };
 
     // 获取收藏记录(3活动)
-    $scope.activityList='';
+    $scope.activityList=[];
     var page2=1;
     var data2 = {
         page:page2,

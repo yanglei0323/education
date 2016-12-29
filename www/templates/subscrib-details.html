@@ -34,15 +34,16 @@
 	        </div> 
 	    </div>
 	    <!-- 课程目录 -->
-	    <div class="y-y-bPage y-page-2">
+	    <div class="y-bPage y-page-2">
 	        <!-- 切换tab -->
 	        <div class="y-switch flex align s-around">
 	            <span class="y-item y-item-1 flex align column" ng-click="goSwitch(1)">订阅详情</span>
 	            <span class="y-item y-item-2 flex align column y-item-h" ng-click="goSwitch(2)">课程目录(<span ng-bind="subDetailList.columnnum"></span>)</span>
 	        </div>
 	        <div class="y-curr-list">
-	            <div class="y-curr-item" ng-repeat="column in columnList">
-	                <span><img src="./img/boutique/play.png" alt="" class="y-play-btn"></span>
+	            <div class="y-curr-item" ng-repeat="column in columnList" ng-click="goPlayVideo(column)">
+	                <span ng-if="!column.isplay"><img src="./img/boutique/play.png" alt="" class="y-play-btn"></span>
+	                <span ng-if="column.isplay"><img src="./img/boutique/suspend.png" alt="" class="y-play-btn"></span>
 	                <div class="y-curr-info">
 	                    <p class="y-curr-title" ng-bind="column.name"></p>
 	                    <span class="y-curr-time">

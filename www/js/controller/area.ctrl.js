@@ -3,7 +3,7 @@ educationApp.controller('areaCtrl', ['$scope','Http', 'Popup', '$rootScope','$st
 	var topicId=$stateParams.topicid;
 	var topicName=$stateParams.topicname;
 	$scope.topicName=topicName;
-	$scope.areaList = {};
+	$scope.areaList = [];
 	var areaPage=1;
 	var data = {
 		topicid:topicId,
