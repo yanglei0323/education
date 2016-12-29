@@ -20,14 +20,15 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		// console.log(resp);
 	});
 	$timeout(function(){
-        var mySwiper = new Swiper("#indexbanner",{  
+        $scope.mySwiper = new Swiper("#indexbanner",{  
 	   		autoplayDisableOnInteraction : false,/*触摸后是否停止自动播放*/ 
 	        direction:"horizontal",/*横向滑动*/  
 	        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/  
 	        pagination:".swiper-pagination",/*分页器*/   
-	        autoplay:3000/*每隔3秒自动播放*/  
+	        autoplay:3000,/*每隔3秒自动播放*/ 
+	        observer:true,//修改swiper自己或子元素时，自动初始化swiper
+			observeParents:true//修改swiper的父元素时，自动初始化swiper 
 	    })
-
     },500);
     //判断显示状态
 	var tabNum=JSON.parse(sessionStorage.getItem('tabNum'));
@@ -115,19 +116,30 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		$('.y-home-content').css({'display':'none'});
 		$('.y-home-content-'+index).css({'display':'block'});
 		sessionStorage.setItem('tabNum',index);
+		$scope.mySwiper.stopAutoplay();
 		if(index == 1){
-			$timeout(function(){
-		        var mySwiper = new Swiper("#indexbanner",{  
-			   		autoplayDisableOnInteraction : false,/*触摸后是否停止自动播放*/ 
-			        direction:"horizontal",/*横向滑动*/  
-			        loop:true,/*形成环路（即：可以从最后一张图跳转到第一张图*/  
-			        pagination:".swiper-pagination",/*分页器*/   
-			        autoplay:3000/*每隔3秒自动播放*/  
-			    })
-
-		    },10);
-		}
-	};
+		    // 轮播图
+			$scope.bannerList = {};
+			Http.post('/page/unl/choosead.json')
+			.success(function (resp) {
+				// console.log(resp);
+				if (1 === resp.code) {
+					var homeAdList = resp.data.adlist;
+					for (var i = 0; i < homeAdList.length; i++) {
+						homeAdList[i].imgurl = picBasePath + homeAdList[i].imgurl;
+					}
+					$scope.bannerList = homeAdList;
+					$scope.mySwiper.startAutoplay();
+				}
+				else if (0 === resp.code) {
+				}
+			})
+			.error(function (resp) {
+				// console.log(resp);
+			});
+		};
+	}
+		
 	// 付费精品模块
 	$scope.boutiqueList = {};
 	var boutiquePage=1;
