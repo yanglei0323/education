@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var picBasePath = 'http://yuemeikeimg.oss-cn-beijing.aliyuncs.com';
-var educationApp = angular.module('education', ['ionic'])
+var educationApp = angular.module('education', ['ionic','ngCordova'])
 
 .run(function($ionicPlatform, $rootScope, User, $state) {
   $ionicPlatform.ready(function() {

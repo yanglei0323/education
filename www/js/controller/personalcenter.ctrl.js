@@ -1,4 +1,4 @@
-educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicActionSheet','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicActionSheet,$ionicViewSwitcher) {
+educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicActionSheet','$ionicViewSwitcher','$cordovaImagePicker','$cordovaCamera','$cordovaFileTransfer', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicActionSheet,$ionicViewSwitcher,$cordovaImagePicker,$cordovaCamera,$cordovaFileTransfer) {
 	console.log('个人中心控制器');
 	// 获取个人信息
     var userInfo=JSON.parse(localStorage.getItem('user'));
@@ -128,61 +128,108 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
           console.log(resp);
         });
     };
-
-
-    // 选择头像
-    $scope.selectImg = function() {
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [{
-                    text: '相册'
-                }, {
-                    text: '拍照'
-                }
+   // 添加图片
+    $scope.addPhoto = function () {
+        $ionicActionSheet.show({
+            cancelOnStateChange: true,
+            cssClass: 'action_s',
+            titleText: "请选择获取图片方式",
+            buttons: [
+                {text: '相机'},
+                {text: '图库'}
             ],
-            titleText: '选择图片',
             cancelText: '取消',
-            cancel: function() {
-                // add cancel code..
+            cancel: function () {
+                return true;
             },
-            buttonClicked: function(index) {
-                // navigator.camera.getPicture(cameraSuccess, cameraError, {
-                //     sourceType: index
-                // }); //调用系统相册、拍照
+            buttonClicked: function (index) {
+
+                switch (index) {
+                    case 0:
+                        $scope.takePhoto();
+                        break;
+                    case 1:
+                        $scope.pickImage();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
             }
         });
     };
-    // function cameraSuccess(img) {
-    //     $scope.img = img;//这里返回的img是选择的图片的地址，可以直接赋给img标签的src，就能显示了
-    //     window.resolveLocalFileSystemURL(img, function success(fileEntry) { 
-    //         upload(fileEntry.toInternalURL());//将获取的文件地址转换成file transfer插件需要的绝对地址
-    //     }, function() {
-    //         alert("上传失败");
-    //     });
-    // }
 
-    // function cameraError(img) {
-    //    alert("上传失败");
-    // }
+    //拍照
+    $scope.takePhoto = function () {
+        var options = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,//Choose the format of the return value.
+            sourceType: Camera.PictureSourceType.CAMERA,//资源类型：CAMERA打开系统照相机；PHOTOLIBRARY打开系统图库
+            targetWidth: 75,//头像宽度
+            targetHeight: 75,//头像高度
+            saveToPhotoAlbum: true
 
-    // function upload(fileURL) {//上传图片
-    //     var win = function(r) {//成功回调方法
-    //         var response = JSON.parse(r.response);//你的上传接口返回的数据
-    //         if(response.datas.state){
-    //             alert("修改成功");
-    //         }else {
-    //             alert(response.datas.error);
-    //         }
-    //     }
-    //     var fail = function(error) {//失败回调方法
-    //         alert("上传失败");
-    //     }
+        };
 
-    //     var options = new FileUploadOptions();
-    //     options.fileKey = "pic";//这是你的上传接口的文件标识，服务器通过这个标识获取文件
-    //     options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
-    //     options.mimeType = "image/gif";//图片
+        $cordovaCamera.getPicture(options)
+            .then(function (imageURI) {
+                //Success
+                $scope.userInfo.avatar = imageURI;
+                $scope.uploadPhoto();
+            }, function (err) {
+                // Error
+            });
+    };
+    //选择照片
+    $scope.pickImage = function () {
+        var options = {
+            quality: 100,
+            destinationType: Camera.DestinationType.FILE_URI,//Choose the format of the return value.
+            sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,//资源类型：CAMERA打开系统照相机；PHOTOLIBRARY打开系统图库
+            targetWidth: 75,//头像宽度
+            targetHeight: 75//头像高度
+        };
 
-    //     var ft = new FileTransfer();
-    //     ft.upload(fileURL, encodeURI('uploadurl'), win, fail, options);//开始上传，uoloadurl是你的上传接口地址
-    // }
+        $cordovaCamera.getPicture(options)
+            .then(function (imageURI) {
+                //Success
+                $scope.userInfo.avatar = imageURI;
+                $scope.uploadPhoto();
+            }, function (err) {
+                // Error
+            });
+    };
+
+
+    $scope.uploadPhoto = function () {
+        var requestParams = "?callback=JSON_CALLBACK";
+
+        var server = encodeURI('/user/edit.json' + requestParams);
+        var fileURL = $scope.userInfo.avatar;
+        var options = {
+            fileKey: "file",//相当于form表单项的name属性
+            // fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
+            fileName: 'avatar',
+            mimeType: "image/jpeg"
+        };
+        //用params保存其他参数，例如昵称，年龄之类
+        // var params = {};
+        // params['avatar'] = $scope.userInfo.avatar;
+        // //把params添加到options的params中
+        // options.params = params;
+        $cordovaFileTransfer.upload(server, fileURL, options)
+            .then(function (result) {
+                // Success!
+                Popup.alert("上传成功! Code = " + result.responseCode);
+            }, function (err) {
+                // Error
+                Popup.alert("上传失败: Code = " + error.code);
+            }, function (progress) {
+                // constant progress updates
+                Popup.alert(progress);
+            });
+
+    };
+
+
 }]);
