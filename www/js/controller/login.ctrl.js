@@ -97,5 +97,51 @@ educationApp.controller('loginCtrl',
 		    alert("Failed: " + reason);
 		});
 
+		$scope.qqLogin = function () {
+
+			var checkClientIsInstalled = 1;//default is 0,only for iOS
+			YCQQ.ssoLogin(function(args) {
+			    // Popup.alert("token is " + args.access_token);
+			    Popup.alert("userid is " +args.userid);
+			    // Popup.alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
+			    var data = {
+	    			type: 'qq',
+	    			token: args.access_token,
+	    			openid: args.userid
+	    		};
+	    		localStorage.setItem('isQQLogin', true);
+	    		Http.post('/user/unl/thirdlogin.json', data)
+	    		.success(function (resp) {
+	    			$ionicLoading.hide();
+	    			if (1 === resp.code) {
+	    				// 登录成功(用户已绑定手机号)
+	    				localStorage.setItem('isLogin', true);
+						localStorage.setItem('user', JSON.stringify(resp.data));
+	    				var confirm = Popup.alert('登录成功');
+						confirm.then(function () {
+							$rootScope.$ionicGoBack();
+						});
+	    			}
+	    			else if (2 === resp.code) {
+	    				// 授权成功，用户未绑定手机号，则跳转到手机号绑定页
+	    				var confirm = Popup.alert('请先绑定手机号');
+						confirm.then(function () {
+							$state.go('binding-phone');
+						});
+	    				
+	    			}
+	    			else {
+	    				Popup.alert(resp.reason);
+	    			}
+	    		})
+	    		.error(function () {
+	    			$ionicLoading.hide();
+	    			Popup.alert('数据请求失败，请稍后再试');
+	    		});
+			}, function(failReason){
+		        Popup.alert(failReason);
+			}, checkClientIsInstalled);
+		};
+
 	};
 }]);
