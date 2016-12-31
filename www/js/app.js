@@ -20,14 +20,15 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
+      StatusBar.overlaysWebView(false);
     }
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (toState.needLogin && !User.isLogin()) {
+    // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    //     if (toState.needLogin && !User.isLogin()) {
           // event.preventDefault();
           // $state.go('login');
-        }
-    });
+    //     }
+    // });
   });
 })
 
@@ -206,9 +207,3 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/micro-lesson');
 });
-function onDeviceReady() {  
-    if (parseFloat(window.device.version) >= 7.0) {  
-          document.body.style.marginTop = "20px";  
-    }  
-}  
-document.addEventListener('deviceready', onDeviceReady, false);
