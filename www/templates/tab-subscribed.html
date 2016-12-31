@@ -4,11 +4,16 @@
     </ion-header-bar>
     <ion-content class="subscribed-bg">
         <div class="subscribed-content">
-            <div class="no-subscribed" ng-show="showNoSubscribed">
+            <div class="no-subscribed" ng-if="showNoSubscribed">
                 <img ng-src="img/no_content.png" width="85">
                 <div class="no-content-text">暂无订阅</div>
             </div>
-            <div class="subscribed" ng-show="showSubscribed">
+            <div class="no-subscribed" ng-if="showNoLogin">
+                <img ng-src="img/no_content.png" width="85">
+                <div class="no-content-text">登录后才能看到订阅</div>
+                <div class="btn-gologin" ng-click="goLogin()">登录</div>
+            </div>
+            <div class="subscribed" ng-if="showSubscribed">
                 <div class="subscribed-item" ng-repeat="subscribeditem in followTeacherList" ng-click="goinfo(subscribeditem.teacher.id)">
                     <div class="subscribed-img">
                         <img ng-src="{{subscribeditem.teacher.imgurl}}" alt="">

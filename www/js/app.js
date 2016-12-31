@@ -24,8 +24,8 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
         if (toState.needLogin && !User.isLogin()) {
-          event.preventDefault();
-          $state.go('login');
+          // event.preventDefault();
+          // $state.go('login');
         }
     });
   });
@@ -78,7 +78,7 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
           controller: 'subscribedCtrl'
         }
       },
-      needLogin: true,
+      // needLogin: true,
       cache: false
     })
     .state('tab.offline-lesson', {
@@ -98,7 +98,7 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
         controller: 'meCtrl'
       }
     },
-    needLogin: true,
+    // needLogin: true,
     cache: false
   })
   .state('login', {
