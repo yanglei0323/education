@@ -146,7 +146,6 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 				id:videoId,
 				time:time
 			};
-			// console.log(dataTime);
 			Http.post('/endplay.json',dataTime)
 			.success(function (resp) {
 				console.log(resp);
