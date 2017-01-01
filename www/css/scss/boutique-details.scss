@@ -100,14 +100,8 @@
 }
 .y-describe{
 	width:365px;
-	height:100px;
+	min-height:100px;
 	margin:0 auto;
-	word-break:break-all;
-	display:-webkit-box;
-	-webkit-line-clamp:4;
-	-webkit-box-orient:vertical;
-	text-overflow:ellipsis;
-	overflow:hidden;
 	border-radius:5px;
 	background:#fff;
 	color:#666;

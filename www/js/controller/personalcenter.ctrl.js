@@ -7,6 +7,7 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
     }else{
         userInfo.avatar=picBasePath + userInfo.avatar;
     }
+    console.log(userInfo);
     // console.log(userInfo);
     // 将用户信息写入页面
     $scope.userInfo=userInfo;
@@ -204,12 +205,11 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
     $scope.uploadPhoto = function () {
         var requestParams = "?callback=JSON_CALLBACK";
 
-        var server = encodeURI('/user/edit.json' + requestParams);
+        var server = encodeURI('http://101.200.205.162:8889/user/edit.json' + requestParams);
         var fileURL = $scope.userInfo.avatar;
         var options = {
             fileKey: "file",//相当于form表单项的name属性
-            // fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
-            fileName: 'avatar',
+            fileName: fileURL.substr(fileURL.lastIndexOf('/') + 1),
             mimeType: "image/jpeg"
         };
         //用params保存其他参数，例如昵称，年龄之类
@@ -218,16 +218,15 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
         // //把params添加到options的params中
         // options.params = params;
         $cordovaFileTransfer.upload(server, fileURL, options)
-            .then(function (result) {
-                // Success!
-                Popup.alert("上传成功! Code = " + result.responseCode);
-            }, function (err) {
-                // Error
-                Popup.alert("上传失败: Code = " + error.code);
-            }, function (progress) {
-                // constant progress updates
-                Popup.alert(progress);
-            });
+        .then(function (result) {
+            // Success!
+            Popup.alert('上传成功');
+        }, function (err) {
+            // Error
+            Popup.alert("上传失败: Code = " + error.code);
+        }, function (progress) {
+            // constant progress updates
+        });
 
     };
 
