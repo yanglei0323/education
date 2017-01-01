@@ -1,12 +1,7 @@
 educationApp.controller('loginCtrl',
 	['$scope','$rootScope', 'Http', 'Popup', 'User', '$http', '$state', '$ionicLoading', '$window', function ($scope, $rootScope, Http, Popup, User, $http, $state, $ionicLoading, $window) {
-	
-	$scope.user = {};
 
-	// if (localStorage.getItem('isWechatLogin')) {
-	// 	localStorage.setItem('isWechatLogin', false);
-	// 	$rootScope.$ionicGoBack();
-	// }
+	$scope.user = {};
 
 	// 获取验证码
 	$scope.getCode = function () {
@@ -16,7 +11,6 @@ educationApp.controller('loginCtrl',
 		}
 		Http.post('/user/unl/sendlogin.json', {telephone: $scope.user.telephone})
 		.success(function (resp) {
-			console.log(resp);
 			if (1 === resp.code) {
 				// 发送成功
 				// 目前发送不了短信，验证码为reason后4位
@@ -43,7 +37,7 @@ educationApp.controller('loginCtrl',
 		    $http.get('https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx55bde7209676fe4c&secret=34932985e0a2540c9b490e06940243ab&grant_type=authorization_code&code=' + resp.code)
 		    .success(function (resp) {
 		    	$ionicLoading.show({
-			        template: 'Loading...'
+			        template: '请稍后...'
 			    });
 		    	// 获取openid失败
 		    	if (resp.errcode) {
@@ -97,12 +91,16 @@ educationApp.controller('loginCtrl',
 		    alert("Failed: " + reason);
 		});
 
-		$scope.qqLogin = function () {
+		
 
+	};
+	$scope.qqLogin = function () {
 			var checkClientIsInstalled = 1;//default is 0,only for iOS
 			YCQQ.ssoLogin(function(args) {
 			    // Popup.alert("token is " + args.access_token);
-			    Popup.alert("userid is " +args.userid);
+			    $ionicLoading.show({
+			        template: '请稍后...'
+			    });
 			    // Popup.alert("expires_time is "+ new Date(parseInt(args.expires_time)) + " TimeStamp is " +args.expires_time);
 			    var data = {
 	    			type: 'qq',
@@ -142,6 +140,4 @@ educationApp.controller('loginCtrl',
 		        Popup.alert(failReason);
 			}, checkClientIsInstalled);
 		};
-
-	};
 }]);

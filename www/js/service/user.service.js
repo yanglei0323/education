@@ -5,6 +5,8 @@ educationApp.factory('User',
 			// 清除本地存储的用户信息
 			localStorage.removeItem('isLogin');
 			localStorage.removeItem('user');
+			// 清除cookie
+			document.cookie = '';	
 		};
 
 		return {
