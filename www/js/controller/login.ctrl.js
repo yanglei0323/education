@@ -3,10 +3,10 @@ educationApp.controller('loginCtrl',
 	
 	$scope.user = {};
 
-	if (localStorage.getItem('isWechatLogin')) {
-		localStorage.setItem('isWechatLogin', false);
-		$rootScope.$ionicGoBack();
-	}
+	// if (localStorage.getItem('isWechatLogin')) {
+	// 	localStorage.setItem('isWechatLogin', false);
+	// 	$rootScope.$ionicGoBack();
+	// }
 
 	// 获取验证码
 	$scope.getCode = function () {
@@ -55,7 +55,7 @@ educationApp.controller('loginCtrl',
 		    			token: resp.access_token,
 		    			openid: resp.openid
 		    		};
-		    		localStorage.setItem('isWechatLogin', true);
+		    		// localStorage.setItem('isWechatLogin', true);
 		    		Http.post('/user/unl/thirdlogin.json', data)
 		    		.success(function (resp) {
 		    			$ionicLoading.hide();
@@ -109,7 +109,7 @@ educationApp.controller('loginCtrl',
 	    			token: args.access_token,
 	    			openid: args.userid
 	    		};
-	    		localStorage.setItem('isQQLogin', true);
+	    		// localStorage.setItem('isQQLogin', true);
 	    		Http.post('/user/unl/thirdlogin.json', data)
 	    		.success(function (resp) {
 	    			$ionicLoading.hide();
