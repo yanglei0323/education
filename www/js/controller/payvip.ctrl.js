@@ -43,6 +43,10 @@ educationApp.controller('payvipCtrl', ['$scope','Http', 'Popup', '$rootScope','$
 	.error(function (resp) {
 		console.log(resp);
 	});
+
+	$scope.payVIP = function (orderID) {
+		Popup.alert("支付成功！");
+	}
 	
 	// 返回上一页
 	$scope.ionicBack= function () {
