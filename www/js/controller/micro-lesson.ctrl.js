@@ -313,5 +313,123 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 			});
 		}
 	};
+	$scope.bannerJump=function(banner){
+		var index=banner.jumpflag;
+		switch (index) {
+			case 0:
+				// 专题
+				$state.go("boutiquedetail",{videoid:banner.jumpurl},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 1:
+				// 专栏
+				$state.go("subscribdetails",{teacherid:banner.jumpurl},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 2:
+				// 视频
+				$state.go("boutiquedetail",{videoid:banner.jumpurl},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 3:
+				// 线下课
+				$state.go("officedetails",{activityid:banner.jumpurl},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 4:
+				// 课程表
+				$scope.homeSwitch(4);
+				break;
+			case 5:
+				// vip表
+				$state.go("vip",{reload:true});
+            	$ionicViewSwitcher.nextDirection("forward");
+				break;
+			default:
+    			return;
 
+		}
+		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
+		$ionicViewSwitcher.nextDirection("forward");
+	};
+	// 付费列表下拉刷新
+	$scope.doRefresh = function() {
+        // 付费精品模块
+		var boutiquePage=1;
+		var data = {
+			page:boutiquePage
+		};
+		Http.post('/page/unl/payvidedo.json',data)
+		.success(function (resp) {
+			// console.log(resp);
+			if (1 === resp.code) {
+				var payvidedoList = resp.data.payvidedolist;
+				for (var i = 0; i < payvidedoList.length; i++) {
+					payvidedoList[i].imgurl = picBasePath + payvidedoList[i].imgurl;
+				}
+				$scope.boutiqueList = {};
+				$scope.boutiqueList = payvidedoList;
+				boutiquePage++;
+				$scope.noMorePage=false;
+			}
+			else if (0 === resp.code) {
+			}
+		})
+		.finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+    // 公开课下拉刷新
+	$scope.doRefresh1 = function() {
+        // 公开课模块
+		var publicPage=1;
+		var data = {
+			page:publicPage
+		};
+		Http.post('/page/unl/freevidedo.json',data)
+		.success(function (resp) {
+			// console.log(resp);
+			if (1 === resp.code) {
+				var freevidedoList = resp.data.freevidedolist;
+				for (var i = 0; i < freevidedoList.length; i++) {
+					freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+				}
+				$scope.publicList = {};
+				$scope.publicList = freevidedoList;
+				publicPage++;
+				$scope.noMorePage1=false;
+			}
+			else if (0 === resp.code) {
+			}
+		}).finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
+    // 课程表模块下拉刷新
+	$scope.doRefresh2 = function() {
+       // 课程表模块
+		var curriculumPage=1;
+		var data = {
+			page:curriculumPage
+		};
+		Http.post('/page/unl/schedule.json',data)
+		.success(function (resp) {
+			// console.log(resp);
+			if (1 === resp.code) {
+				var currList = resp.data.freevidedolist;
+				for (var i = 0; i < currList.length; i++) {
+					currList[i].imgurl = picBasePath + currList[i].imgurl;
+				}
+				$scope.curriculumList = {};
+				$scope.curriculumList = currList;
+				curriculumPage++;
+				$scope.noMorePage2=false;
+			}
+			else if (0 === resp.code) {
+			}
+		})
+		.finally(function() {
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    };
 }]);

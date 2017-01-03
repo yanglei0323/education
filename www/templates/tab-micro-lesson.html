@@ -7,8 +7,8 @@
 
 </div>
 <ion-view view-title="悦美课">
-		
   <ion-content class="y-home-content y-home-content-1">
+  
   	<!-- 轮播图 -->
   	<!-- <div class="home-banner">
   		<ion-slide-box auto-play="true" slide-interval="3000" does-continue="true" delegate-handle="slideimgs"  
@@ -20,7 +20,7 @@
   	</div> -->
   	<div class="swiper-container" id="indexbanner"> 
 	    <div class="swiper-wrapper">  
-	        <div class="swiper-slide" ng-repeat="banner in bannerList"><img ng-src="{{banner.imgurl}}" /></div> 
+	        <div class="swiper-slide" ng-repeat="banner in bannerList" ng-click="bannerJump(banner)"><img ng-src="{{banner.imgurl}}" /></div> 
 	    </div>  
 	    <div class="swiper-pagination"></div><!--分页器-->
 	</div>
@@ -63,6 +63,7 @@
   </ion-content>
   <!-- 付费精品 -->
   <ion-content class="y-home-content y-home-content-2 y-simple-video">
+  <ion-refresher pulling-text="" on-refresh="doRefresh()"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
 			<div class="item" ng-repeat="recomitem in boutiqueList" ng-click="goBoutiDetail(recomitem)">
@@ -81,6 +82,7 @@
   </ion-content>
   <!-- 公开课 -->
   <ion-content class="y-home-content y-home-content-3 y-simple-video">
+  <ion-refresher pulling-text="" on-refresh="doRefresh1()"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
 			<div class="item" ng-repeat="recomitem in publicList" ng-click="gopublicDetail(recomitem)">
@@ -97,6 +99,7 @@
   </ion-content>
   <!-- 课程表 -->
   <ion-content class="y-home-content y-home-content-4 y-simple-video">
+  <ion-refresher pulling-text="" on-refresh="doRefresh2()"></ion-refresher>
 	<div class="y-curriculum-content">
 		<div class="y-curriculum-item" ng-repeat="curritem in curriculumList">
 			<img ng-src="{{curritem.imgurl}}" alt="" class="y-currImg">

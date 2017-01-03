@@ -121,6 +121,8 @@ educationApp.controller('personalcenterCtrl', ['$scope','Http', 'Popup', '$rootS
             localStorage.removeItem('user');
             localStorage.setItem('user', JSON.stringify(resp.data));
             Popup.alert('保存个人信息成功！');
+            $state.go("tab.me",{reload:true});
+            $ionicViewSwitcher.nextDirection("forward");
           }
           else if (0 === resp.code) {
           }
