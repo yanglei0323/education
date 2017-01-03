@@ -57,12 +57,12 @@ educationApp.controller('loginCtrl',
 		    				// 登录成功(用户已绑定手机号)
 		    				localStorage.setItem('isLogin', true);
 							localStorage.setItem('user', JSON.stringify(resp.data));
-		    				var confirm = Popup.alert('登录成功');
-							confirm.then(function () {
+		    				// var confirm = Popup.alert('登录成功');
+							// confirm.then(function () {
 								// $ionicHistory.goBack();
 								// $window.history.back();
 								$rootScope.$ionicGoBack();
-							});
+							// });
 		    			}
 		    			else if (2 === resp.code) {
 		    				// 微信授权成功，用户未绑定手机号，则跳转到手机号绑定页
