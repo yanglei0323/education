@@ -140,4 +140,9 @@ educationApp.controller('loginCtrl',
 		        Popup.alert(failReason);
 			}, checkClientIsInstalled);
 		};
+
+	$scope.ionicBack= function () {
+	    $ionicHistory.goBack();
+	    $ionicViewSwitcher.nextDirection("back");
+	};
 }]);
