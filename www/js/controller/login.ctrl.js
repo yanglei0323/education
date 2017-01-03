@@ -1,5 +1,5 @@
 educationApp.controller('loginCtrl',
-	['$scope','$rootScope', 'Http', 'Popup', 'User', '$http', '$state', '$ionicLoading', '$window', function ($scope, $rootScope, Http, Popup, User, $http, $state, $ionicLoading, $window) {
+	['$scope','$rootScope', 'Http', 'Popup', 'User', '$http', '$state', '$ionicLoading', '$window', '$ionicHistory', '$ionicViewSwitcher', function ($scope, $rootScope, Http, Popup, User, $http, $state, $ionicLoading, $window, $ionicHistory, $ionicViewSwitcher) {
 
 	$scope.user = {};
 
