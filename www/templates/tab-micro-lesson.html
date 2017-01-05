@@ -63,7 +63,7 @@
   </ion-content>
   <!-- 付费精品 -->
   <ion-content class="y-home-content y-home-content-2 y-simple-video">
-  <ion-refresher pulling-text="" on-refresh="doRefresh()"></ion-refresher>
+  <ion-refresher pulling-text="" on-refresh="doRefresh()" immediate-check="false"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
 			<div class="item" ng-repeat="recomitem in boutiqueList" ng-click="goBoutiDetail(recomitem)">
@@ -77,12 +77,12 @@
 		</div>
 	</div>
 	
-	<ion-infinite-scroll ng-if="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="1%" ></ion-infinite-scroll>
+	<ion-infinite-scroll ng-if="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="10%" ></ion-infinite-scroll>
 	<div ng-if="noMorePage" class="y-nomorepage">没有更多内容</div>
   </ion-content>
   <!-- 公开课 -->
   <ion-content class="y-home-content y-home-content-3 y-simple-video">
-  <ion-refresher pulling-text="" on-refresh="doRefresh1()"></ion-refresher>
+  <ion-refresher pulling-text="" on-refresh="doRefresh1()" immediate-check="false"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
 			<div class="item" ng-repeat="recomitem in publicList" ng-click="gopublicDetail(recomitem)">
@@ -99,7 +99,7 @@
   </ion-content>
   <!-- 课程表 -->
   <ion-content class="y-home-content y-home-content-4 y-simple-video">
-  <ion-refresher pulling-text="" on-refresh="doRefresh2()"></ion-refresher>
+  <ion-refresher pulling-text="" on-refresh="doRefresh2()" immediate-check="false"></ion-refresher>
 	<div class="y-curriculum-content">
 		<div class="y-curriculum-item" ng-repeat="curritem in curriculumList">
 			<img ng-src="{{curritem.imgurl}}" alt="" class="y-currImg">

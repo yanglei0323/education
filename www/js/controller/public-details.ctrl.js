@@ -8,7 +8,7 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	};
 	Http.post('/unl/playurl.json',data1)
 	.success(function (resp) {
-		// console.log(resp);
+		console.log(resp);
 		if (1 === resp.code) {
 			$scope.videoInfo=resp.data;
 		}
@@ -28,7 +28,7 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 	};
 	Http.post('/page/unl/videodetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			resp.data.teacheravatar=picBasePath + resp.data.teacheravatar;
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
