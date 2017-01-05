@@ -8,7 +8,7 @@
 var picBasePath = 'http://yuemeikeimg.oss-cn-beijing.aliyuncs.com';
 var educationApp = angular.module('education', ['ionic','ngCordova'])
 
-.run(function($ionicPlatform, $rootScope, User, $state) {
+.run(function($ionicPlatform, $ionicPopup, $rootScope, User, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -30,6 +30,29 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
     //     }
     // });
   });
+  $ionicPlatform.registerBackButtonAction(function(e) {
+      var current_state_name = $state.current.name;
+      if(current_state_name == 'tab.micro-lesson'
+       || current_state_name == 'tab.subscribed' ||
+      current_state_name == 'tab.offline-lesson' ||
+      current_state_name == 'tab.me'){
+          $ionicPopup.confirm({
+              title: '退出应用',
+              template: '您确定要退出应用吗?'
+          }).then(function (res) {
+              if (res) {
+                  //ionic.Platform.exitApp();
+                  navigator.app.exitApp();
+              } else {
+                  console.log('You are not sure');
+              }
+          });
+          e.preventDefault();
+          return false;
+      }else{
+          navigator.app.backHistory();
+      }
+  },100);
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
@@ -53,6 +76,18 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
 
   // 路由设置
   $stateProvider
+  .state('start', {
+    url: '/start',
+    templateUrl: 'templates/start-up.html',
+    controller: 'startUpCtrl',
+    cache: false
+  })
+  .state('guide', {
+    url: '/guide',
+    templateUrl: 'templates/guide.html',
+    controller: 'guideCtrl',
+    cache: false
+  })
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -205,5 +240,5 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/micro-lesson');
+  $urlRouterProvider.otherwise('start');
 });
