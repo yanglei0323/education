@@ -29,6 +29,10 @@
     {
       "path": "/unl/playurl.json",
       "proxyUrl": "http://101.200.205.162:8889/unl/playurl.json"
+    },
+    {
+      "path": "/pay/prepay.json",
+      "proxyUrl": "http://101.200.205.162:8889//pay/prepay.json"
     }
   ]
 }

@@ -15,7 +15,6 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -119,7 +118,8 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
       'tab-micro-lesson': {
         templateUrl: 'templates/tab-micro-lesson.html',
         controller: 'microLessonCtrl'
-      }
+      },
+      cache: true
     }
   })
   .state('tab.subscribed', {

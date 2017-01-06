@@ -18,7 +18,19 @@ var paths = {
   serviceJs: ['./www/js/service/**/*.js']
 };
 
+
+
+
 gulp.task('default', ['sass', 'buildController', 'buildService']);
+
+
+
+gulp.task('buildIonicCss', function () {
+  gulp.src('./www/lib/ionic/scss/ionic.scss')
+      .pipe(plumber({errorHandler: notify.onError('Error: <%= error %>')}))
+      .pipe(sass())
+      .pipe(gulp.dest('./www/lib/ionic/css/'));
+});
 
 // 处理sass文件
 gulp.task('sass', function (done) {
