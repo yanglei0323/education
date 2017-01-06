@@ -27,6 +27,11 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
       // $ionicPlatform.fullScreen(true,false);
       // $ionicPlatform.showStatusBar(false);
     }
+    if (!localStorage.getItem('isfirstLoad')) {
+      $state.go('guide');
+    } else {
+      $state.go('tab.micro-lesson');
+    }
     // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     //     if (toState.needLogin && !User.isLogin()) {
           // event.preventDefault();
@@ -95,12 +100,6 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
 
   // 路由设置
   $stateProvider
-  .state('start', {
-    url: '/start',
-    templateUrl: 'templates/start-up.html',
-    controller: 'startUpCtrl',
-    cache: false
-  })
   .state('guide', {
     url: '/guide',
     templateUrl: 'templates/guide.html',
@@ -113,9 +112,7 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
     abstract: true,
     templateUrl: 'templates/tabs.html'
   })
-
   // Each tab has its own nav history stack:
-
   .state('tab.micro-lesson', {
     url: '/micro-lesson',
     views: {
@@ -259,5 +256,5 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('start');
+  $urlRouterProvider.otherwise('tab.micro-lessons');
 });
