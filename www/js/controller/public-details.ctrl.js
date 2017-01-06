@@ -19,7 +19,7 @@ educationApp.controller('publicdetailsCtrl', ['$scope','Http', 'Popup', '$rootSc
 		console.log(resp);
 	});
 	// 对视频添加信任
-	$scope.videoUrl = function(url){  
+	$scope.videoUrl = function(url){ 
         return $sce.trustAsResourceUrl(url);  
     };
     // 获取视频信息

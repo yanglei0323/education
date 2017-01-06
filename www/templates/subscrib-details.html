@@ -67,7 +67,7 @@
     <!-- 订阅按钮模块 -->
     <div class="y-pay-info" ng-if="priceType">
         <div class="y-pay-btn" ng-if="showPrice" ng-click="subscribPay(subDetailList.id)"><span>订阅：￥</span><span ng-bind="subDetailList.price"></span><span>/年</span></div>
-        <div class="y-pay-btn" ng-if="!showPrice">订阅：<span ng-bind="subDetailList.price"></span></div>
+        <div class="y-pay-btn" ng-if="!showPrice" ng-click="subscribPay(subDetailList.id)">订阅：<span ng-bind="subDetailList.price"></span></div>
     </div>
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view class="y-modalView flex align" ng-click="hideModal()">

@@ -33,7 +33,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	Http.post('/page/unl/teacherdetail.json',data)
 	.success(function (resp) {
-		// console.log(resp);
+		console.log(resp);
 		if (1 === resp.code) {
 			resp.data.avatar=picBasePath + resp.data.avatar;
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
@@ -46,11 +46,16 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 				$scope.columnList[i].indexnum = i;
 			}
 			var priceType=parseInt(resp.data.price);
-			if(priceType>=0 || $scope.columnList.price == '免费'){
+			if($scope.subDetailList.price == '免费'){
 				$scope.priceType = true;
-			}
-			if($scope.columnList.price == '免费'){
 				$scope.showPrice = false;
+			}else if(priceType>=0){
+				$scope.priceType = true;
+			}else if($scope.subDetailList.price == '已订阅'){
+				$scope.priceType = false;
+			}else{
+				$scope.priceType = true;
+				$scope.priceType = false;
 			}
 		}
 		else if (0 === resp.code) {

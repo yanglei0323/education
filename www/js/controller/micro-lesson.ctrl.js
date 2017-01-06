@@ -360,36 +360,53 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		var index=banner.jumpflag;
 		switch (index) {
 			case 0:
-				// 专题
-				$state.go("boutiquedetail",{videoid:banner.jumpurl},{reload:true});
-				$ionicViewSwitcher.nextDirection("forward");
+				// 图文
+				window.location.href=banner.type;
 				break;
 			case 1:
-				// 专栏
-				$state.go("subscribdetails",{teacherid:banner.jumpurl},{reload:true});
+				// 链接
+				window.location.href=banner.jumpurl;
+				break;
+			case 21:
+				// 专题1列表
+				$state.go("area",{topicid:$scope.specialList[0].id,topicname:$scope.specialList[0].name,},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 				break;
-			case 2:
-				// 视频
-				$state.go("boutiquedetail",{videoid:banner.jumpurl},{reload:true});
+			case 22:
+				// 专题2列表
+				$state.go("area",{topicid:$scope.specialList[1].id,topicname:$scope.specialList[1].name,},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 23:
+				// 专题3列表
+				$state.go("area",{topicid:$scope.specialList[2].id,topicname:$scope.specialList[2].name,},{reload:true});
+				$ionicViewSwitcher.nextDirection("forward");
+				break;
+			case 24:
+				// 专题4列表
+				$state.go("area",{topicid:$scope.specialList[3].id,topicname:$scope.specialList[3].name,},{reload:true});
 				$ionicViewSwitcher.nextDirection("forward");
 				break;
 			case 3:
-				// 线下课
-				$state.go("officedetails",{activityid:banner.jumpurl},{reload:true});
-				$ionicViewSwitcher.nextDirection("forward");
+				// 付费精品列表
+				$scope.homeSwitch(2);
 				break;
 			case 4:
+				// 线下课列表
+				$scope.homeSwitch(3);
+				break;
+			case 5:
 				// 课程表
 				$scope.homeSwitch(4);
 				break;
-			case 5:
+			case 6:
 				// vip表
 				$state.go("vip",{reload:true});
             	$ionicViewSwitcher.nextDirection("forward");
 				break;
-			default:
-    			return;
+			case 99:
+				// 不跳转
+				break;
 
 		}
 		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
