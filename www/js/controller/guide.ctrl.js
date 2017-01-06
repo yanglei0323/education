@@ -1,5 +1,7 @@
-educationApp.controller('guideCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher) {
+educationApp.controller('guideCtrl', ['$scope','$state','$ionicPlatform','$ionicViewSwitcher', function ($scope,$state,$ionicPlatform,$ionicViewSwitcher) {
 	console.log('引导控制器');
+	// $ionicPlatform.fullScreen(true,false);
+	// $ionicPlatform.showStatusBar(false);
 
 	if(!localStorage.getItem('isfirstLoad')){
 		console.log('引导~~~');

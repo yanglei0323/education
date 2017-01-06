@@ -1,7 +1,8 @@
-educationApp.controller('startUpCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher) {
+educationApp.controller('startUpCtrl', ['$scope','$state','$timeout','$ionicPlatform', function ($scope,$state,$timeout,$ionicPlatform) {
 	console.log('启动控制器');
-
-	setTimeout(function () {
+	// $ionicPlatform.fullScreen(true,false);
+	// $ionicPlatform.showStatusBar(false);
+	$timeout(function () {
 		if (!localStorage.getItem('isfirstLoad')) {
 			$state.go('guide');
 		} else {

@@ -22,7 +22,11 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
       StatusBar.styleDefault();
       StatusBar.overlaysWebView(false);
     }
-
+    var current_state_name = $state.current.name;
+    if(current_state_name == 'start' || current_state_name == 'guide'){
+      // $ionicPlatform.fullScreen(true,false);
+      // $ionicPlatform.showStatusBar(false);
+    }
     // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     //     if (toState.needLogin && !User.isLogin()) {
           // event.preventDefault();
@@ -38,7 +42,22 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
       current_state_name == 'tab.me'){
           $ionicPopup.confirm({
               title: '退出应用',
-              template: '您确定要退出应用吗?'
+              template: '您确定要退出应用吗?',
+              buttons: [{
+              text: '取消',
+              type: 'button-default',
+              onTap: function(e) {
+                // e.preventDefault();
+                return false;
+              }
+            }, {
+              text: '确定',
+              type: 'button-positive',
+              onTap: function(e) {
+                // 返回的值会导致处理给定的值。
+                return true;
+              }
+            }]
           }).then(function (res) {
               if (res) {
                   //ionic.Platform.exitApp();
