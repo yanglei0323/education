@@ -9,7 +9,6 @@ educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	};
 	Http.post('/activity/myactivity.json',data)
 	.success(function (resp) {
-		// console.log(resp);
 		if (1 === resp.code) {
 			resp.data.activity.imgurl=picBasePath + resp.data.activity.imgurl;
 			$scope.activityDetailsInfo=resp.data;
