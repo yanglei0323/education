@@ -254,24 +254,71 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.noMorePage=false;
 	$scope.loading=false;
 	$scope.loadMore=function(){
-		if($scope.scrollNum2){
-			if(!$scope.loading){
-				$scope.loading=true;
-				$timeout(function(){
-					Http.post('/page/unl/payvidedo.json',{page:boutiquePage})
+		if($scope.noMorePage){
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+			return;
+		}else{
+			if($scope.scrollNum2){
+				if(!$scope.loading){
+					$scope.loading=true;
+					$timeout(function(){
+						Http.post('/page/unl/payvidedo.json',{page:boutiquePage})
+						.success(function (resp) {
+							console.log(resp);
+							if (1 === resp.code) {
+								var payvidedoList = resp.data.payvidedolist;
+								for (var i = 0; i < payvidedoList.length; i++) {
+									payvidedoList[i].imgurl = picBasePath + payvidedoList[i].imgurl;
+									$scope.boutiqueList.push(payvidedoList[i]);
+								}
+								boutiquePage+=1;
+								$scope.$broadcast('scroll.infiniteScrollComplete');
+								$scope.loading=false;
+								if (payvidedoList.length === 0) {
+					                $scope.noMorePage=true;//禁止滚动触发事件
+					            } 
+							}
+							else if (0 === resp.code) {
+							}
+						})
+						.error(function (resp) {
+							console.log(resp);
+						});
+					},1000);
+					
+				}
+			}else{
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+		}
+		
+	 	
+	};
+	// 公开课上拉加载
+	$scope.noMorePage1=false;
+	$scope.loading1=false;
+	$scope.loadMore1=function(){
+		if($scope.noMorePage1){
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+			return;
+		}else{
+			if($scope.scrollNum3){
+				if(!$scope.loading1){
+					$scope.loading1=true;
+					Http.post('/page/unl/freevidedo.json',{page:publicPage})
 					.success(function (resp) {
 						console.log(resp);
 						if (1 === resp.code) {
-							var payvidedoList = resp.data.payvidedolist;
-							for (var i = 0; i < payvidedoList.length; i++) {
-								payvidedoList[i].imgurl = picBasePath + payvidedoList[i].imgurl;
-								$scope.boutiqueList.push(payvidedoList[i]);
+							var freevidedoList = resp.data.freevidedolist;
+							for (var i = 0; i < freevidedoList.length; i++) {
+								freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
+								$scope.publicList.push(freevidedoList[i]);
 							}
-							boutiquePage+=1;
+							publicPage+=1;
 							$scope.$broadcast('scroll.infiniteScrollComplete');
-							$scope.loading=false;
-							if (payvidedoList.length === 0) {
-				                $scope.noMorePage=true;//禁止滚动触发事件
+							$scope.loading1=false;
+							if (freevidedoList.length === 0) {
+				                $scope.noMorePage1=true;//禁止滚动触发事件
 				            } 
 						}
 						else if (0 === resp.code) {
@@ -280,48 +327,12 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 					.error(function (resp) {
 						console.log(resp);
 					});
-				},1000);
-				
+				}
+			}else{
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 			}
-		}else{
-			$scope.$broadcast('scroll.infiniteScrollComplete');
 		}
-	 	
-	};
-	// 公开课上拉加载
-	$scope.noMorePage1=false;
-	$scope.loading1=false;
-	$scope.loadMore1=function(){
-		if($scope.scrollNum3){
-			if(!$scope.loading1){
-		 		console.log('上拉加载');
-				$scope.loading1=true;
-				Http.post('/page/unl/freevidedo.json',{page:publicPage})
-				.success(function (resp) {
-					console.log(resp);
-					if (1 === resp.code) {
-						var freevidedoList = resp.data.freevidedolist;
-						for (var i = 0; i < freevidedoList.length; i++) {
-							freevidedoList[i].imgurl = picBasePath + freevidedoList[i].imgurl;
-							$scope.publicList.push(freevidedoList[i]);
-						}
-						publicPage+=1;
-						$scope.$broadcast('scroll.infiniteScrollComplete');
-						$scope.loading1=false;
-						if (freevidedoList.length === 0) {
-			                $scope.noMorePage1=true;//禁止滚动触发事件
-			            } 
-					}
-					else if (0 === resp.code) {
-					}
-				})
-				.error(function (resp) {
-					console.log(resp);
-				});
-			}
-		}else{
-			$scope.$broadcast('scroll.infiniteScrollComplete');
-		}
+		
 	 	
 	};
 	// 课程表上拉加载
@@ -450,7 +461,6 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		Http.post('/page/unl/freevidedo.json',data)
 		.success(function (resp) {
 			// console.log(resp);
-	 		console.log('下拉刷新');
 			if (1 === resp.code) {
 				var freevidedoList = resp.data.freevidedolist;
 				for (var i = 0; i < freevidedoList.length; i++) {
