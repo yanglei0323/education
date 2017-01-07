@@ -44,7 +44,9 @@ educationApp.controller('buyvideoCtrl', ['$scope','Http', 'Popup', '$rootScope',
 				    var confirm = Popup.alert("支付成功！");
 				    confirm.then(function () {
 				    	// 这里支付成功后的逻辑是什么，暂时跳转到我的
+				    	sessionStorage.setItem('meTab',2);
 				    	$state.go('me');
+				    	$ionicViewSwitcher.nextDirection("forward");
 				    });
 
 				}, function (reason) {

@@ -65,7 +65,8 @@ educationApp.controller('payvipCtrl', ['$scope','Http', 'Popup', '$rootScope','$
 				    var confirm = Popup.alert("支付成功！");
 				    confirm.then(function () {
 				    	// 这里支付成功后的逻辑是什么，暂时跳转到我的
-				    	$state.go('me');
+				    	$state.go("vip",{reload:true});
+            			$ionicViewSwitcher.nextDirection("forward");
 				    });
 
 				}, function (reason) {

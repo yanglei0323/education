@@ -67,6 +67,7 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 				    confirm.then(function () {
 				    	// 支付成功后返回订阅列表
 				    	$state.go('subscribed');
+				    	$ionicViewSwitcher.nextDirection("forward");
 				    });
 
 				}, function (reason) {
