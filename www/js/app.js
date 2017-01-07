@@ -19,7 +19,7 @@ var educationApp = angular.module('education', ['ionic','ngCordova'])
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
-      StatusBar.overlaysWebView(false);
+      // StatusBar.overlaysWebView(false);
     }
     var current_state_name = $state.current.name;
     if(current_state_name == 'start' || current_state_name == 'guide'){

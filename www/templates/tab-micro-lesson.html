@@ -1,5 +1,5 @@
 <!-- 顶部导航 -->
-<div class="home-bar flex align s-around">
+<div class="home-bar flex align s-around status-bar-offset">
   <span class="home-tab-item home-tab-item-1 flex align home-tab-active" ng-click="homeSwitch(1)">精选</span>
   <span class="home-tab-item home-tab-item-2 flex align" ng-click="homeSwitch(2)">付费精品</span>
   <span class="home-tab-item home-tab-item-3 flex align" ng-click="homeSwitch(3)">公开课</span>
@@ -7,7 +7,7 @@
 
 </div>
 <ion-view view-title="悦美课">
-  <ion-content class="y-home-content y-home-content-1">
+  <ion-content class="y-home-content y-home-content-1 status-bar-offset">
   
   	<!-- 轮播图 -->
   	<!-- <div class="home-banner">
@@ -62,7 +62,7 @@
 	</div>
   </ion-content>
   <!-- 付费精品 -->
-  <ion-content class="y-home-content y-home-content-2 y-simple-video">
+  <ion-content class="y-home-content y-home-content-2 y-simple-video status-bar-offset">
   <ion-refresher pulling-text="" on-refresh="doRefresh()" immediate-check="false"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
@@ -80,7 +80,7 @@
 	<div ng-if="noMorePage" class="y-nomorepage">没有更多内容</div>
   </ion-content>
   <!-- 公开课 -->
-  <ion-content class="y-home-content y-home-content-3 y-simple-video">
+  <ion-content class="y-home-content y-home-content-3 y-simple-video status-bar-offset">
   <ion-refresher pulling-text="" on-refresh="doRefresh1()" immediate-check="false"></ion-refresher>
 	<div class="y-boutique-content">
 		<div class="y-recommend">
@@ -97,7 +97,7 @@
 	<div ng-if="noMorePage1" class="y-nomorepage">没有更多内容</div>
   </ion-content>
   <!-- 课程表 -->
-  <ion-content class="y-home-content y-home-content-4 y-simple-video">
+  <ion-content class="y-home-content y-home-content-4 y-simple-video status-bar-offset">
   <ion-refresher pulling-text="" on-refresh="doRefresh2()" immediate-check="false"></ion-refresher>
 	<div class="y-curriculum-content">
 		<div class="y-curriculum-item" ng-repeat="curritem in curriculumList">
