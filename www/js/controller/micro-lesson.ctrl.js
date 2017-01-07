@@ -1,4 +1,4 @@
-educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher) {
+educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$timeout','$ionicSlideBoxDelegate','$ionicViewSwitcher','$ionicScrollDelegate', function ($scope, Http, Popup, $rootScope,$state,$timeout,$ionicSlideBoxDelegate,$ionicViewSwitcher,$ionicScrollDelegate) {
 	console.log('小悦微课控制器');
 	$scope.scrollNum2=false;
 	$scope.scrollNum3=false;
@@ -165,6 +165,9 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 			$scope.scrollNum3=false;
 			$scope.scrollNum4=true;
 		}
+		$timeout(function(){
+            $ionicScrollDelegate.resize();
+        },1000);
 	}
 		
 	// 付费精品模块
@@ -409,8 +412,6 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 				break;
 
 		}
-		$state.go("subscribdetails",{teacherid:index.id},{reload:true});
-		$ionicViewSwitcher.nextDirection("forward");
 	};
 	// 付费列表下拉刷新
 	$scope.doRefresh = function() {

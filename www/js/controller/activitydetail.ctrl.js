@@ -1,7 +1,7 @@
 educationApp.controller('activitydetailCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
 	console.log('报名详情详情控制器');
 	var useractivityId=$stateParams.useractivityid;
-	$scope.activityDetailsInfo = [];
+	$scope.activityDetailsInfo = {};
 	
 	// 获取验证码
 	var data = {

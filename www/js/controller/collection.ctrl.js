@@ -1,4 +1,4 @@
-educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User','$ionicViewSwitcher','$timeout', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User,$ionicViewSwitcher,$timeout) {
+educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','User','$ionicViewSwitcher','$timeout','$ionicScrollDelegate', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,User,$ionicViewSwitcher,$timeout,$ionicScrollDelegate) {
     console.log('收藏列表控制器');
     $scope.nocolumn=true;
     $scope.novideo=true;
@@ -255,5 +255,8 @@ educationApp.controller('collectionCtrl', ['$scope','Http', 'Popup', '$rootScope
             $scope.scrollNum2=false;
             $scope.scrollNum3=true;
         }
+        $timeout(function(){
+            $ionicScrollDelegate.resize();
+        },1000);
     };
 }]);

@@ -1,5 +1,5 @@
 educationApp.controller('meCtrl',
-    ['$scope', '$state', '$location', 'User','Http','Popup','$ionicViewSwitcher','$timeout', function ($scope, $state, $location, User,Http,Popup,$ionicViewSwitcher,$timeout) {
+    ['$scope', '$state', '$location', 'User','Http','Popup','$ionicViewSwitcher','$timeout','$ionicScrollDelegate', function ($scope, $state, $location, User,Http,Popup,$ionicViewSwitcher,$timeout,$ionicScrollDelegate) {
     console.log('我的控制器');
     $scope.isLogin = false;
     // 未登录提示语
@@ -85,6 +85,9 @@ educationApp.controller('meCtrl',
             $scope.scrollNum2=false;
             $scope.scrollNum3=true;
         }
+        $timeout(function(){
+            $ionicScrollDelegate.resize();
+        },1000);
     };
     // 判断登录状态
     Http.post('/user/mine.json')

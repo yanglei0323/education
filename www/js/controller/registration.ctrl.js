@@ -60,10 +60,10 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
             };
             Http.post('/activity/add.json',data1)
             .success(function (resp) {
-                // console.log(resp);
+                console.log(resp);
                 if (1 === resp.code) {
-                   $state.go("activitydetail",{useractivityid:activityId},{reload:true});
-                    $ionicViewSwitcher.nextDirection("forward");
+                   $state.go("activitydetail",{useractivityid:resp.data.id},{reload:true});
+                   $ionicViewSwitcher.nextDirection("forward");
                 }
                 else if (0 === resp.code) {
                 }
