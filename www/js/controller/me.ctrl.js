@@ -142,7 +142,10 @@ educationApp.controller('meCtrl',
                     $state.go("boutiquedetail",{videoid:data.id},{reload:true});
                     $ionicViewSwitcher.nextDirection("forward");
                 };
-                
+                $scope.goSubDetail=function(index){
+                    $state.go("subscribdetails",{teacherid:index.teacherid},{reload:true});
+                    $ionicViewSwitcher.nextDirection("forward");
+                };
                 Http.post('/user/studyhistory.json',data)
                 .success(function (resp) {
                     console.log(resp);

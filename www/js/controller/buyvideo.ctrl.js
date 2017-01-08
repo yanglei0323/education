@@ -45,7 +45,7 @@ educationApp.controller('buyvideoCtrl', ['$scope','Http', 'Popup', '$rootScope',
 				    confirm.then(function () {
 				    	// 这里支付成功后的逻辑是什么，暂时跳转到我的
 				    	sessionStorage.setItem('meTab',2);
-				    	$state.go('me');
+				    	$state.go('tab.me');
 				    	$ionicViewSwitcher.nextDirection("forward");
 				    });
 

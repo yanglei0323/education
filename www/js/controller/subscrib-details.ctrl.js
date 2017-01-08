@@ -187,8 +187,33 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 						console.log(resp);
 					});
 				}
-				$state.go("subscribpay", {teacherid:tid},{reload:true});
-				$ionicViewSwitcher.nextDirection("forward");
+				if($scope.subDetailList.price == '免费'){
+					var data = {
+						teacherid:teacherId
+					};
+					Http.post('/teacher/follow.json',data)
+					.success(function (resp) {
+						console.log(resp);
+						if (1 === resp.code) {
+							// $scope.priceType = false;
+							$state.go('subscribed',{reload:true});
+							$ionicViewSwitcher.nextDirection("forward");
+							Popup.alert('订阅成功！');
+						}
+						else if (0 === resp.code) {
+							Popup.alert(resp.reason);
+						}
+						else if (-1 === resp.code) {
+							$state.go('login');
+						}
+					})
+					.error(function (resp) {
+						console.log(resp);
+					});
+				}else{
+					$state.go("subscribpay", {teacherid:tid},{reload:true});
+					$ionicViewSwitcher.nextDirection("forward");
+				}
 
 			}
 		})
@@ -259,7 +284,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 				$scope.videoInfo={};
 				// 获取视频地址，自动播放（第一次播放此视频执行）
 				var data1 = {
-					videoid:index.id
+					columnid:index.id
 				};
 				// console.log(data1);
 				Http.post('/unl/playurl.json',data1)

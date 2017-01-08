@@ -48,11 +48,12 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 			$scope.boutiDetailList =resp.data;
 			$scope.boutiDetailList.teacherdescribe=$scope.boutiDetailList.teacherdescribe.split("\n");
 			var priceType=parseInt(resp.data.price);
-			if(priceType>=0 || $scope.boutiDetailList.price == '免费'){
+			if(priceType>=0 ){
 				$scope.priceType = true;
 			}
 			if($scope.boutiDetailList.price == '免费'){
-				$scope.showPrice = false;
+				// $scope.showPrice = false;
+				$scope.priceType = false;
 			}
 		}
 		else if (0 === resp.code) {
