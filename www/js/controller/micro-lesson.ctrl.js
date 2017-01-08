@@ -375,11 +375,11 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 		switch (index) {
 			case 0:
 				// 图文
-				window.location.href=banner.type;
+				// window.location.href=banner.type;
 				break;
 			case 1:
 				// 链接
-				window.location.href=banner.jumpurl;
+				// window.location.href=banner.jumpurl;
 				break;
 			case 21:
 				// 专题1列表
