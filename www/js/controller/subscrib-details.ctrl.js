@@ -33,13 +33,14 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 	};
 	Http.post('/page/unl/teacherdetail.json',data)
 	.success(function (resp) {
-		console.log(resp);
+		// console.log(resp);
 		if (1 === resp.code) {
 			resp.data.avatar=picBasePath + resp.data.avatar;
 			resp.data.imgurl=picBasePath + resp.data.imgurl;
 			$scope.subDetailList =resp.data;
 			$scope.subDetailList.info=$scope.subDetailList.info.split("\n");
 			$scope.describe=$scope.subDetailList.describe.split("\n");
+			$scope.detail=$scope.subDetailList.detail.split("\n");
 			$scope.columnList =resp.data.columnlist;
 			for (var i = 0; i < $scope.columnList.length; i++) {
 				$scope.columnList[i].isplay = false;

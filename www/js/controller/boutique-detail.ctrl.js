@@ -235,7 +235,7 @@ educationApp.controller('boutiquedetailCtrl', ['$scope','Http', 'Popup', '$rootS
 	// 立即订阅
 	$scope.goSub=function(){
 		sessionStorage.setItem('tabNum',1);
-		$state.go("tab.micro-lesson",{reload:true});
+		$state.go("tab.micro-lesson",{reload:false});
         $ionicViewSwitcher.nextDirection("forward");
 	};
 }]);

@@ -62,9 +62,13 @@ $graybg: #ececec;
 	overflow:hidden;
 	white-space: nowrap;
 	.subItem{
+		width:120px;
 		position:relative;
 		border-radius:5px;
 		display:inline-block;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		white-space: nowrap;
 	}
 	img{
 		width:120px;

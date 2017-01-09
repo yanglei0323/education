@@ -36,7 +36,7 @@
 	        </div>
 	        <span class="y-notice">订阅须知</span>
 	        <div class="y-describe y-notice-info">
-	            <p ng-bind="subDetailList.info"></p>
+	            <p ng-repeat="item in detail track by $index"><span ng-bind="item"></span></p>
 	        </div> 
 	    </div>
 	    <!-- 课程目录 -->

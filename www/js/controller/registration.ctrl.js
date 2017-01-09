@@ -49,7 +49,7 @@ educationApp.controller('registrationCtrl', ['$scope','Http', 'Popup', '$rootSco
          if (-1 === checkParams()) {
              return;
          }
-         console.log('跳转支付');
+         // console.log('跳转支付');
          if($scope.boutiDetailList.price == '免费'){
             var data1 = {
                 activityid:activityId,
