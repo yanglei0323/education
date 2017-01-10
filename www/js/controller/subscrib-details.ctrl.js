@@ -197,7 +197,7 @@ educationApp.controller('subscribdetailsCtrl', ['$scope','Http', 'Popup', '$root
 						console.log(resp);
 						if (1 === resp.code) {
 							// $scope.priceType = false;
-							$state.go('subscribed',{reload:true});
+							$state.go('tab.subscribed',{reload:true});
 							$ionicViewSwitcher.nextDirection("forward");
 							Popup.alert('订阅成功！');
 						}
