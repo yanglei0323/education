@@ -1,4 +1,6 @@
-educationApp.controller('payvipCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('payvipCtrl',
+	['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', '$ionicLoading',
+	function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher, $ionicLoading) {
 	console.log('VIP支付');
 	var vipId =　$stateParams.vipid;
 	var mName =　$stateParams.name;
@@ -49,9 +51,13 @@ educationApp.controller('payvipCtrl', ['$scope','Http', 'Popup', '$rootScope','$
 			type: 'wx',
 			orderid: orderID
 		};
+		$ionicLoading.show({
+			template: '<ion-spinner></ion-spinner>'
+		});
 		Http.post('/pay/prepay.json', data)
 		.success(function (resp) {
 			if (1 === resp.code) {
+				$ionicLoading.hide();
 				var data = resp.data;
 				// 预支付成功
 				var params = {
@@ -75,6 +81,7 @@ educationApp.controller('payvipCtrl', ['$scope','Http', 'Popup', '$rootScope','$
 			}
 		})
 		.error(function (){
+			$ionicLoading.hide();
 			Popup.alert('数据请求失败，请稍后再试');
 		});
 	}

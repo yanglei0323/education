@@ -1,4 +1,6 @@
-educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('subscribpayCtrl',
+	['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', '$ionicLoading',
+	function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher, $ionicLoading) {
 	console.log('专栏订阅支付');
 	var teacherId　=　$stateParams.teacherid;
 	$scope.subDetailList = {};
@@ -50,8 +52,12 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 			type: 'wx',
 			orderid: orderID
 		};
+		$ionicLoading.show({
+			template: '<ion-spinner></ion-spinner>'
+		});
 		Http.post('/pay/prepay.json', data)
 		.success(function (resp) {
+			$ionicLoading.hide();
 			if (1 === resp.code) {
 				var data = resp.data;
 				// 预支付成功
@@ -76,6 +82,7 @@ educationApp.controller('subscribpayCtrl', ['$scope','Http', 'Popup', '$rootScop
 			}
 		})
 		.error(function (){
+			$ionicLoading.hide();
 			Popup.alert('数据请求失败，请稍后再试');
 		});
 	};

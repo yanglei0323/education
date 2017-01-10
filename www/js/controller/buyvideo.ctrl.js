@@ -1,4 +1,6 @@
-educationApp.controller('buyvideoCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('buyvideoCtrl',
+	['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', '$ionicLoading',
+	function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher, $ionicLoading) {
 	console.log('视频支付');
 	var videoId　=　$stateParams.videoid;
 	$scope.subDetailList = {};
@@ -28,8 +30,12 @@ educationApp.controller('buyvideoCtrl', ['$scope','Http', 'Popup', '$rootScope',
 			type: 'wx',
 			orderid: orderID
 		};
+		$ionicLoading.show({
+			template: '<ion-spinner></ion-spinner>'
+		});
 		Http.post('/pay/prepay.json', data)
 		.success(function (resp) {
+			$ionicLoading.hide();
 			if (1 === resp.code) {
 				var data = resp.data;
 				// 预支付成功
@@ -55,6 +61,7 @@ educationApp.controller('buyvideoCtrl', ['$scope','Http', 'Popup', '$rootScope',
 			}
 		})
 		.error(function (){
+			$ionicLoading.hide();
 			Popup.alert('数据请求失败，请稍后再试');
 		});
 	}

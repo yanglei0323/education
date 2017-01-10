@@ -1,4 +1,6 @@
-educationApp.controller('payactivityCtrl', ['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher) {
+educationApp.controller('payactivityCtrl',
+	['$scope','Http', 'Popup', '$rootScope','$state','$stateParams','$ionicHistory','$ionicViewSwitcher', '$ionicLoading',
+	function ($scope,Http, Popup, $rootScope,$state,$stateParams,$ionicHistory,$ionicViewSwitcher, $ionicLoading) {
 	console.log('活动支付');
 	var activityId =　$stateParams.activityid;
 	var mName =　$stateParams.name;
@@ -46,8 +48,12 @@ educationApp.controller('payactivityCtrl', ['$scope','Http', 'Popup', '$rootScop
 			type: 'wx',
 			orderid: orderID
 		};
+		$ionicLoading.show({
+			template: '<ion-spinner></ion-spinner>'
+		});
 		Http.post('/pay/prepay.json', data)
 		.success(function (resp) {
+			$ionicLoading.hide();
 			if (1 === resp.code) {
 				var data = resp.data;
 				// 预支付成功
@@ -72,6 +78,7 @@ educationApp.controller('payactivityCtrl', ['$scope','Http', 'Popup', '$rootScop
 			}
 		})
 		.error(function (){
+			$ionicLoading.hide();
 			Popup.alert('数据请求失败，请稍后再试');
 		});
 	}
