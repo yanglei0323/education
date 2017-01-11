@@ -100,7 +100,7 @@ educationApp.controller('meCtrl',
             if($scope.isLogin) {
                 // 获取个人信息
                 var userInfo=JSON.parse(localStorage.getItem('user'));
-                // console.log(userInfo);
+                console.log(userInfo);
                 $scope.userInfo=userInfo;
                 // 头像
                 if(userInfo.avatar == ''){
