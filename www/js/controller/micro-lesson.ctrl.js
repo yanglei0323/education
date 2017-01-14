@@ -3,6 +3,7 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 	$scope.scrollNum2=false;
 	$scope.scrollNum3=false;
 	$scope.scrollNum4=false;
+	$scope.noBoutique=false;
 	// 轮播图
 	$scope.bannerList = {};
 	Http.post('/page/unl/choosead.json')
@@ -185,6 +186,10 @@ educationApp.controller('microLessonCtrl', ['$scope','Http', 'Popup', '$rootScop
 			}
 			$scope.boutiqueList = payvidedoList;
 			boutiquePage++;
+			if(payvidedoList.length == 0){
+				$scope.noBoutique=true;
+				$scope.noMorePage=true;
+			}
 		}
 		else if (0 === resp.code) {
 		}

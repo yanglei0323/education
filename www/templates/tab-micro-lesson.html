@@ -75,6 +75,10 @@
 				<span class="flex align watchnum"><span ng-bind="recomitem.timelongs"></span>-<span ng-bind="recomitem.watchnum"></span>人观看</span>
 			</div>
 		</div>
+		<div class="no-subscribed" ng-if="noBoutique">
+            <img ng-src="img/no_content.png" width="85">
+            <div class="no-content-text">即将开通,敬请期待</div>
+        </div>
 	</div>
 	<ion-infinite-scroll ng-show="!noMorePage" immediate-check="false" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
 	<div ng-if="noMorePage" class="y-nomorepage">没有更多内容</div>
